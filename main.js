@@ -55,9 +55,9 @@ const getRandomList = (min, max) => {
 
 // напишите функцию, которая будет заменять все 0 на строку 'zero';
 // выведите полученный массив в консоль (пример: [12, 53, '2zero', 18, 22, '1zerozero', 43, 57, '5zero', 1]).
-const getList = () => {
-  for (let i = 0; i < array.length; i++) {
-    const value = `${array[i]}`;
+const getList = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    const value = `${arr[i]}`;
     let newValue = '';
 
     for (let j = 0; j < value.length; j++) {
@@ -70,10 +70,10 @@ const getList = () => {
     const isNumber = +newValue;
 
     if (Number.isNaN(isNumber)) {
-      array[i] = newValue;
+      arr[i] = newValue;
     }
   }
-  return array;
+  return arr;
 };
 
 let value = '3334'; // Таким образом добился чтобы и цифры тоже приводил к строке и сравнивал, но не уверен, что так правильно
