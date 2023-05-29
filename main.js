@@ -67,7 +67,7 @@ const getList = () => {
         newValue += value[j];
       }
     }
-    let isNumber = +newValue;
+    const isNumber = +newValue;
 
     if (Number.isNaN(isNumber)) {
       array[i] = newValue;
@@ -76,7 +76,7 @@ const getList = () => {
   return array;
 };
 
-let value = '3334'; // Таким образом добился чтобы и цифры тоже приводил к строке и сравнивал, но не уверен что так правильно))
+let value = '3334'; // Таким образом добился чтобы и цифры тоже приводил к строке и сравнивал, но не уверен, что так правильно
 value = String(value);
 const num1 = 20;
 const num2 = 50;
@@ -87,4 +87,4 @@ console.log(min(num1, num2));
 console.log(max(num1, num2));
 console.log(min1(num1, num2));
 console.log(max1(num1, num2));
-console.log(getList());
+console.log(getList(array));
