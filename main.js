@@ -80,7 +80,9 @@ let value = '3334'; // Таким образом добился чтобы и ц
 value = String(value);
 const num1 = 20;
 const num2 = 50;
-const array = getRandomList(0, 101);
+const minNum = 0;
+const maxNum = 101;
+const array = getRandomList(minNum, maxNum);
 
 console.log(myFun(value));
 console.log(min(num1, num2));
