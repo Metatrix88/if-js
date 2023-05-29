@@ -67,7 +67,11 @@ const getList = () => {
         newValue += value[j];
       }
     }
-    array[i] = newValue;
+    let isNumber = +newValue;
+
+    if (Number.isNaN(isNumber)) {
+      array[i] = newValue;
+    }
   }
   return array;
 };
@@ -77,10 +81,10 @@ value = String(value);
 const num1 = 20;
 const num2 = 50;
 const array = getRandomList(0, 101);
+
 console.log(myFun(value));
 console.log(min(num1, num2));
 console.log(max(num1, num2));
 console.log(min1(num1, num2));
 console.log(max1(num1, num2));
-console.log(array);
 console.log(getList());
