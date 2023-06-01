@@ -2,11 +2,12 @@
   "name": "if-js",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "scripts/main.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "lint": "prettier --write . && eslint main.js"
+    "lint": "prettier --write . && eslint scripts/main.js"
   },
   "author": "",
   "license": "ISC",
