@@ -8,7 +8,6 @@ export const sum = (a) => {
 export const a = 7;
 export const b = 10;
 
-
 export function addProduct(name, price) {
   const productNameRegexNoSpace = /[a-zA-Z\s]/g;
   if (!productNameRegexNoSpace.test(name)) {
