@@ -1,5 +1,5 @@
 import * as lesson3 from './lesson3.js';
-import { sum } from './lesson4.js';
+import * as lesson4 from './lesson4.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -10,9 +10,7 @@ console.log(lesson3.max1(lesson3.num1, lesson3.num2));
 console.log(lesson3.getList(lesson3.array));
 
 console.log('--------------lesson-4-----------------');
-console.log(sum(6)(6));
-
-
+console.log(lesson4.sum(lesson4.a)(lesson4.b));
 
 // (lessonNumber => {
 //   console.log(lessonNumber);
@@ -116,53 +114,47 @@ console.log(sum(6)(6));
 // (lessonNumber => {
 //   console.log(lessonNumber);
 
-  // Напишите функцию sum, которая возвращает сумму чисел следующим образом
-  // const sum = (a) => {
-  //   return (b) => {
-  //     return a + b;
-  //   };
-  // };
-  //
-  // console.log(sum(8)(4));
+// Напишите функцию sum, которая возвращает сумму чисел следующим образом
+// const sum = (a) => {
+//   return (b) => {
+//     return a + b;
+//   };
+// };
+//
+// console.log(sum(8)(4));
 
+// const users = [
+//   { firstName: 'John', lastName: 'Smith' },
+//   { firstName: 'Todd', lastName: 'Lee' },
+//   { firstName: 'Taylor', lastName: 'Fox' },
+// ];
+//
+// for (let i = 0; i < users.length; i++) {
+//   const user = users[i];
+//
+//   user.getFullName = () => (
+//     `${user.firstName} ${user.lastName}`
+//   );
+// }
+//
+// console.log(users[0].getFullName()); // ?
+// console.log(users[1].getFullName()); // ?
+// console.log(users[2].getFullName()); // ?
 
-  // const users = [
-  //   { firstName: 'John', lastName: 'Smith' },
-  //   { firstName: 'Todd', lastName: 'Lee' },
-  //   { firstName: 'Taylor', lastName: 'Fox' },
-  // ];
-  //
-  // for (let i = 0; i < users.length; i++) {
-  //   const user = users[i];
-  //
-  //   user.getFullName = () => (
-  //     `${user.firstName} ${user.lastName}`
-  //   );
-  // }
-  //
-  // console.log(users[0].getFullName()); // ?
-  // console.log(users[1].getFullName()); // ?
-  // console.log(users[2].getFullName()); // ?
-
-  // const users = [
-  //   { firstName: 'John', lastName: 'Smith' },
-  //   { firstName: 'Todd', lastName: 'Lee' },
-  //   { firstName: 'Taylor', lastName: 'Fox' },
-  // ];
-  // const getFullName = (firstName, lastName) => () => (
-  //   `${firstName} ${lastName}`
-  // );
-  // for (let i = 0; i < users.length; i++) {
-  //   var user = users[i];
-  //   user.getFullName = getFullName(user.firstName, user.lastName);
-  // }
-  // console.log(users[0].getFullName()); // 'John Smith'
-  // console.log(users[1].getFullName()); // 'Todd Lee'
-  // console.log(users[2].getFullName()); // 'Taylor Fox'
-
-
-
-
+// const users = [
+//   { firstName: 'John', lastName: 'Smith' },
+//   { firstName: 'Todd', lastName: 'Lee' },
+//   { firstName: 'Taylor', lastName: 'Fox' },
+// ];
+// const getFullName = (firstName, lastName) => () => (
+//   `${firstName} ${lastName}`
+// );
+// for (let i = 0; i < users.length; i++) {
+//   var user = users[i];
+//   user.getFullName = getFullName(user.firstName, user.lastName);
+// }
+// console.log(users[0].getFullName()); // 'John Smith'
+// console.log(users[1].getFullName()); // 'Todd Lee'
+// console.log(users[2].getFullName()); // 'Taylor Fox'
 
 // })('Lesson number-4, author: Davidovich Andrey.');
-

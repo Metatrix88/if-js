@@ -82,4 +82,3 @@ export const num2 = 50;
 export const minNum = 0;
 export const maxNum = 101;
 export const array = getRandomList(minNum, maxNum);
-
