@@ -10,7 +10,7 @@ console.log(lesson3.max1(lesson3.num1, lesson3.num2));
 console.log(lesson3.getList(lesson3.array));
 
 console.log('--------------lesson-4-----------------');
-console.log(lesson4.sum(lesson4.a)(lesson4.b));
+console.log(lesson4.sum(lesson4.num1)(lesson4.num2));
 
 // (lessonNumber => {
 //   console.log(lessonNumber);

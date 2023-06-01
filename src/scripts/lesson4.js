@@ -9,7 +9,7 @@ export const a = 7;
 export const b = 10;
 
 export function addProduct(name, price) {
-  const productNameRegexNoSpace = /[a-zA-Z\s]/g;
+  const productNameRegexNoSpace = /[a-zA-Z]/g; // no white-space allowed
   if (!productNameRegexNoSpace.test(name)) {
     return false;
   }
