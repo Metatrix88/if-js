@@ -5,6 +5,8 @@ export const sum = (a) => {
   };
 };
 
+// module.exports = { sum };
+
 // Функция со слайда и тест на нее тоже
 export function addProduct(name, price) {
   const productNameRegexNoSpace = /[a-zA-Z]/g; // no white-space allowed
@@ -13,9 +15,6 @@ export function addProduct(name, price) {
   }
   return typeof price === 'number';
 }
-
-export const num1 = 7;
-export const num2 = 12;
 
 // Покрасьте абзацы по клику
 // дан массив цветов:
@@ -39,16 +38,10 @@ export const getColors = () => {
   };
 };
 
-export const text1 = document.getElementById('text1');
-export const text2 = document.getElementById('text2');
-export const text3 = document.getElementById('text3');
-export const colors = [
-  'magenta',
-  'cyan',
-  'firebrick',
-  'springgreen',
-  'skyblue',
-];
+
+
 export const click1 = getColors();
 export const click2 = getColors();
 export const click3 = getColors();
+
+
