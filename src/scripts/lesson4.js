@@ -38,10 +38,6 @@ export const getColors = () => {
   };
 };
 
-
-
 export const click1 = getColors();
 export const click2 = getColors();
 export const click3 = getColors();
-
-

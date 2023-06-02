@@ -1,25 +1,24 @@
 import { randProductName, randNumber } from '@ngneat/falso';
-import {addProduct, sum, getColors, click1, click2, click3} from '../src/scripts/lesson4';
+import {
+  addProduct,
+  sum,
+  getColors,
+  click1,
+  click2,
+  click3,
+} from '../src/scripts/lesson4';
 
 document.body.innerHTML = `
   <p id="text1">Text 1</p>
   <p id="text2">Text 2</p>
   <p id="text3">Text 3</p>`;
 
-
-
 describe('check color', () => {
   const text1 = document.getElementById('text1');
   const text2 = document.getElementById('text2');
   const text3 = document.getElementById('text3');
   const textArr = [text1, text2, text3];
-  const colors = [
-    'magenta',
-    'cyan',
-    'firebrick',
-    'springgreen',
-    'skyblue',
-  ];
+  const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
   text1.addEventListener('click', (event) => {
     event.target.style.color = click1(colors);
   });
@@ -94,7 +93,6 @@ describe('letters only', () => {
 
 describe('receive sum a and b', () => {
   test('Sum should return sum of two values', () => {
-
     expect(sum(7)(12)).toBe(19);
   });
 });
