@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>11/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16% </span>
+                <span class="strong">72% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/25</span>
+                <span class='fraction'>18/25</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>11/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,75 +112,75 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const getDate = (date) =&gt; {
   const re = /(?&lt;year&gt;\d+)\S(?&lt;monch&gt;\d+)\S(?&lt;day&gt;\d+)/;
-  let newDate = '';
+  let corDate = '';
   const arrDate = date.split('-');
-  if (
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (
     arrDate[0].length === 4 &amp;&amp;
     arrDate[1].length === 2 &amp;&amp;
     arrDate[2].length === 2
   ) {
-    newDate = date.replace(re, '$&lt;day&gt;.$&lt;monch&gt;.$&lt;year&gt;');
-    return newDate;
-  } else <span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>if (</span>
+<span class="cstat-no" title="statement not covered" >    corDate = date.replace(re, '$&lt;day&gt;.$&lt;monch&gt;.$&lt;year&gt;');</span>
+<span class="cstat-no" title="statement not covered" >    return corDate;</span>
+  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (
     arrDate[0].length !== 4 ||
     arrDate[1].length &gt; 2 ||
     arrDate[2].length &gt; 2
   ) {
 <span class="cstat-no" title="statement not covered" >    return 'Введите дату согласно шаблону: гггг-мм-дд';</span>
-  } else <span class="cstat-no" title="statement not covered" >if (</span>
+  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (
     arrDate[0].length === 4 &amp;&amp;
     arrDate[1].length === 1 &amp;&amp;
-    arrDate[2].length === 1
+<span class="branch-2 cbranch-no" title="branch not covered" >    arrDate[2].length === 1</span>
   ) {
-<span class="cstat-no" title="statement not covered" >    newDate = date.replace(re, '0$&lt;day&gt;.0$&lt;monch&gt;.$&lt;year&gt;');</span>
-<span class="cstat-no" title="statement not covered" >    return newDate;</span>
-  } else <span class="cstat-no" title="statement not covered" >if (</span>
+<span class="cstat-no" title="statement not covered" >    corDate = date.replace(re, '0$&lt;day&gt;.0$&lt;monch&gt;.$&lt;year&gt;');</span>
+<span class="cstat-no" title="statement not covered" >    return corDate;</span>
+  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (
     arrDate[0].length === 4 &amp;&amp;
     arrDate[1].length === 1 &amp;&amp;
-    arrDate[2].length === 2
+<span class="branch-2 cbranch-no" title="branch not covered" >    arrDate[2].length === 2</span>
   ) {
-<span class="cstat-no" title="statement not covered" >    newDate = date.replace(re, '$&lt;day&gt;.0$&lt;monch&gt;.$&lt;year&gt;');</span>
-<span class="cstat-no" title="statement not covered" >    return newDate;</span>
-  } else <span class="cstat-no" title="statement not covered" >if (</span>
+<span class="cstat-no" title="statement not covered" >    corDate = date.replace(re, '$&lt;day&gt;.0$&lt;monch&gt;.$&lt;year&gt;');</span>
+<span class="cstat-no" title="statement not covered" >    return corDate;</span>
+  } else <span class="missing-if-branch" title="else path not taken" >E</span>if (
     arrDate[0].length === 4 &amp;&amp;
     arrDate[1].length === 2 &amp;&amp;
     arrDate[2].length === 1
   ) {
-<span class="cstat-no" title="statement not covered" >    newDate = date.replace(re, '0$&lt;day&gt;.0$&lt;monch&gt;.$&lt;year&gt;');</span>
-<span class="cstat-no" title="statement not covered" >    return newDate;</span>
+    corDate = date.replace(re, '0$&lt;day&gt;.$&lt;monch&gt;.$&lt;year&gt;');
+    return corDate;
   }
 };
 &nbsp;</pre></td></tr></table></pre>
@@ -190,7 +190,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-06T10:51:47.495Z
+                at 2023-06-06T13:55:13.890Z
             </div>
         <script src="prettify.js"></script>
         <script>
