@@ -1,7 +1,7 @@
 import * as lesson3 from './lesson3.js';
 import * as lesson4 from './lesson4.js';
 import { click1, click2, click3 } from './lesson4.js';
-import { getDate } from './lesson5.js';
+import { getDate, getObject } from './lesson5.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -33,4 +33,6 @@ text3.addEventListener('click', (event) => {
 });
 console.log('--------------lesson-5-----------------');
 const date = '2020-13-24';
+const value = 'hotel rehberge berlin mitte';
 console.log(getDate(date));
+console.log(getObject(value));
