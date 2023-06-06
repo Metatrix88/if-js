@@ -1,4 +1,4 @@
-import { getDate } from '../src/scripts/lesson5';
+import {getDate, getObject} from '../src/scripts/lesson5';
 
 describe('Возврат даты формат:', () => {
   const date = '2020-10-4';
@@ -44,4 +44,11 @@ describe('Возврат даты формат:', () => {
       expect(getDate(date)).toBe('04.10.2020');
     });
   }
+});
+
+describe('Object list output:', () => {
+  const value = 'hotel rehberge berlin mitte';
+  test('Name output', () => {
+    expect(getObject(value)).toBe('Germany, Berlin, Hotel Rehberge Berlin Mitte; ');
+  });
 });

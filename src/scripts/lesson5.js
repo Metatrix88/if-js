@@ -93,7 +93,11 @@ export const getObject = (value) => {
   ];
   let result = '';
   for (let i = 0; i < data.length; i++) {
-    if (data[i].country.toLowerCase() === value.toLowerCase() || data[i].city.toLowerCase() === value.toLowerCase() || data[i].hotel.toLowerCase() === value.toLowerCase()) {
+    if (
+      data[i].country.toLowerCase() === value.toLowerCase() ||
+      data[i].city.toLowerCase() === value.toLowerCase() ||
+      data[i].hotel.toLowerCase() === value.toLowerCase()
+    ) {
       result += `${data[i].country}, ${data[i].city}, ${data[i].hotel}; `;
     }
   }
