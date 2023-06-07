@@ -33,6 +33,6 @@ text3.addEventListener('click', (event) => {
 });
 console.log('--------------lesson-5-----------------');
 const date = '2020-13-24';
-const value = 'hotel rehberge berlin mitte';
+const value = 'mar';
 console.log(getDate(date));
 console.log(getObject(value));

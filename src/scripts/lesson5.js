@@ -92,11 +92,12 @@ export const getObject = (value) => {
     },
   ];
   let result = '';
+  const lowerVal = value.toLowerCase();
   for (let i = 0; i < data.length; i++) {
     if (
-      data[i].country.toLowerCase() === value.toLowerCase() ||
-      data[i].city.toLowerCase() === value.toLowerCase() ||
-      data[i].hotel.toLowerCase() === value.toLowerCase()
+      data[i].country.toLowerCase().match(lowerVal) ||
+      data[i].city.toLowerCase().match(lowerVal) ||
+      data[i].hotel.toLowerCase().match(lowerVal)
     ) {
       result += `${data[i].country}, ${data[i].city}, ${data[i].hotel}; `;
     }
