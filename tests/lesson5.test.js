@@ -2,7 +2,9 @@ import { getDate, getObject } from '../src/scripts/lesson5';
 
 describe('Возврат даты формат:', () => {
   test('дд.мм.гггг', () => {
-    expect(getDate('20202-1-1')).toBe('Введите дату согласно шаблону: гггг-мм-дд');
+    expect(getDate('20202-1-1')).toBe(
+      'Введите дату согласно шаблону: гггг-мм-дд',
+    );
     expect(getDate('2020-10-4')).toBe('04.10.2020');
     expect(getDate('2020-1-4')).toBe('04.01.2020');
     expect(getDate('2020-1-14')).toBe('14.01.2020');
@@ -12,6 +14,7 @@ describe('Возврат даты формат:', () => {
 describe('Object list output:', () => {
   test('Name output', () => {
     expect(getObject('ger')).toBe(
-      'Germany, Berlin, Hostel Friendship; Germany, Berlin, Hotel Rehberge Berlin Mitte; ');
+      'Germany, Berlin, Hostel Friendship; Germany, Berlin, Hotel Rehberge Berlin Mitte; ',
+    );
   });
 });

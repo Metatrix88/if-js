@@ -5,18 +5,22 @@
 export const getDate = (date) => {
   const re = /(?<day>\d+)\S(?<monch>\d+)\S(?<year>\d+)/;
   const corDate = date.split('-').reverse();
-    if (corDate[0].length > 2 || corDate[1].length > 2 || corDate[2].length !== 4) {
-      return 'Введите дату согласно шаблону: гггг-мм-дд';
-    }
-    if (corDate[0].length === 1 && corDate[1].length === 1) {
-      return corDate.join('.').replace(re, '0$<day>.0$<monch>.$<year>' );
-    }
-    if (corDate[0].length === 1) {
-      return corDate.join('.').replace(re, '0$<day>.$<monch>.$<year>' );
-    }
-    if (corDate[1].length === 1) {
-      return corDate.join('.').replace(re, '$<day>.0$<monch>.$<year>' );
-    }
+  if (
+    corDate[0].length > 2 ||
+    corDate[1].length > 2 ||
+    corDate[2].length !== 4
+  ) {
+    return 'Введите дату согласно шаблону: гггг-мм-дд';
+  }
+  if (corDate[0].length === 1 && corDate[1].length === 1) {
+    return corDate.join('.').replace(re, '0$<day>.0$<monch>.$<year>');
+  }
+  if (corDate[0].length === 1) {
+    return corDate.join('.').replace(re, '0$<day>.$<monch>.$<year>');
+  }
+  if (corDate[1].length === 1) {
+    return corDate.join('.').replace(re, '$<day>.0$<monch>.$<year>');
+  }
   return corDate.join('.');
 };
 
@@ -79,7 +83,10 @@ export const getObject = (value) => {
     const country = data[i].country.toLowerCase();
     const city = data[i].city.toLowerCase();
     const hotel = data[i].hotel.toLowerCase();
-    if ( country.includes(lowerVal) || city.includes(lowerVal) || hotel.includes(lowerVal)
+    if (
+      country.includes(lowerVal) ||
+      city.includes(lowerVal) ||
+      hotel.includes(lowerVal)
     ) {
       result += `${data[i].country}, ${data[i].city}, ${data[i].hotel}; `;
     }
