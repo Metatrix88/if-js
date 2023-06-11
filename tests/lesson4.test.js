@@ -2,7 +2,6 @@ import { randProductName, randNumber } from '@ngneat/falso';
 import {
   addProduct,
   sum,
-  getColors,
   click1,
   click2,
   click3,
