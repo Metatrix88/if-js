@@ -32,7 +32,7 @@ text3.addEventListener('click', (event) => {
   event.target.style.color = click3(colors);
 });
 console.log('--------------lesson-5-----------------');
-const date = '2020-13-24';
-const value = 'ger';
-console.log(getDate(date));
-console.log(getObject(value));
+const value = '2023-22-13';
+const value1 = 'mar';
+console.log(getDate(value));
+console.log(getObject(value1));

@@ -2,6 +2,8 @@ import { getDate, getObject } from '../src/scripts/lesson5';
 
 describe('Возврат даты формат:', () => {
   test('дд.мм.гггг', () => {
+    expect(getDate(null)).toBe('Вы не ввели дату');
+    expect(getDate('')).toBe('Вы не ввели дату');
     expect(getDate('20202-1-1')).toBe(
       'Введите дату согласно шаблону: гггг-мм-дд',
     );
