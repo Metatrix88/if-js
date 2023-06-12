@@ -11,7 +11,10 @@ export const getDate = (str) => {
     return 'Вы не ввели дату';
   }
   const corDateArr = str.split('-').reverse();
-  const isCorrectDate = corDateArr[0].length <= 2 && corDateArr[1].length <= 2 && corDateArr[2].length === 4 ;
+  const isCorrectDate =
+    corDateArr[0].length <= 2 &&
+    corDateArr[1].length <= 2 &&
+    corDateArr[2].length === 4;
   const isNotCorrectDay = corDateArr[0].length === 1;
   const isNotCorrectMonth = corDateArr[1].length === 1;
   if (!isCorrectDate || !date) {
@@ -28,7 +31,6 @@ export const getDate = (str) => {
   }
   return corDateArr.join('.');
 };
-
 
 // Поиск объектов размещения:
 //   дан массив;

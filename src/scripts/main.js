@@ -2,6 +2,7 @@ import * as lesson3 from './lesson3.js';
 import * as lesson4 from './lesson4.js';
 import { click1, click2, click3 } from './lesson4.js';
 import { getDate, getObject } from './lesson5.js';
+import { myFuncPol, searchFun } from './lesson6.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -36,3 +37,6 @@ const value = '2023-22-13';
 const value1 = 'mar';
 console.log(getDate(value));
 console.log(getObject(value1));
+console.log('--------------lesson-6-----------------');
+console.log(myFuncPol('3344332'));
+console.log(searchFun('ger'));
