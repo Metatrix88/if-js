@@ -1,4 +1,4 @@
-import { data } from './constans/constansLesson5.js';
+import { data } from './constants/constansLesson5.js';
 
 // Преобразование формата даты:
 //   в переменной date лежит дата в формате '2020-11-26';

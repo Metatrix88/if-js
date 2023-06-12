@@ -1,4 +1,4 @@
-import { hotels } from './constans/constansLesson6.js';
+import { hotels } from './constants/constansLesson6.js';
 
 // Функция palindrome (Слово палиндром может читаться справа-налево и слева-направо одинаково. Прим "шалаш".):
 // создайте функцию palindrome, которая будет возвращать bool значение в зависимости от того, является ли переданное функции слово палиндромом или нет;
@@ -15,7 +15,7 @@ export const myFuncPol = (str) => {
 // зная, как работать с массивами, сократите вашу функцию, избавившись от цикла for.
 export const searchObject = (str) => {
   const lowerStr = str.toLowerCase();
-  let result = '';
+  let result = [];
   const newArrHotels = hotels.filter((element) => {
     const name = element.name.toLowerCase();
     const city = element.city.toLowerCase();
@@ -38,4 +38,31 @@ export const searchObject = (str) => {
     return `${element.country}, ${element.city}, ${element.name}`;
   });
   return result;
+};
+
+export const getCitiesAndCountries = (arr) => {
+  const obj = {};
+  // Получаю массив всех стран которые есть
+  const countriesArr = arr.map((element) => {
+    return element.country;
+  });
+  // Получаю уникальный массив из стран
+  const countries = countriesArr.filter((el, index) => {
+    return countriesArr.indexOf(el) === index;
+  });
+  // Прохожу циклом по массиву и сравниваю страны если страна из уникального массива равна стране из ибщего
+  // то создаю массив городов и пушу туда города этой страны. Потом присваиваю этот список в качестве значения ключа страны
+  // при этом фильтруя массивы городов и удаляя дубликаты
+  for (let i = 0; i < countries.length; i++) {
+    const cities = [];
+    arr.filter((element) => {
+      if (countries[i] === element.country) {
+        cities.push(element.city);
+      }
+    });
+    obj[countries[i]] = cities.filter((element, index) => {
+      return cities.indexOf(element) === index;
+    });
+  }
+  return obj;
 };
