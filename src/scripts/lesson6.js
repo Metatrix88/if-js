@@ -7,21 +7,23 @@ export const myFuncPol = (str) => {
   return str === str.split('').reverse().join('');
 };
 
-
 // Поиск объектов размещения:
 //   дан массив;
 // напишите функцию поиска, которая будет принимать строку;
 // по полученной строке найдите все совпадения в массиве по любому из полей;
 // верните масcив строк в формате: страна, город, отель;
 // зная, как работать с массивами, сократите вашу функцию, избавившись от цикла for.
-export const searchFun = (str) => {
+export const searchObject = (str) => {
   const lowerStr = str.toLowerCase();
   let result = '';
-  const newArrHotels =  hotels.filter((element) => {
+  const newArrHotels = hotels.filter((element) => {
     const name = element.name.toLowerCase();
-    const city= element.city.toLowerCase();
+    const city = element.city.toLowerCase();
     const country = element.country.toLowerCase();
-    const matched = name.includes(lowerStr) || city.includes(lowerStr) || country.includes(lowerStr);
+    const matched =
+      name.includes(lowerStr) ||
+      city.includes(lowerStr) ||
+      country.includes(lowerStr);
 
     if (matched) {
       return element;

@@ -1,4 +1,4 @@
- export const hotels = [
+export const hotels = [
   {
     name: 'Hotel Leopold',
     city: 'Saint Petersburg',
