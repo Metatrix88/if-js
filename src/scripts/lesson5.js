@@ -1,13 +1,15 @@
-import { data } from './constants/constansLesson5.js';
+import { data } from './constants/constantsLesson5.js';
 
 // Преобразование формата даты:
 //   в переменной date лежит дата в формате '2020-11-26';
 //   преобразуйте эту дату в формат '26.11.2020';
 //   функция должна быть универсальной, т.е. принимать любую дату и приводить ее к поставленному в задании формату.
 export const getDate = (str) => {
-  const re = /(?<day>\d+)\S(?<monch>\d+)\S(?<year>\d+)/;
-  const date = str !== undefined && str !== '' && str !== null;
-  if (!date) {
+  const re = /(?<day>\d+)\S(?<monch>\d+)\S(?<year>\d+)/g;
+  const regex = /[a-zA-Z]/g;
+  const found = str.match(regex);
+  const date = str !== '' && str !== null;
+  if (!date || found) {
     return 'Вы не ввели дату';
   }
   const corDateArr = str.split('-').reverse();

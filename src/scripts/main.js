@@ -1,9 +1,9 @@
 import * as lesson3 from './lesson3.js';
 import * as lesson4 from './lesson4.js';
 import { click1, click2, click3 } from './lesson4.js';
-import { hotels } from './constants/constansLesson6.js';
+import { hotels } from './constants/constantsLesson6.js';
 import { getDate, getObject } from './lesson5.js';
-import { getCitiesAndCountries, myFuncPol, searchObject } from './lesson6.js';
+import {getCalendarMonth, getCitiesAndCountries, myFuncPol, searchObject} from './lesson6.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -34,11 +34,16 @@ text3.addEventListener('click', (event) => {
   event.target.style.color = click3(colors);
 });
 console.log('--------------lesson-5-----------------');
-const value = '2023-22-13';
+const value = '2023-12-ee';
 const value1 = 'mar';
 console.log(getDate(value));
 console.log(getObject(value1));
 console.log('--------------lesson-6-----------------');
 console.log(myFuncPol('3344332'));
-console.log(searchObject('ger'));
+console.log(searchObject('uk'));
 console.log(getCitiesAndCountries(hotels));
+const daysInMonth = 30;
+const daysInWeek = 7;
+const dayOfWeek = 4;
+const result = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+console.log(result);

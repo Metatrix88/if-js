@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686580128690" clover="3.2.0">
-  <project timestamp="1686580128690" name="All files">
+<coverage generated="1686580148867" clover="3.2.0">
+  <project timestamp="1686580148867" name="All files">
     <metrics statements="82" coveredstatements="67" conditionals="40" coveredconditionals="36" methods="16" coveredmethods="11" elements="138" coveredelements="114" complexity="0" loc="82" ncloc="82" packages="2" files="5" classes="5"/>
     <package name="scripts">
       <metrics statements="80" coveredstatements="65" conditionals="40" coveredconditionals="36" methods="16" coveredmethods="11"/>
@@ -96,11 +96,11 @@
     </package>
     <package name="scripts.constants">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="constansLesson5.js" path="D:\dev\intellect-fox\if-js\src\scripts\constants\constansLesson5.js">
+      <file name="constantsLesson5.js" path="D:\dev\intellect-fox\if-js\src\scripts\constants\constansLesson5.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="constansLesson6.js" path="D:\dev\intellect-fox\if-js\src\scripts\constants\constansLesson6.js">
+      <file name="constantsLesson6.js" path="D:\dev\intellect-fox\if-js\src\scripts\constants\constansLesson6.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>

@@ -1,4 +1,4 @@
-import { hotels } from './constants/constansLesson6.js';
+import { hotels } from './constants/constantsLesson6.js';
 
 // Функция palindrome (Слово палиндром может читаться справа-налево и слева-направо одинаково. Прим "шалаш".):
 // создайте функцию palindrome, которая будет возвращать bool значение в зависимости от того, является ли переданное функции слово палиндромом или нет;
@@ -16,18 +16,17 @@ export const myFuncPol = (str) => {
 export const searchObject = (str) => {
   const lowerStr = str.toLowerCase();
   let result = [];
-  const newArrHotels = hotels.filter((element) => {
-    const name = element.name.toLowerCase();
-    const city = element.city.toLowerCase();
-    const country = element.country.toLowerCase();
-    const matched =
-      name.includes(lowerStr) ||
-      city.includes(lowerStr) ||
-      country.includes(lowerStr);
+  const newArrHotels = hotels.filter(({name, city, country}) => {
 
-    if (matched) {
-      return element;
-    }
+    const nameLowerCase = name.toLowerCase();
+    const cityLowerCase = city.toLowerCase();
+    const countryLowerCase = country.toLowerCase();
+    const matched =
+      nameLowerCase.includes(lowerStr) ||
+      cityLowerCase.includes(lowerStr) ||
+      countryLowerCase.includes(lowerStr);
+
+    return matched;
   });
 
   if (newArrHotels.length === 0) {
@@ -66,3 +65,32 @@ export const getCitiesAndCountries = (arr) => {
   }
   return obj;
 };
+
+export const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+  const calendarMonth = [];
+  let week = [];
+  let day = 1 - dayOfWeek;
+
+  while (calendarMonth.length < 5) {
+    for (let i = 0; i < daysInWeek; i++) {
+      if (day <= 0) {
+        week.push(daysInMonth + day);
+      } else if (day > daysInMonth) {
+        week.push(day - daysInMonth);
+      }
+      else {
+        week.push(day);
+      }
+      day++;
+    }
+    calendarMonth.push(week);
+    week = [];
+  }
+
+  return calendarMonth;
+};
+
+
+
+
+
