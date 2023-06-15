@@ -7,7 +7,7 @@ import { data } from './constants/constantsLesson5.js';
 export const getDate = (str) => {
   const re = /(?<day>\d+)\S(?<monch>\d+)\S(?<year>\d+)/g;
   const regex = /[a-zA-Z]/g;
-  const found = str.match(regex);
+  const found = str?.match(regex);
   const date = str !== '' && str !== null;
   if (!date || found) {
     return 'Вы не ввели дату';
