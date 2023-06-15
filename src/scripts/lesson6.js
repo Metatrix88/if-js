@@ -16,8 +16,7 @@ export const myFuncPol = (str) => {
 export const searchObject = (str) => {
   const lowerStr = str.toLowerCase();
   let result = [];
-  const newArrHotels = hotels.filter(({name, city, country}) => {
-
+  const newArrHotels = hotels.filter(({ name, city, country }) => {
     const nameLowerCase = name.toLowerCase();
     const cityLowerCase = city.toLowerCase();
     const countryLowerCase = country.toLowerCase();
@@ -77,8 +76,7 @@ export const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
         week.push(daysInMonth + day);
       } else if (day > daysInMonth) {
         week.push(day - daysInMonth);
-      }
-      else {
+      } else {
         week.push(day);
       }
       day++;
@@ -89,8 +87,3 @@ export const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
 
   return calendarMonth;
 };
-
-
-
-
-

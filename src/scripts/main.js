@@ -3,7 +3,12 @@ import * as lesson4 from './lesson4.js';
 import { click1, click2, click3 } from './lesson4.js';
 import { hotels } from './constants/constantsLesson6.js';
 import { getDate, getObject } from './lesson5.js';
-import {getCalendarMonth, getCitiesAndCountries, myFuncPol, searchObject} from './lesson6.js';
+import {
+  getCalendarMonth,
+  getCitiesAndCountries,
+  myFuncPol,
+  searchObject,
+} from './lesson6.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
