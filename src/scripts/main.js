@@ -10,7 +10,7 @@ import {
   searchObject,
 } from './lesson6.js';
 import { obj1, obj2, obj3, obj4 } from './constants/constantsLesson7.js';
-import { deepEqual } from './lesson7.js';
+import {deepEqual, getCalendarMonthLesson7} from './lesson7.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -62,3 +62,5 @@ console.log('--------------lesson-7-----------------');
 
 console.log(deepEqual(obj1, obj2));
 console.log(deepEqual(obj3, obj4));
+const resultLesson7 = getCalendarMonthLesson7(daysInMonth, daysInWeek, dayOfWeek);
+console.log(resultLesson7);

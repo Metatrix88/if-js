@@ -23,3 +23,42 @@ export const deepEqual = (object1, object2) => {
 
   return true;
 };
+
+export const getCalendarMonthLesson7 = (daysInMonth, daysInWeek, dayOfWeek) => {
+  const calendarMonth = [];
+  let week = [];
+  let day = 1 - dayOfWeek;
+
+  while (calendarMonth.length < 5) {
+    for (let i = 0; i < daysInWeek; i++) {
+      if (day <= 0) {
+        const dayWeek = {
+          dayOfMonth: daysInMonth + day,
+          notCurrentMonth: true,
+          selectedDay: true,
+        };
+        week.push(dayWeek);
+      } else if (day > daysInMonth) {
+        const dayWeek = {
+          dayOfMonth: day - daysInMonth,
+          notCurrentMonth: true,
+          selectedDay: true,
+        };
+        week.push(dayWeek);
+      } else {
+        const dayWeek = {
+          dayOfMonth: day,
+          notCurrentMonth: false,
+          selectedDay: true,
+        };
+        week.push(dayWeek);
+      }
+      day++;
+    }
+    calendarMonth.push(week);
+    week = [];
+  }
+
+  return calendarMonth;
+};
+
