@@ -10,7 +10,7 @@ import {
   searchObject,
 } from './lesson6.js';
 import { obj1, obj2, obj3, obj4 } from './constants/constantsLesson7.js';
-import {deepEqual, getCalendarMonthLesson7} from './lesson7.js';
+import { deepEqual, getCalendarMonthLesson7 } from './lesson7.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -55,6 +55,8 @@ console.log(getCitiesAndCountries(hotels));
 const daysInMonth = 30;
 const daysInWeek = 7;
 const dayOfWeek = 4;
+const checkInDate = 10;
+const checkOutDate = 20;
 const result = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
 console.log(result);
 
@@ -62,5 +64,11 @@ console.log('--------------lesson-7-----------------');
 
 console.log(deepEqual(obj1, obj2));
 console.log(deepEqual(obj3, obj4));
-const resultLesson7 = getCalendarMonthLesson7(daysInMonth, daysInWeek, dayOfWeek);
+const resultLesson7 = getCalendarMonthLesson7(
+  daysInMonth,
+  daysInWeek,
+  dayOfWeek,
+  checkInDate,
+  checkOutDate,
+);
 console.log(resultLesson7);

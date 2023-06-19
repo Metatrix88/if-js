@@ -24,32 +24,48 @@ export const deepEqual = (object1, object2) => {
   return true;
 };
 
-export const getCalendarMonthLesson7 = (daysInMonth, daysInWeek, dayOfWeek) => {
+export const getCalendarMonthLesson7 = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
   const calendarMonth = [];
   let week = [];
   let day = 1 - dayOfWeek;
+  // Создаю массив с интервалом дат, checkInDate и checkOutDate и возвращаю true если дата совпадает с датой в дне недели.
+  // Но это в рамках одного месяца
+  const getDates = (day, date1, date2) => {
+    const result = [];
 
+    while (date1 <= date2) {
+      result.push(date1);
+      date1++;
+    }
+    for (let i = 0; i <= result.length; i++) {
+      if (result[i] === day) {
+        return true;
+      }
+    }
+    return false;
+  };
+  // В цикле создаю каждый день в виде объекта и пушу в неделю, а потом неделю в месяц
   while (calendarMonth.length < 5) {
     for (let i = 0; i < daysInWeek; i++) {
       if (day <= 0) {
         const dayWeek = {
           dayOfMonth: daysInMonth + day,
           notCurrentMonth: true,
-          selectedDay: true,
+          selectedDay: false,
         };
         week.push(dayWeek);
       } else if (day > daysInMonth) {
         const dayWeek = {
           dayOfMonth: day - daysInMonth,
           notCurrentMonth: true,
-          selectedDay: true,
+          selectedDay: false,
         };
         week.push(dayWeek);
       } else {
         const dayWeek = {
           dayOfMonth: day,
           notCurrentMonth: false,
-          selectedDay: true,
+          selectedDay: getDates(day, checkInDate, checkOutDate),
         };
         week.push(dayWeek);
       }
@@ -61,4 +77,3 @@ export const getCalendarMonthLesson7 = (daysInMonth, daysInWeek, dayOfWeek) => {
 
   return calendarMonth;
 };
-
