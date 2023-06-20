@@ -39,18 +39,17 @@ export const getCalendarMonthLesson7 = (
   while (calendarMonth.length < 5) {
     for (let i = 0; i < daysInWeek; i++) {
       if (day <= 0) {
-        console.log(day, '++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
         const dayWeek = {
           dayOfMonth: daysInMonth + day,
           notCurrentMonth: true,
-          selectedDay: (daysInMonth + day) >= checkInDate,
+          selectedDay: daysInMonth + day >= checkInDate,
         };
         week.push(dayWeek);
       } else if (day > daysInMonth) {
         const dayWeek = {
           dayOfMonth: day - daysInMonth,
           notCurrentMonth: true,
-          selectedDay: (day - daysInMonth) <= checkOutDate,
+          selectedDay: day - daysInMonth <= checkOutDate,
         };
         week.push(dayWeek);
       } else {
@@ -58,8 +57,10 @@ export const getCalendarMonthLesson7 = (
           dayOfMonth: day,
           notCurrentMonth: false,
           selectedDay:
-            (day <= checkInDate && checkInDate > checkOutDate && day <= checkOutDate)
-            || (day >= checkInDate && day <= checkOutDate),
+            (day <= checkInDate &&
+              checkInDate > checkOutDate &&
+              day <= checkOutDate) ||
+            (day >= checkInDate && day <= checkOutDate),
         };
         week.push(dayWeek);
       }
