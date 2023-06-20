@@ -55,8 +55,8 @@ console.log(getCitiesAndCountries(hotels));
 const daysInMonth = 30;
 const daysInWeek = 7;
 const dayOfWeek = 4;
-const checkInDate = 10;
-const checkOutDate = 20;
+const checkInDate = 30;
+const checkOutDate = 5;
 const result = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
 console.log(result);
 
