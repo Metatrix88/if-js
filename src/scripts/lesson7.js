@@ -24,7 +24,13 @@ export const deepEqual = (object1, object2) => {
   return true;
 };
 
-export const getCalendarMonthLesson7 = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
+export const getCalendarMonthLesson7 = (
+  daysInMonth,
+  daysInWeek,
+  dayOfWeek,
+  checkInDate,
+  checkOutDate,
+) => {
   const calendarMonth = [];
   let week = [];
   let day = 1 - dayOfWeek;
