@@ -22,5 +22,5 @@ export const studentsData = [
     lastName: 'Петров',
     admissionYear: 2019,
     courseName: 'Android',
-  }
+  },
 ];

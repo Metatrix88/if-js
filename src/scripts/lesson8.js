@@ -1,4 +1,4 @@
-import {studentsData} from './constants/constantsLesson8.js';
+import { studentsData } from './constants/constantsLesson8.js';
 
 export class User {
   constructor({ firstName, lastName }) {
@@ -43,8 +43,3 @@ Students.prototype.getInfo = function () {
 };
 
 export const students = new Students(studentsData);
-
-
-
-
-
