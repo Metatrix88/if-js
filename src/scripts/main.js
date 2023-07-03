@@ -11,6 +11,7 @@ import {
 } from './lesson6.js';
 import { obj1, obj2, obj3, obj4 } from './constants/constantsLesson7.js';
 import { deepEqual, getCalendarMonthLesson7 } from './lesson7.js';
+import * as lesson8 from './lesson8.js';
 
 console.log('--------------lesson-3-----------------');
 console.log(lesson3.myFun(lesson3.value));
@@ -72,3 +73,6 @@ const resultLesson7 = getCalendarMonthLesson7(
   checkOutDate,
 );
 console.log(resultLesson7);
+
+console.log('--------------lesson-8-----------------');
+console.log(lesson8.students.getInfo());
