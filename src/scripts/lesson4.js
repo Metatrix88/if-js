@@ -22,22 +22,22 @@ export function addProduct(name, price) {
 // по первому нажатию на абзац он должен покраситься в первый цвет из массива, по второму нажатию - во второй и так далее;
 // цвета из массива меняются бесконечно;
 // все абзацы работают независимо.
-export const getColors = () => {
-  let color = '';
-  let count = 0;
-  return (array) => {
-    for (let i = 1; i < array.length; i++) {
-      if (count <= i) {
-        color = array[count];
-        count++;
-        return color;
-      } else if (count === array.length) {
-        count = 0;
-      }
-    }
-  };
-};
-
-export const click1 = getColors();
-export const click2 = getColors();
-export const click3 = getColors();
+// export const getColors = () => {
+//   let color = '';
+//   let count = 0;
+//   return (array) => {
+//     for (let i = 1; i < array.length; i++) {
+//       if (count <= i) {
+//         color = array[count];
+//         count++;
+//         return color;
+//       } else if (count === array.length) {
+//         count = 0;
+//       }
+//     }
+//   };
+// };
+//
+// export const click1 = getColors();
+// export const click2 = getColors();
+// export const click3 = getColors();
