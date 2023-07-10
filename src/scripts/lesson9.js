@@ -36,8 +36,7 @@ text2.addEventListener('click', changeColor({ ...colors }));
 
 text3.addEventListener('click', changeColor({ ...colors }));
 
-
-const getCalendarMonthLesson7 = (
+const getCalendarMonthLesson9 = (
   daysInMonth,
   daysInWeek,
   dayOfWeek,
@@ -47,7 +46,7 @@ const getCalendarMonthLesson7 = (
   const calendarMonth = [];
   let week = [];
   let day = 1 - dayOfWeek;
-  const previousMonth =  32 - new Date(2023, 5, 32).getDate();
+  const previousMonth = 32 - new Date(2023, 5, 32).getDate();
 
   // В цикле создаю каждый день в виде объекта и пушу в неделю, а потом неделю в месяц
   while (calendarMonth.length < 5) {
@@ -88,14 +87,13 @@ const getCalendarMonthLesson7 = (
 };
 
 const daysInMonth = 32 - new Date(2023, 6, 32).getDate(); // - количество дней в месяце
-const dayOfWeek  = new Date(2023, 6, 1).getDay();// - с какого дня недели начинается июль
-
+const dayOfWeek = new Date(2023, 6, 1).getDay(); // - с какого дня недели начинается июль
 
 const daysInWeek = 7;
 const checkInDate = 30;
 const checkOutDate = 5;
 
-const resultLesson9 = getCalendarMonthLesson7(
+const resultLesson9 = getCalendarMonthLesson9(
   daysInMonth,
   daysInWeek,
   dayOfWeek,
