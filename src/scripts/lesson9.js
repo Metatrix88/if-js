@@ -9,7 +9,6 @@ const colors = {
     return this;
   },
   next() {
-
     if (this.count < this.data.length) {
       return {
         done: false,
@@ -27,16 +26,12 @@ const colors = {
   },
 };
 
-text1.addEventListener('click', (event) => {
-  event.target.style.color = colors.next().value;
-});
+const changeColor = (color) => (event) => {
+  event.target.style.color = color.next().value;
+};
 
-text2.addEventListener('click', (event) => {
-  event.target.style.color = colors.next().value;
-});
+text1.addEventListener('click', changeColor({...colors}));
 
-text3.addEventListener('click', (event) => {
-  event.target.style.color = colors.next().value;
-});
+text2.addEventListener('click', changeColor({...colors}));
 
-
+text3.addEventListener('click', changeColor({...colors}));
