@@ -47,9 +47,11 @@ const getCalendarMonthLesson9 = (
   let week = [];
   let day = 1 - dayOfWeek;
   const previousMonth = 32 - new Date(2023, 5, 32).getDate();
+  const today = new Date();
+  console.log(today.getDate());
 
   // В цикле создаю каждый день в виде объекта и пушу в неделю, а потом неделю в месяц
-  while (calendarMonth.length < 5) {
+  while (calendarMonth.length < 6) {
     for (let i = 0; i < daysInWeek; i++) {
       if (day <= 0) {
         const dayWeek = {
@@ -69,11 +71,12 @@ const getCalendarMonthLesson9 = (
         const dayWeek = {
           dayOfMonth: day,
           notCurrentMonth: false,
-          selectedDay:
-            (day <= checkInDate &&
-              checkInDate > checkOutDate &&
-              day <= checkOutDate) ||
-            (day >= checkInDate && day <= checkOutDate),
+          selectedDay: day === today.getDate(),
+
+            // (day <= checkInDate &&
+            //   checkInDate > checkOutDate &&
+            //   day <= checkOutDate) ||
+            // (day >= checkInDate && day <= checkOutDate),  // Пока что закоментил, так как по условию понял что selectedDay нужен чтобы бы был true именно на текущий день
         };
         week.push(dayWeek);
       }
