@@ -5,8 +5,6 @@ export const sum = (a) => {
   };
 };
 
-// module.exports = { sum };
-
 // Функция со слайда и тест на нее тоже
 export function addProduct(name, price) {
   const productNameRegexNoSpace = /[a-zA-Z]/g; // no white-space allowed
