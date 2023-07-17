@@ -9,6 +9,10 @@
   margin-bottom: var(--title-bottom);
 }
 
+.apartments__card--none {
+  display: none;
+}
+
 .apartments__img {
   margin-bottom: 24px;
 }
