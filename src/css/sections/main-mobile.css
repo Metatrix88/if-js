@@ -1,0 +1,11 @@
+@media (max-width: 600px) {
+  /*For mobile phones:*/
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sing-up {
+    order: 6;
+  }
+}

@@ -1,0 +1,20 @@
+.images {
+  display: block;
+  max-width: 296px;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 1024px) {
+  /*For mobile tablets:*/
+  .images {
+    max-width: 328px;
+  }
+}
+
+@media (max-width: 600px) {
+  /*For mobile phones:*/
+  .images {
+    max-width: 328px;
+  }
+}

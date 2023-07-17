@@ -1,0 +1,32 @@
+@import url("base/reset.css");
+@import url("base/fonts.css");
+@import url("../fonts/font-awesome/css/all.min.css");
+@import url("abstracts/variables.css");
+
+@import url("layout/grid.css");
+@import url("layout/flex.css");
+
+@import url("base/my-reset.css");
+@import url("base/typography.css");
+@import url("base/container.css");
+@import url("components/logo.css");
+@import url("components/list.css");
+@import url("components/link.css");
+@import url("components/button.css");
+@import url("components/input.css");
+@import url("components/images.css");
+@import url("components/form.css");
+@import url("components/desktop-form.css");
+@import url("components/laptop-form.css");
+@import url("components/dots.css");
+
+@import url("sections/header.css");
+@import url("sections/main-mobile.css");
+@import url("sections/top-section.css");
+@import url("sections/mobile-app.css");
+@import url("sections/offer.css");
+@import url("sections/apartments.css");
+@import url("sections/destinations.css");
+@import url("sections/sing-up.css");
+@import url("sections/reviews.css");
+@import url("sections/footer.css");

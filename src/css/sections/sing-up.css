@@ -1,0 +1,177 @@
+.sing-up__wrap {
+  position: relative;
+  background-color: var(--bg-color);
+  padding: 52px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.sing-up__logo {
+  width: 86px;
+  height: 86px;
+  background-color: var(--general-white-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sing-up__icon-lg {
+  width: 50px;
+  height: 45px;
+  fill: var(--primary-color);
+}
+
+.sing-up__icon-sm {
+  display: none;
+}
+
+.sing-up__title {
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+
+.sing-up__part-title {
+  display: none;
+}
+
+.sing-up__button {
+  background: var(--general-white-color);
+  border: 1px solid var(--primary-color);
+  max-width: 128px;
+  font-size: 18px;
+  padding: 12px 16px;
+  line-height: 1.16;
+  color: var(--primary-color);
+}
+
+.sing-up__button-sm {
+  display: none;
+}
+
+.sing-up__button:hover {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.sing-up__button-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.sing-up__icon-close {
+  width: 24px;
+  height: 24px;
+  fill: var(--secondary-text-color);
+}
+
+.sing-up__icon-close:hover {
+  fill: var(--primary-dark-color);
+}
+
+@media (max-width: 1024px) {
+  /*For mobile tablets:*/
+  .sing-up__wrap {
+    padding: calc(var(--unit) * 6) calc(var(--unit) * 2);
+    gap: calc(var(--unit) * 2);
+  }
+
+  .sing-up__title {
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .sing-up__logo {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 600px) {
+  /*For mobile phones:*/
+  .sing-up__wrap {
+    position: static;
+    background-color: var(--general-white-color);
+    padding: calc(var(--unit) * 3) 0;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unit) * 2);
+  }
+
+  .sing-up__button-close {
+    position: static;
+    order: 1;
+  }
+
+  .sing-up__icon-close {
+    width: 16px;
+    height: 16px;
+    fill: var(--secondary-text-color);
+  }
+
+  .sing-up__logo {
+    width: 100%;
+    max-width: 58px;
+    height: 58px;
+    background-color: var(--primary-color);
+    border-radius: var(--basic-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+  }
+
+  .sing-up__icon-lg {
+    display: none;
+  }
+
+  .sing-up__icon-sm {
+    display: block;
+    width: 53px;
+    height: 11px;
+    fill: var(--general-white-color);
+  }
+
+  .sing-up__wrap-sm {
+    display: flex;
+    align-items: center;
+    order: 3;
+    gap: calc(var(--unit) * 2);
+  }
+
+  .sing-up__title {
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+
+  .sing-up__part-title {
+    display: inline-block;
+  }
+
+  .sing-up__button-lg-md {
+    display: none;
+  }
+
+  .sing-up__button-sm {
+    display: inline-block;
+  }
+
+  .sing-up__button {
+    background: var(--general-white-color);
+    border: none;
+    width: 100%;
+    max-width: 41px;
+    padding: 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--primary-color);
+  }
+
+  .sing-up__button:hover {
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+}
