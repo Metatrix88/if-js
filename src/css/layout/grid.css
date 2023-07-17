@@ -46,7 +46,7 @@
   grid-template-columns: repeat(12, 1fr);
 }
 
-[class*="-col"] {
+[class*='-col'] {
   display: grid;
   gap: var(--unit);
   grid-template-rows: auto;

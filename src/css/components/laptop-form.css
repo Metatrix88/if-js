@@ -55,7 +55,7 @@
   }
 
   .laptop-form__input-properties:nth-child(n + 2):before {
-    content: "";
+    content: '';
     position: absolute;
     top: 6px;
     left: -8px;
@@ -120,7 +120,7 @@
   }
 
   .laptop-form__input-properties:nth-child(n + 2):before {
-    content: "";
+    content: '';
     position: absolute;
     top: 8px;
     left: 0;

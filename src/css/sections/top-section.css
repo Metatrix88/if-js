@@ -1,6 +1,6 @@
 .top-section {
   min-height: 100vh;
-  background-image: url("../../images/jpg/background.jpg");
+  background-image: url('../../images/jpg/background.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

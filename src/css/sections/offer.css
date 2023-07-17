@@ -9,7 +9,7 @@
 }
 
 .offer__title:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 100px;
   height: 4px;

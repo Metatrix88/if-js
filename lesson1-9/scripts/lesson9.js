@@ -73,10 +73,10 @@ const getCalendarMonthLesson9 = (
           notCurrentMonth: false,
           selectedDay: day === today.getDate(),
 
-            // (day <= checkInDate &&
-            //   checkInDate > checkOutDate &&
-            //   day <= checkOutDate) ||
-            // (day >= checkInDate && day <= checkOutDate),  // Пока что закоментил, так как по условию понял что selectedDay нужен чтобы бы был true именно на текущий день
+          // (day <= checkInDate &&
+          //   checkInDate > checkOutDate &&
+          //   day <= checkOutDate) ||
+          // (day >= checkInDate && day <= checkOutDate),  // Пока что закоментил, так как по условию понял что selectedDay нужен чтобы бы был true именно на текущий день
         };
         week.push(dayWeek);
       }

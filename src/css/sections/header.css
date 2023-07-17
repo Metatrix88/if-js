@@ -28,7 +28,7 @@
 }
 
 .header__link:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 5px;
   top: 40px;

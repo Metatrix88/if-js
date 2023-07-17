@@ -1,11 +1,5 @@
 import { randProductName, randNumber } from '@ngneat/falso';
-import {
-  addProduct,
-  sum,
-  click1,
-  click2,
-  click3,
-} from '../scripts/lesson4';
+import { addProduct, sum, click1, click2, click3 } from '../scripts/lesson4';
 
 document.body.innerHTML = `
   <p id="text1">Text 1</p>
