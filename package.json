@@ -2,11 +2,11 @@
   "name": "if-js",
   "version": "1.0.0",
   "description": "",
-  "main": "src/scripts/main.js",
+  "main": "lesson1-9/scripts/main.js",
   "scripts": {
     "test": "jest --env=jsdom --transformIgnorePatterns \"node_modules/(?!react-dnd)/\"",
     "prepare": "husky install",
-    "lint": "prettier --write . && eslint src/scripts/main.js",
+    "lint": "prettier --write . && eslint lesson1-9/scripts/main.js",
     "prepublish": "npm run lint && npm test"
   },
   "author": "",

@@ -1,0 +1,28 @@
+.mobile-app {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mobile-app__link {
+  display: inline-block;
+  line-height: 0;
+}
+
+.mobile-app__icon-google {
+  width: 135px;
+  height: 40px;
+}
+
+.mobile-app__icon-apple {
+  width: 120px;
+  height: 40px;
+}
+
+@media (max-width: 1024px) {
+  /*For mobile tablets:*/
+}
+
+@media (max-width: 600px) {
+  /*For mobile phones:*/
+}

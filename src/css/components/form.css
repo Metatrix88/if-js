@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  width: 100%;
+  max-width: 622px;
+  background-color: var(--border-light-color);
+  border-radius: var(--basic-radius);
+}
+
+@media (max-width: 1024px) {
+  /*For mobile tablets:*/
+  .form {
+    max-width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    border-radius: var(--basic-radius);
+  }
+}
+
+@media (max-width: 600px) {
+  /*For mobile phones:*/
+}

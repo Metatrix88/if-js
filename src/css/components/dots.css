@@ -1,0 +1,27 @@
+.dots {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  /*For mobile tablets:*/
+}
+
+@media (max-width: 600px) {
+  /*For mobile phones:*/
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--unit);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border: 1px solid #333333;
+    border-radius: 50%;
+  }
+
+  .dot:first-child {
+    background-color: #333333;
+  }
+}
