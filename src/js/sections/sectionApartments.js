@@ -1,9 +1,9 @@
 import { destinationsEl, mainEl } from '../main.js';
-import {data} from '../constants/apartmentsConstants/cardsDataApartments.js';
+import { data } from '../constants/apartmentsConstants/cardsDataApartments.js';
 
 const sectionElApartments = document.createElement('section'); // создал section
 const ulElApartments = document.createElement('ul'); // создал tag ul
-const button = document.createElement('button');// создал кнопку
+const button = document.createElement('button'); // создал кнопку
 
 export const createSectionApartments = () => {
   mainEl.insertBefore(sectionElApartments, destinationsEl); // добавил новую секцию в tag main в нужное место
@@ -18,15 +18,15 @@ export const createSectionApartments = () => {
   titleElApartments.classList.add('apartments__title'); // добавил классы к tag h2
   ulElApartments.classList.add('row'); // добавил классы к tag ul
 
-  button.classList.add('button-next', 'apartments__button-next');// Добавил классы к кнопке
-  button.setAttribute('type', 'button');// добавил атрибуты к кнопке
-  button.setAttribute('aria-label', 'Next apartments');// добавил атрибуты к кнопке
+  button.classList.add('button-next', 'apartments__button-next'); // Добавил классы к кнопке
+  button.setAttribute('type', 'button'); // добавил атрибуты к кнопке
+  button.setAttribute('aria-label', 'Next apartments'); // добавил атрибуты к кнопке
   //добавил svg в кнопку
   button.innerHTML = `<svg class="button-next__icon">
             <use href="./src/images/svg/sprite.svg#arrow" />
           </svg>`;
 
-  sectionElApartments.appendChild(button);// Добавил кнопку в секцию в конец
+  sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
 
   const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
 
@@ -43,12 +43,10 @@ export const createSectionApartments = () => {
 
   // Функция которая по клику меняет картинки, добавляет класс и убирает его
   const nextApartments = (evt) => {
-
     apartmentsCardsEl.forEach((card, index) => {
       if (index <= 3) {
         card.classList.toggle('apartments__card--none');
-      }
-      else if (index >= 4) {
+      } else if (index >= 4) {
         card.classList.toggle('apartments__card--none');
       }
     });
@@ -59,7 +57,7 @@ export const createSectionApartments = () => {
 
 //Создал функцию в которой создается карточка и добавляется в tag Ul
 export const createdAndAddedCards = () => {
-//создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
+  //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
   const createHotelCard = ({ imageUrl, name, city, country }) => {
     return `<li class="col-lg-3 col-md-6 col-sm-3 apartments__card">
     <a class="link apartments__link" href="#" target="_blank">
@@ -82,4 +80,3 @@ export const createdAndAddedCards = () => {
 
   addedCard(data);
 };
-

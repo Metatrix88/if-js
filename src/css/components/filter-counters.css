@@ -1,0 +1,65 @@
+.desktop-form__filter {
+    position: absolute;
+    top: 76px;
+    left: 67%;
+}
+
+.filter {
+    background-color: var(--general-white-color);
+    max-width: 260px;
+    border-radius: 8px;
+    padding: 22px;
+}
+
+.filter__counters {
+    margin-bottom: 16px;
+}
+
+.counter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.counter__button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--primary-color);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.counter__label {
+    font-size: 16px;
+    width: 70px;
+}
+.counter__input {
+    font-size: 16px;
+    max-width: 30px;
+    text-align: center;
+}
+
+.filter__adults {
+    margin-bottom: 12px;
+}
+
+.filter__children {
+    margin-bottom: 12px;
+}
+
+.filter__children-question {
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+.filter__children-select {
+    max-width: 105px;
+    width: 100%;
+    font-size: 12px;
+    padding: 8px;
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    margin-bottom: 8px;
+
+}
