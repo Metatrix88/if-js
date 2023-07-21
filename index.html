@@ -118,55 +118,91 @@
             <div class="desktop-form__filter filter">
               <ul class="filter__counters">
                 <li class="filter__adults counter">
-                  <label class="counter__label" for="counter-adults">Adults</label>
-                  <button class="counter__button counter__button--minus">-</button>
-                  <input class="counter__input" id="counter-adults" name="counter-adults" type="text" disabled value="1"/>
-                  <button class="counter__button counter__button--plus">+</button>
+                  <label class="counter__label" for="counter-adults"
+                    >Adults</label
+                  >
+                  <button class="counter__button counter__button--minus">
+                    -
+                  </button>
+                  <input
+                    class="counter__input counter__input--adults"
+                    id="counter-adults"
+                    name="counter-adults"
+                    type="text"
+                    disabled
+                    value="1"
+                  />
+                  <button class="counter__button counter__button--plus">
+                    +
+                  </button>
                 </li>
                 <li class="filter__children counter">
-                  <label class="counter__label" for="counter-children">Children</label>
-                  <button class="counter__button counter__button--minus">-</button>
-                  <input class="counter__input" id="counter-children" name="counter-children" type="text" disabled value="0"/>
-                  <button class="counter__button counter__button--plus">+</button>
+                  <label class="counter__label" for="counter-children"
+                    >Children</label
+                  >
+                  <button class="counter__button counter__button--minus counter__button-children">
+                    -
+                  </button>
+                  <input
+                    class="counter__input counter__input--children"
+                    id="counter-children"
+                    name="counter-children"
+                    type="text"
+                    disabled
+                    value="0"
+                  />
+                  <button class="counter__button counter__button--plus counter__button-children">
+                    +
+                  </button>
                 </li>
                 <li class="filter__rooms counter">
-                  <label class="counter__label" for="counter-rooms">Rooms</label>
-                  <button class="counter__button counter__button--minus">-</button>
-                  <input class="counter__input" id="counter-rooms" name="counter-rooms" type="text" disabled value="1"/>
-                  <button class="counter__button counter__button--plus">+</button>
+                  <label class="counter__label" for="counter-rooms"
+                    >Rooms</label
+                  >
+                  <button class="counter__button counter__button--minus">
+                    -
+                  </button>
+                  <input
+                    class="counter__input counter__input--rooms"
+                    id="counter-rooms"
+                    name="counter-rooms"
+                    type="text"
+                    disabled
+                    value="1"
+                  />
+                  <button class="counter__button counter__button--plus">
+                    +
+                  </button>
                 </li>
               </ul>
 
-              <div>
-                <p class="filter__children-question">What is the age of the child you’re travelling with?</p>
-                <select class="filter__children-select">
-                  <option value="0 year">0 years old</option>
-                  <option value="1 year">1 years old</option>
-                  <option value="2 year">2 years old</option>
-                  <option value="3 year">3 years old</option>
-                  <option value="4 year">4 years old</option>
-                  <option value="5 years">5 years old</option>
-                  <option value="6 years">6 years old</option>
-                  <option value="7 years">7 years old</option>
-                  <option value="8 years">8 years old</option>
-                  <option value="9 years">9 years old</option>
-                  <option value="10 years">10 years old</option>
-                  <option value="11 years">11 years old</option>
-                  <option value="12 years">12 years old</option>
-                  <option value="13 years">13 years old</option>
-                  <option value="14 years">14 years old</option>
-                  <option value="15 years">15 years old</option>
-                  <option value="16 years">16 years old</option>
-                  <option value="17 years">17 years old</option>
-                </select>
-
+              <div class="filter__children-info filter__children--disabled">
+                <p class="filter__children-question">
+                  What is the age of the child you’re travelling with?
+                </p>
+<!--                <select class="filter__children-select">-->
+<!--                  <option value="0 years">0 years old</option>-->
+<!--                  <option value="1 years">1 years old</option>-->
+<!--                  <option value="2 years">2 years old</option>-->
+<!--                  <option value="3 years">3 years old</option>-->
+<!--                  <option value="4 years">4 years old</option>-->
+<!--                  <option value="5 years">5 years old</option>-->
+<!--                  <option value="6 years">6 years old</option>-->
+<!--                  <option value="7 years">7 years old</option>-->
+<!--                  <option value="8 years">8 years old</option>-->
+<!--                  <option value="9 years">9 years old</option>-->
+<!--                  <option value="10 years">10 years old</option>-->
+<!--                  <option value="11 years">11 years old</option>-->
+<!--                  <option value="12 years">12 years old</option>-->
+<!--                  <option value="13 years">13 years old</option>-->
+<!--                  <option value="14 years">14 years old</option>-->
+<!--                  <option value="15 years">15 years old</option>-->
+<!--                  <option value="16 years">16 years old</option>-->
+<!--                  <option value="17 years">17 years old</option>-->
+<!--                </select>-->
               </div>
             </div>
-
           </form>
-
-
-
 
           <form class="md-2-col sm-2-col search-form--laptop laptop-form">
             <div class="laptop-form__input-wrap laptop-form__input--full-width">
