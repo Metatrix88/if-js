@@ -71,3 +71,7 @@
 .filter__children--disabled {
   display: none;
 }
+
+.desktop-form__filter--disabled {
+  display: none;
+}
