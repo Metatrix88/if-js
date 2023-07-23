@@ -59,13 +59,14 @@
 }
 
 .filter__children-select {
-  max-width: 105px;
+  max-width: 100px;
   width: 100%;
   font-size: 12px;
   padding: 8px;
   border: 1px solid var(--primary-color);
   cursor: pointer;
   margin-bottom: 8px;
+  margin-right: 8px;
 }
 
 .filter__children--disabled {
