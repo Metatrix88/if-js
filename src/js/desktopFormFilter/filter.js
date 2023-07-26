@@ -198,8 +198,6 @@ const counterMinusRooms = (e) => {
   getValueCounters();
 };
 
-console.log(counterChildrenInfoEl.childElementCount);
-
 inputFilterEl.addEventListener('click', countersFilter);
 buttonPlusAdultsEl.addEventListener('click', counterPlusAdults);
 buttonMinusAdultsEl.addEventListener('click', counterMinusAdults);
