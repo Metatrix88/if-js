@@ -1,14 +1,13 @@
 const inputFilterEl = document.querySelector('.desktop-form__input-filter');
-const buttonMinusAdultsEl = document.querySelector('.counter__button--minus.counter__button-adults');
-const buttonMinusChildrenEl = document.querySelector('.counter__button--minus.counter__button-children');
-const buttonMinusRoomsEl = document.querySelector('.counter__button--minus.counter__button-rooms');
-const buttonPlusAdultsEl = document.querySelector('.counter__button--plus.counter__button-adults');
-const buttonPlusChildrenEl = document.querySelector('.counter__button--plus.counter__button-children');
-const buttonPlusRoomsEl = document.querySelector('.counter__button--plus.counter__button-rooms');
+const buttonMinusAdultsEl = document.querySelector('.counter__button--minus.counter__button-adults',);
+const buttonMinusChildrenEl = document.querySelector('.counter__button--minus.counter__button-children',);
+const buttonMinusRoomsEl = document.querySelector('.counter__button--minus.counter__button-rooms',);
+const buttonPlusAdultsEl = document.querySelector('.counter__button--plus.counter__button-adults',);
+const buttonPlusChildrenEl = document.querySelector('.counter__button--plus.counter__button-children',);
+const buttonPlusRoomsEl = document.querySelector('.counter__button--plus.counter__button-rooms',);
 let inputAdultsEl = document.querySelector('.counter__input--adults').value;
-
-
-
+let inputChildrenEl = document.querySelector('.counter__input--children').value;
+let inputRoomsEl = document.querySelector('.counter__input--rooms').value;
 
 // открывает панель со счетчиками
 const countersFilter = (e) => {
@@ -32,14 +31,15 @@ const counterPlusAdults = (e) => {
     inputAdultsEl = 30;
   }
 
-  if (inputAdultsEl >= 1) {
+  if (inputAdultsEl > 1) {
     buttonMinusAdultsEl.classList.remove('button-disabled');
   }
 
-  target.closest('.counter').querySelector('.counter__input--adults').value = inputAdultsEl;
+  target.closest('.counter').querySelector('.counter__input--adults').value =
+    inputAdultsEl;
 };
 
-// Функция уменьшает Adults и ограничивает до 0, так же делает кнопку минус серой при значении 0!
+// Функция уменьшает Adults и ограничивает до 1, так же делает кнопку минус серой при значении 1!
 const counterMinusAdults = (e) => {
   const target = e.target;
 
@@ -52,21 +52,91 @@ const counterMinusAdults = (e) => {
     buttonMinusAdultsEl.classList.add('button-disabled');
   }
 
-  target.closest('.counter').querySelector('.counter__input--adults').value = inputAdultsEl;
+  target.closest('.counter').querySelector('.counter__input--adults').value =
+    inputAdultsEl;
 };
 
+// Функция увеличивает Children и ограничивает до 10!
+const counterPlusChildren = (e) => {
+  const target = e.target;
 
+  if (target.classList.contains('counter__button--plus')) {
+    inputChildrenEl++;
+  }
 
+  if (inputChildrenEl >= 10) {
+    inputChildrenEl = 10;
+  }
+
+  if (inputChildrenEl >= 0) {
+    buttonMinusChildrenEl.classList.remove('button-disabled');
+  }
+
+  target.closest('.counter').querySelector('.counter__input--children').value =
+    inputChildrenEl;
+};
+
+// Функция уменьшает Children и ограничивает до 0, так же делает кнопку минус серой при значении 0!
+const counterMinusChildren = (e) => {
+  const target = e.target;
+
+  if (target.classList.contains('counter__button--minus')) {
+    --inputChildrenEl;
+  }
+
+  if (inputChildrenEl <= 0) {
+    inputChildrenEl = 0;
+    buttonMinusChildrenEl.classList.add('button-disabled');
+  }
+
+  target.closest('.counter').querySelector('.counter__input--children').value =
+    inputChildrenEl;
+};
+
+// Функция увеличивает Rooms и ограничивает до 30!
+const counterPlusRooms = (e) => {
+  const target = e.target;
+
+  if (target.classList.contains('counter__button--plus')) {
+    inputRoomsEl++;
+  }
+
+  if (inputRoomsEl >= 30) {
+    inputRoomsEl = 30;
+  }
+
+  if (inputRoomsEl > 1) {
+    buttonMinusRoomsEl.classList.remove('button-disabled');
+  }
+
+  target.closest('.counter').querySelector('.counter__input--rooms').value =
+    inputRoomsEl;
+};
+
+// Функция уменьшает Rooms и ограничивает до 1, так же делает кнопку минус серой при значении 1!
+const counterMinusRooms = (e) => {
+  const target = e.target;
+
+  if (target.classList.contains('counter__button--minus')) {
+    --inputRoomsEl;
+  }
+
+  if (inputRoomsEl <= 1) {
+    inputRoomsEl = 1;
+    buttonMinusRoomsEl.classList.add('button-disabled');
+  }
+
+  target.closest('.counter').querySelector('.counter__input--rooms').value =
+    inputRoomsEl;
+};
 
 inputFilterEl.addEventListener('click', countersFilter);
 buttonPlusAdultsEl.addEventListener('click', counterPlusAdults);
 buttonMinusAdultsEl.addEventListener('click', counterMinusAdults);
-
-
-
-
-
-
+buttonPlusChildrenEl.addEventListener('click', counterPlusChildren);
+buttonMinusChildrenEl.addEventListener('click', counterMinusChildren);
+buttonPlusRoomsEl.addEventListener('click', counterPlusRooms);
+buttonMinusRoomsEl.addEventListener('click', counterMinusRooms);
 
 
 // const counters = document.querySelectorAll('.counter');
