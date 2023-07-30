@@ -1,20 +1,20 @@
-const inputFilterEl = document.querySelector('.desktop-form__input-filter');
-const buttonMinusAdultsEl = document.querySelector(
+export const inputFilterEl = document.querySelector('.desktop-form__input-filter');
+export const buttonMinusAdultsEl = document.querySelector(
   '.counter__button--minus.counter__button-adults',
 );
-const buttonMinusChildrenEl = document.querySelector(
+export const buttonMinusChildrenEl = document.querySelector(
   '.counter__button--minus.counter__button-children',
 );
-const buttonMinusRoomsEl = document.querySelector(
+export const buttonMinusRoomsEl = document.querySelector(
   '.counter__button--minus.counter__button-rooms',
 );
-const buttonPlusAdultsEl = document.querySelector(
+export const buttonPlusAdultsEl = document.querySelector(
   '.counter__button--plus.counter__button-adults',
 );
-const buttonPlusChildrenEl = document.querySelector(
+export const buttonPlusChildrenEl = document.querySelector(
   '.counter__button--plus.counter__button-children',
 );
-const buttonPlusRoomsEl = document.querySelector(
+export const buttonPlusRoomsEl = document.querySelector(
   '.counter__button--plus.counter__button-rooms',
 );
 let inputAdultsEl = document.querySelector('.counter__input--adults').value;
@@ -23,7 +23,7 @@ let inputRoomsEl = document.querySelector('.counter__input--rooms').value;
 const counterChildrenInfoEl = document.querySelector('.filter__children-info');
 
 // открывает панель со счетчиками
-const countersFilter = (e) => {
+export const countersFilter = (e) => {
   const countersEl = document.querySelector('.desktop-form__filter');
   const input = e.target.closest('.desktop-form__input-filter');
 
@@ -33,14 +33,14 @@ const countersFilter = (e) => {
 };
 
 //Функция которая передает значения счетчиков в основной инпут
-const getValueCounters = () => {
+export const getValueCounters = () => {
   document.querySelector(
     '.desktop-form__input-filter',
   ).value = `${inputAdultsEl} Adults — ${inputChildrenEl} Children — ${inputRoomsEl} Room`;
 };
 
 // Функция которая создает и наполняет option select
-const createSelect = () => {
+export const createSelect = () => {
   const selectEl = document.createElement('select');
   selectEl.classList.add('filter__children-select');
 
@@ -54,7 +54,7 @@ const createSelect = () => {
 };
 
 // Функция увеличивает Adults и ограничивает до 30!
-const counterPlusAdults = (e) => {
+export const counterPlusAdults = (e) => {
   const target = e.target;
 
   if (target.classList.contains('counter__button--plus')) {
@@ -75,7 +75,7 @@ const counterPlusAdults = (e) => {
 };
 
 // Функция уменьшает Adults и ограничивает до 1, так же делает кнопку минус серой при значении 1!
-const counterMinusAdults = (e) => {
+export const counterMinusAdults = (e) => {
   const target = e.target;
 
   if (target.classList.contains('counter__button--minus')) {
@@ -93,7 +93,7 @@ const counterMinusAdults = (e) => {
 };
 
 // Функция увеличивает Children и ограничивает до 10!
-const counterPlusChildren = (e) => {
+export const counterPlusChildren = (e) => {
   const target = e.target;
 
   if (target.classList.contains('counter__button--plus')) {
@@ -128,7 +128,7 @@ const counterPlusChildren = (e) => {
 };
 
 // Функция уменьшает Children и ограничивает до 0, так же делает кнопку минус серой при значении 0!
-const counterMinusChildren = (e) => {
+export const counterMinusChildren = (e) => {
   const target = e.target;
 
   if (target.classList.contains('counter__button--minus')) {
@@ -160,7 +160,7 @@ const counterMinusChildren = (e) => {
 };
 
 // Функция увеличивает Rooms и ограничивает до 30!
-const counterPlusRooms = (e) => {
+export const counterPlusRooms = (e) => {
   const target = e.target;
 
   if (target.classList.contains('counter__button--plus')) {
@@ -181,7 +181,7 @@ const counterPlusRooms = (e) => {
 };
 
 // Функция уменьшает Rooms и ограничивает до 1, так же делает кнопку минус серой при значении 1!
-const counterMinusRooms = (e) => {
+export const counterMinusRooms = (e) => {
   const target = e.target;
 
   if (target.classList.contains('counter__button--minus')) {
@@ -198,10 +198,3 @@ const counterMinusRooms = (e) => {
   getValueCounters();
 };
 
-inputFilterEl.addEventListener('click', countersFilter);
-buttonPlusAdultsEl.addEventListener('click', counterPlusAdults);
-buttonMinusAdultsEl.addEventListener('click', counterMinusAdults);
-buttonPlusChildrenEl.addEventListener('click', counterPlusChildren);
-buttonMinusChildrenEl.addEventListener('click', counterMinusChildren);
-buttonPlusRoomsEl.addEventListener('click', counterPlusRooms);
-buttonMinusRoomsEl.addEventListener('click', counterMinusRooms);
