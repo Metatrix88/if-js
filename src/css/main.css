@@ -19,6 +19,7 @@
 @import url('components/desktop-form.css');
 @import url('components/laptop-form.css');
 @import url('components/dots.css');
+@import url('components/filter-counters.css');
 
 @import url('sections/header.css');
 @import url('sections/main-mobile.css');
