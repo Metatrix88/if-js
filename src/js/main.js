@@ -4,9 +4,11 @@ import {
 } from './sections/sectionApartments.js';
 import {
   counterMinusAdults,
-  counterMinusChildren, counterMinusRooms,
+  counterMinusChildren,
+  counterMinusRooms,
   counterPlusAdults,
-  counterPlusChildren, counterPlusRooms,
+  counterPlusChildren,
+  counterPlusRooms,
   countersFilter,
   inputFilterEl,
   buttonPlusAdultsEl,

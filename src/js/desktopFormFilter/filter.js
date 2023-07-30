@@ -1,4 +1,6 @@
-export const inputFilterEl = document.querySelector('.desktop-form__input-filter');
+export const inputFilterEl = document.querySelector(
+  '.desktop-form__input-filter',
+);
 export const buttonMinusAdultsEl = document.querySelector(
   '.counter__button--minus.counter__button-adults',
 );
@@ -197,4 +199,3 @@ export const counterMinusRooms = (e) => {
     inputRoomsEl;
   getValueCounters();
 };
-
