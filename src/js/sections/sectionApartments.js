@@ -1,10 +1,11 @@
-import { destinationsEl, mainEl } from '../main.js';
-import { data } from '../constants/apartmentsConstants/cardsDataApartments.js';
+const destinationsEl = document.getElementById('destinations'); // получил секцию destinations по id
+const mainEl = document.getElementById('main'); // получил tag main по id
 
 const sectionElApartments = document.createElement('section'); // создал section
 const ulElApartments = document.createElement('ul'); // создал tag ul
 const button = document.createElement('button'); // создал кнопку
 
+// Создаю секцию Apartments
 export const createSectionApartments = () => {
   mainEl.insertBefore(sectionElApartments, destinationsEl); // добавил новую секцию в tag main в нужное место
 
@@ -27,56 +28,68 @@ export const createSectionApartments = () => {
           </svg>`;
 
   sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
-
-  const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
-
-  //Создал функцию которая добавляет класс к последним четырем картинкам, чтобы они скрывались изначально
-  const addClassNone = (cards) => {
-    cards.forEach((card, index) => {
-      if (index >= 4) {
-        card.classList.toggle('apartments__card--none');
-      }
-    });
-  };
-
-  addClassNone(apartmentsCardsEl);
-
-  // Функция которая по клику меняет картинки, добавляет класс и убирает его
-  const nextApartments = (evt) => {
-    apartmentsCardsEl.forEach((card, index) => {
-      if (index <= 3) {
-        card.classList.toggle('apartments__card--none');
-      } else if (index >= 4) {
-        card.classList.toggle('apartments__card--none');
-      }
-    });
-  };
-
-  button.addEventListener('click', nextApartments);
 };
 
-//Создал функцию в которой создается карточка и добавляется в tag Ul
-export const createdAndAddedCards = () => {
-  //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
-  const createHotelCard = ({ imageUrl, name, city, country }) => {
-    return `<li class="col-lg-3 col-md-6 col-sm-3 apartments__card">
-    <a class="link apartments__link" href="#" target="_blank">
-      <img class="images apartments__img"
-       src=${imageUrl}
-         alt=${name}/>
-      ${name}
-    </a>
-    <h3 class="apartments__subtitle">${city}, ${country}</h3>
-  </li>`;
-  };
+fetch('https://if-student-api.onrender.com/api/hotels/popular')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status} - ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
+    const createHotelCard = ({ imageUrl, name, city, country }) => {
+      return `<li class="col-lg-3 col-md-6 col-sm-3 apartments__card">
+      <a class="link apartments__link" href="#" target="_blank">
+        <img class="images apartments__img"
+         src=${imageUrl}
+           alt=${name}/>
+        ${name}
+      </a>
+      <h3 class="apartments__subtitle">${city}, ${country}</h3>
+      </li>`;
+    };
 
-  //принимает массив объектов и добавляет Отели в Ul по очереди
-  const addedCard = (apartments) => {
-    apartments.forEach((apartment) => {
-      const cardApartment = createHotelCard(apartment);
-      ulElApartments.innerHTML += cardApartment;
-    });
-  };
+    // принимает массив объектов и добавляет Отели в Ul по очереди
+    const addedCard = (apartments) => {
+      apartments.forEach((apartment) => {
+        const cardApartment = createHotelCard(apartment);
+        ulElApartments.innerHTML += cardApartment;
+      });
+    };
 
-  addedCard(data);
-};
+    addedCard(data);
+  })
+  .then(() => {
+    const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
+
+    //Создал функцию которая добавляет класс к последним четырем картинкам, чтобы они скрывались изначально
+    const addClassNone = (cards) => {
+      cards.forEach((card, index) => {
+        if (index >= 4) {
+          card.classList.toggle('apartments__card--none');
+        }
+      });
+    };
+
+    addClassNone(apartmentsCardsEl);
+    return apartmentsCardsEl;
+  })
+  .then((apartmentsCardsEl) => {
+    // Функция которая по клику меняет картинки, добавляет класс и убирает его
+    const nextApartments = (evt) => {
+      apartmentsCardsEl.forEach((card, index) => {
+        if (index <= 3) {
+          card.classList.toggle('apartments__card--none');
+        } else if (index >= 4) {
+          card.classList.toggle('apartments__card--none');
+        }
+      });
+    };
+
+    button.addEventListener('click', nextApartments);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
