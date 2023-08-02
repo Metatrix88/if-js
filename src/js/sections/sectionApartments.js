@@ -31,16 +31,15 @@ const createSectionApartments = () => {
 };
 
 //Функция которая достает данные по ссылке
-async function getPopularHotels() {
-  try {
-    const response = await fetch(
-      'https://if-student-api.onrender.com/api/hotels/popular',
-    );
-    return await response.json();
-  } catch (e) {
-    return console.error('Error!!!', e.message);
-  }
-}
+const getPopularHotels = () => {
+  return fetch('https://if-student-api.onrender.com/api/hotels/popular')
+    .then((response) => {
+      return response.json();
+    })
+    .catch((e) => {
+      console.error('Error!!!', e.message);
+    });
+};
 
 // функция которая содержит в себе две функции, одна создает карточку отеля, вторая добавляет ее в Ul
 async function createdAndAddedCard() {
