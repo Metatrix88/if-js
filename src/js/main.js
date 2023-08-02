@@ -1,4 +1,3 @@
-import { createSectionApartments } from './sections/sectionApartments.js';
 import {
   counterMinusAdults,
   counterMinusChildren,
@@ -25,4 +24,4 @@ buttonMinusChildrenEl.addEventListener('click', counterMinusChildren);
 buttonPlusRoomsEl.addEventListener('click', counterPlusRooms);
 buttonMinusRoomsEl.addEventListener('click', counterMinusRooms);
 
-createSectionApartments();
+

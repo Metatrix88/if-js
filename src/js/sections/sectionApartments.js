@@ -6,7 +6,7 @@ const ulElApartments = document.createElement('ul'); // создал tag ul
 const button = document.createElement('button'); // создал кнопку
 
 // Создаю секцию Apartments
-export const createSectionApartments = () => {
+const createSectionApartments = () => {
   mainEl.insertBefore(sectionElApartments, destinationsEl); // добавил новую секцию в tag main в нужное место
 
   const titleElApartments = document.createElement('h2'); // создал tag h2
@@ -30,8 +30,22 @@ export const createSectionApartments = () => {
   sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
 };
 
+//Функция которая достает данные по ссылке
+async function getPopularHotels() {
+  try {
+    const response = await fetch(
+      'https://if-student-api.onrender.com/api/hotels/popular',
+    );
+    return await response.json();
+  } catch (e) {
+    return console.error('Error!!!', e.message);
+  }
+}
+
 // функция которая содержит в себе две функции, одна создает карточку отеля, вторая добавляет ее в Ul
-const createdAndAddedCard = (data) => {
+async function createdAndAddedCard() {
+  const data = await getPopularHotels();
+
   //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
   const createHotelCard = ({ imageUrl, name, city, country }) => {
     return `<li class="col-lg-3 col-md-6 col-sm-3 apartments__card">
@@ -54,47 +68,31 @@ const createdAndAddedCard = (data) => {
   };
 
   addedCard(data);
-};
 
-//Создал функцию которая добавляет класс к последним картинкам, чтобы они скрывались изначально
-const addClassNone = (cards) => {
-  cards.forEach((card, index) => {
-    if (index >= 4) {
-      card.classList.toggle('apartments__card--none');
-    }
-  });
-};
+  const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
+  //Создал функцию которая добавляет класс к последним картинкам, чтобы они скрывались изначально
+  const addClassNone = (cards) => {
+    cards.forEach((card, index) => {
+      if (index >= 4) {
+        card.classList.toggle('apartments__card--none');
+      }
+    });
+  };
 
-fetch('https://if-student-api.onrender.com/api/hotels/popular')
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`${response.status} - ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    createdAndAddedCard(data);
-  })
-  .then(() => {
-    const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
+  // Функция которая по клику меняет картинки, добавляет класс и убирает его
+  const nextApartments = (evt) => {
+    apartmentsCardsEl.forEach((card, index) => {
+      if (index <= 3) {
+        card.classList.toggle('apartments__card--none');
+      } else if (index >= 4) {
+        card.classList.toggle('apartments__card--none');
+      }
+    });
+  };
 
-    addClassNone(apartmentsCardsEl);
-    return apartmentsCardsEl;
-  })
-  .then((apartmentsCardsEl) => {
-    // Функция которая по клику меняет картинки, добавляет класс и убирает его
-    const nextApartments = (evt) => {
-      apartmentsCardsEl.forEach((card, index) => {
-        if (index <= 3) {
-          card.classList.toggle('apartments__card--none');
-        } else if (index >= 4) {
-          card.classList.toggle('apartments__card--none');
-        }
-      });
-    };
+  addClassNone(apartmentsCardsEl);
+  button.addEventListener('click', nextApartments);
+}
 
-    button.addEventListener('click', nextApartments);
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+createdAndAddedCard();
+createSectionApartments();
