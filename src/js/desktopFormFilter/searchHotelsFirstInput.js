@@ -1,5 +1,4 @@
 const { desktopForm } = document.forms;
-
 const offerEl = document.getElementById('offer'); // получил секцию offer по id
 const mainEl = document.getElementById('main'); // получил tag main по id
 
@@ -22,35 +21,17 @@ const createSectionApartments = () => {
 };
 
 // Функция которая достает данные по ссылке
-const getHotelsServer = () =>
-  fetch('https://if-student-api.onrender.com/api/hotels')
+const getHotelsServer = (url) =>
+  fetch(url)
     .then((response) => {
       return response.json();
+    })
+    .then((hotel) => {
+      return hotel;
     })
     .catch((e) => {
       console.error('Error!!!', e.message);
     });
-
-//Функция которая получает данные которые ввели и данные с сервера(список отелей) и отфильтровывает отели по тем данным которые ввели
-const getHotelsFilter = (dataInput, hotels) => {
-  const dataInputLower = dataInput.toLowerCase();
-
-  const filterHotel = hotels.filter((hotel) => {
-    const dataHotelNameLower = hotel.name.toLowerCase();
-    const dataHotelCityLower = hotel.city.toLowerCase();
-    const dataHotelCountryLower = hotel.country.toLowerCase();
-
-    if (
-      dataHotelNameLower.includes(dataInputLower) ||
-      dataHotelCityLower.includes(dataInputLower) ||
-      dataHotelCountryLower.includes(dataInputLower)
-    ) {
-      return hotel;
-    }
-  });
-
-  return filterHotel;
-};
 
 //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
 const createHotelCardAvailable = ({ imageUrl, name, city, country }) => {
@@ -73,7 +54,7 @@ const addHotelsAvailable = (hotels) => {
   });
 };
 
-//Функция которая очищает секцию при каждом нажатии перед ее заполнением
+// Функция которая очищает секцию при каждом нажатии перед ее заполнением
 const sectionClear = () => {
   const sectionAvailableEl = document.querySelector('.available');
   if (sectionAvailableEl) {
@@ -88,11 +69,12 @@ const searchHotels = async (e) => {
   e.preventDefault();
 
   sectionClear();
+  const URL = 'https://if-student-api.onrender.com/api/hotels';
   const desktopFormInputCity = desktopForm.city.value;
-  const hotels = await getHotelsServer();
-
+  const newURL = `${URL}/?search=${desktopFormInputCity}`;
+  const hotels = await getHotelsServer(newURL);
   await createSectionApartments();
-  addHotelsAvailable(getHotelsFilter(desktopFormInputCity, hotels));
+  await addHotelsAvailable(hotels);
 };
 
 desktopForm.addEventListener('submit', searchHotels);
