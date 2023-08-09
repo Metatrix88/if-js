@@ -75,7 +75,11 @@
           <h2 class="top-section__title">
             Discover stays to&nbsp;live,&nbsp;work or just relax
           </h2>
-          <form class="lg-4-col search-form--desktop desktop-form">
+          <form
+            id="desktopForm"
+            class="lg-4-col search-form--desktop desktop-form"
+            name="desktop"
+          >
             <div class="desktop-form__input">
               <input
                 class="input desktop-form__input-city"
@@ -94,7 +98,6 @@
                 name="date"
                 id="date"
                 title="Check-in — Check-out"
-                required
               />
               <label for="date">Check-in — Check-out</label>
             </div>
@@ -113,7 +116,10 @@
                 autocomplete="off"
               />
             </div>
-            <button class="button button--blue desktop-form__button-search">
+            <button
+              id="desktop-search"
+              class="button button--blue desktop-form__button-search"
+            >
               Search
             </button>
 
@@ -706,5 +712,9 @@
     </footer>
     <script type="module" src="src/js/main.js"></script>
     <script type="module" src="src/js/sections/sectionApartments.js"></script>
+    <script
+      type="module"
+      src="src/js/desktopFormFilter/searchHotelsFirstInput.js"
+    ></script>
   </body>
 </html>
