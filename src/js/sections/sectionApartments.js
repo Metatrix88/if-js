@@ -72,9 +72,16 @@ const addClassNone = (cards) => {
 
 // функция которая вызывает функции выше
 async function createdAndAddedCard() {
-  const data = await getPopularHotels();
+  const dataStorage = sessionStorage.getItem('hotels');
 
-  addedCard(data);
+  if (dataStorage === null) {
+    const data = await getPopularHotels();
+    await addedCard(data);
+    sessionStorage.setItem('hotels', JSON.stringify(data));
+  } else {
+    const dataInSessionStorage = JSON.parse(dataStorage);
+    await addedCard(dataInSessionStorage);
+  }
 
   const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
 
