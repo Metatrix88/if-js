@@ -36,6 +36,10 @@ const getPopularHotels = () =>
     .then((response) => {
       return response.json();
     })
+    .then((data) => {
+      console.log('data', data);
+      return data;
+    })
     .catch((e) => {
       console.error('Error!!!', e.message);
     });
@@ -70,17 +74,41 @@ const addClassNone = (cards) => {
   });
 };
 
+//Сортировка отелей методом пузырька
+const bubbleSort = (arr) => {
+  const array = [...arr];
+
+  const len = array.length;
+  for (let i = len - 1; i >= 0; i--) {
+    for (let j = 1; j <= i; j++) {
+      if (array[j - 1].name > array[j].name) {
+        const temp = array[j - 1];
+        array[j - 1] = array[j];
+        array[j] = temp;
+      }
+    }
+  }
+  console.log(2, array);
+  return array;
+};
+
 // функция которая вызывает функции выше
 async function createdAndAddedCard() {
   const dataStorage = sessionStorage.getItem('hotels');
 
   if (dataStorage === null) {
     const data = await getPopularHotels();
-    await addedCard(data);
+
+    const arr1 = await bubbleSort(data);
+    console.log('arr1', arr1);
+    await addedCard(arr1);
+
     sessionStorage.setItem('hotels', JSON.stringify(data));
   } else {
     const dataInSessionStorage = JSON.parse(dataStorage);
-    await addedCard(dataInSessionStorage);
+
+    const arr1 = await bubbleSort(dataInSessionStorage);
+    await addedCard(arr1);
   }
 
   const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
