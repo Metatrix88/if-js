@@ -13,7 +13,7 @@ import {
   buttonMinusChildrenEl,
   buttonPlusRoomsEl,
   buttonMinusRoomsEl,
-} from './desktopFormFilter/filter.js';
+} from './desktopFormFilter/filterHotelsThreeInput.js';
 
 //Фильтр и счетчики
 inputFilterEl.addEventListener('click', countersFilter);
