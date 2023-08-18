@@ -1,4 +1,3 @@
-
 // Функция которая достает данные по ссылке
 export const getPopularHotels = (url) =>
   fetch(url)
@@ -25,3 +24,4 @@ export const bubbleSort = (arr) => {
   }
   return newArrHotels;
 };
+

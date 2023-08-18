@@ -1,4 +1,4 @@
-import { destinationsEl, mainEl, URL } from '../constants-utils/constants.js';
+import { destinationsEl, mainEl, urlPopularHotel } from '../constants-utils/constants.js';
 import { getPopularHotels, bubbleSort } from '../constants-utils/helpers.js';
 
 const sectionElApartments = document.createElement('section'); // создал section
@@ -65,7 +65,7 @@ export const createdAndAddedCard = async () => {
   const dataStorage = sessionStorage.getItem('hotels');
 
   if (dataStorage === null) {
-    const data = await getPopularHotels(URL);
+    const data = await getPopularHotels(urlPopularHotel);
     const sortHotels = await bubbleSort(data);
     await addedCard(sortHotels);
     sessionStorage.setItem('hotels', JSON.stringify(sortHotels));

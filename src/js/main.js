@@ -18,6 +18,8 @@ import {
   createdAndAddedCard,
   createSectionApartments,
 } from './sections/createdSectionApartments.js';
+import { desktopForm } from './constants-utils/constants.js';
+import { searchHotels } from './desktopFormFilter/searchHotels.js';
 
 //Фильтр и счетчики
 inputFilterEl.addEventListener('click', countersFilter);
@@ -30,3 +32,5 @@ buttonMinusRoomsEl.addEventListener('click', counterMinusRooms);
 
 createdAndAddedCard();
 createSectionApartments();
+
+desktopForm.addEventListener('submit', searchHotels);
