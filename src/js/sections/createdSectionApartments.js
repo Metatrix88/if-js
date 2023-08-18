@@ -6,7 +6,7 @@ const ulElApartments = document.createElement('ul'); // создал tag ul
 const button = document.createElement('button'); // создал кнопку
 
 // Создаю секцию Apartments
-const createSectionApartments = () => {
+export const createSectionApartments = () => {
   mainEl.insertBefore(sectionElApartments, destinationsEl); // добавил новую секцию в tag main в нужное место
 
   const titleElApartments = document.createElement('h2'); // создал tag h2
@@ -72,35 +72,32 @@ const addClassNone = (cards) => {
 
 //Сортировка отелей методом пузырька
 const bubbleSort = (arr) => {
+  const newArrHotels = [...arr];
+
   const len = arr.length;
   for (let i = len - 1; i >= 0; i--) {
     for (let j = 1; j <= i; j++) {
-      if (arr[j - 1].name > arr[j].name) {
-        const temp = arr[j - 1];
-        arr[j - 1] = arr[j];
-        arr[j] = temp;
+      if (newArrHotels[j - 1].name > newArrHotels[j].name) {
+        const temp = newArrHotels[j - 1];
+        newArrHotels[j - 1] = newArrHotels[j];
+        newArrHotels[j] = temp;
       }
     }
   }
-  return arr;
+  return newArrHotels;
 };
 
 // функция которая вызывает функции выше
-async function createdAndAddedCard() {
+export const createdAndAddedCard = async () => {
   const dataStorage = sessionStorage.getItem('hotels');
 
   if (dataStorage === null) {
     const data = await getPopularHotels();
-
-    await bubbleSort(data);
-
-    await addedCard(data);
-
-    sessionStorage.setItem('hotels', JSON.stringify(data));
+    const sortHotels = await bubbleSort(data);
+    await addedCard(sortHotels);
+    sessionStorage.setItem('hotels', JSON.stringify(sortHotels));
   } else {
     const dataInSessionStorage = JSON.parse(dataStorage);
-
-    await bubbleSort(dataInSessionStorage);
     await addedCard(dataInSessionStorage);
   }
 
@@ -119,7 +116,5 @@ async function createdAndAddedCard() {
 
   addClassNone(apartmentsCardsEl);
   button.addEventListener('click', nextApartments);
-}
+};
 
-createdAndAddedCard();
-createSectionApartments();

@@ -14,6 +14,7 @@ import {
   buttonPlusRoomsEl,
   buttonMinusRoomsEl,
 } from './desktopFormFilter/filterHotelsThreeInput.js';
+import { createdAndAddedCard, createSectionApartments } from './sections/createdSectionApartments.js';
 
 //Фильтр и счетчики
 inputFilterEl.addEventListener('click', countersFilter);
@@ -23,3 +24,7 @@ buttonPlusChildrenEl.addEventListener('click', counterPlusChildren);
 buttonMinusChildrenEl.addEventListener('click', counterMinusChildren);
 buttonPlusRoomsEl.addEventListener('click', counterPlusRooms);
 buttonMinusRoomsEl.addEventListener('click', counterMinusRooms);
+
+
+createdAndAddedCard();
+createSectionApartments();
