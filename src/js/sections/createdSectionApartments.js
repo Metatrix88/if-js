@@ -1,5 +1,5 @@
-const destinationsEl = document.getElementById('destinations'); // получил секцию destinations по id
-const mainEl = document.getElementById('main'); // получил tag main по id
+import { destinationsEl, mainEl, URL } from '../constants-utils/constants.js';
+import { getPopularHotels, bubbleSort } from '../constants-utils/helpers.js';
 
 const sectionElApartments = document.createElement('section'); // создал section
 const ulElApartments = document.createElement('ul'); // создал tag ul
@@ -29,16 +29,6 @@ export const createSectionApartments = () => {
 
   sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
 };
-
-// Функция которая достает данные по ссылке
-const getPopularHotels = () =>
-  fetch('https://if-student-api.onrender.com/api/hotels/popular')
-    .then((response) => {
-      return response.json();
-    })
-    .catch((e) => {
-      console.error('Error!!!', e.message);
-    });
 
 //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
 const createHotelCard = ({ imageUrl, name, city, country }) => {
@@ -70,29 +60,12 @@ const addClassNone = (cards) => {
   });
 };
 
-//Сортировка отелей методом пузырька
-const bubbleSort = (arr) => {
-  const newArrHotels = [...arr];
-
-  const len = arr.length;
-  for (let i = len - 1; i >= 0; i--) {
-    for (let j = 1; j <= i; j++) {
-      if (newArrHotels[j - 1].name > newArrHotels[j].name) {
-        const temp = newArrHotels[j - 1];
-        newArrHotels[j - 1] = newArrHotels[j];
-        newArrHotels[j] = temp;
-      }
-    }
-  }
-  return newArrHotels;
-};
-
 // функция которая вызывает функции выше
 export const createdAndAddedCard = async () => {
   const dataStorage = sessionStorage.getItem('hotels');
 
   if (dataStorage === null) {
-    const data = await getPopularHotels();
+    const data = await getPopularHotels(URL);
     const sortHotels = await bubbleSort(data);
     await addedCard(sortHotels);
     sessionStorage.setItem('hotels', JSON.stringify(sortHotels));
@@ -117,4 +90,3 @@ export const createdAndAddedCard = async () => {
   addClassNone(apartmentsCardsEl);
   button.addEventListener('click', nextApartments);
 };
-

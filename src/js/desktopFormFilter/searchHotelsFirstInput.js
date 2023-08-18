@@ -1,4 +1,5 @@
 const { desktopForm } = document.forms;
+
 const offerEl = document.getElementById('offer'); // получил секцию offer по id
 const mainEl = document.getElementById('main'); // получил tag main по id
 
