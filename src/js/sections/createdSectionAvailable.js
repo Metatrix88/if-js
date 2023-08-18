@@ -1,4 +1,4 @@
-import { desktopForm, mainEl, offerEl} from '../constants-utils/constants.js';
+import { desktopForm, mainEl, offerEl } from '../constants-utils/constants.js';
 
 const sectionElAvailableHotels = document.createElement('section'); // создал section
 const ulElAvailableHotel = document.createElement('ul'); // создал tag ul
@@ -55,7 +55,3 @@ export const createSectionAvailable = () => {
   titleElAvailable.classList.add('available__title'); // добавил классы к tag h2
   ulElAvailableHotel.classList.add('row'); // добавил классы к tag ul
 };
-
-
-
-

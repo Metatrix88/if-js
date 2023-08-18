@@ -1,4 +1,8 @@
-import { destinationsEl, mainEl, urlPopularHotel } from '../constants-utils/constants.js';
+import {
+  destinationsEl,
+  mainEl,
+  urlPopularHotel,
+} from '../constants-utils/constants.js';
 import { getPopularHotels, bubbleSort } from '../constants-utils/helpers.js';
 
 const sectionElApartments = document.createElement('section'); // создал section

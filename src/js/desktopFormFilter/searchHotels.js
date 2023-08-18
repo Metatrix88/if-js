@@ -1,6 +1,11 @@
-import { sectionClear, createdURLSearchParams, createSectionAvailable, addHotelsAvailable } from '../sections/createdSectionAvailable.js';
+import {
+  sectionClear,
+  createdURLSearchParams,
+  createSectionAvailable,
+  addHotelsAvailable,
+} from '../sections/createdSectionAvailable.js';
 import { getPopularHotels } from '../constants-utils/helpers.js';
-import {urlAllHotels} from '../constants-utils/constants.js';
+import { urlAllHotels } from '../constants-utils/constants.js';
 
 export const searchHotels = async (e) => {
   e.preventDefault();
