@@ -199,5 +199,3 @@ export const counterMinusRooms = (e) => {
     inputRoomsEl;
   getValueCounters();
 };
-
-
