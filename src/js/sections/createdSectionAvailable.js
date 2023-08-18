@@ -35,9 +35,28 @@ export const sectionClear = () => {
   }
 };
 
+//Функция которая получает значения селектов из формы desktop
+const getValueSelect = () => {
+  const valuesSelect = [];
+  const selectEl = document.querySelectorAll('select.filter__children-select');
+  const selectArr = Array.from(selectEl);
+  selectArr.forEach((item) => {
+    valuesSelect.push(item.value);
+  });
+  return valuesSelect.join(',');
+};
+
 export const createdURLSearchParams = (url) => {
   const desktopFormInputCity = desktopForm.city.value;
+
+  const inputAdultsEl = document.getElementById('counter-adults').value;
+  const valuesSelectInputChildren = getValueSelect();
+  const inputRoomsEl = document.getElementById('counter-rooms').value;
+
   url.searchParams.set('search', `${desktopFormInputCity}`);
+  url.searchParams.set('adults', `${inputAdultsEl}`);
+  url.searchParams.set('children', `${valuesSelectInputChildren}`);
+  url.searchParams.set('rooms', `${inputRoomsEl}`);
   return url;
 };
 

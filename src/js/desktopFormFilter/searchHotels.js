@@ -7,6 +7,8 @@ import {
 import { getPopularHotels } from '../constants-utils/helpers.js';
 import { urlAllHotels } from '../constants-utils/constants.js';
 
+
+
 export const searchHotels = async (e) => {
   e.preventDefault();
 
