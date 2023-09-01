@@ -49,7 +49,7 @@ export const createSelect = () => {
   for (let i = 0; i <= 17; i++) {
     const optionEl = document.createElement('option');
     optionEl.textContent = `${i} years old`;
-    optionEl.setAttribute('value', `${i} years`);
+    optionEl.setAttribute('value', `${i}`);
     selectEl.appendChild(optionEl);
   }
   return selectEl;

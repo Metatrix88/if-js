@@ -1,12 +1,16 @@
-const destinationsEl = document.getElementById('destinations'); // получил секцию destinations по id
-const mainEl = document.getElementById('main'); // получил tag main по id
+import {
+  destinationsEl,
+  mainEl,
+  urlPopularHotel,
+} from '../constants-utils/constants.js';
+import { getPopularHotels, bubbleSort } from '../constants-utils/helpers.js';
 
 const sectionElApartments = document.createElement('section'); // создал section
 const ulElApartments = document.createElement('ul'); // создал tag ul
 const button = document.createElement('button'); // создал кнопку
 
 // Создаю секцию Apartments
-const createSectionApartments = () => {
+export const createSectionApartments = () => {
   mainEl.insertBefore(sectionElApartments, destinationsEl); // добавил новую секцию в tag main в нужное место
 
   const titleElApartments = document.createElement('h2'); // создал tag h2
@@ -29,16 +33,6 @@ const createSectionApartments = () => {
 
   sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
 };
-
-// Функция которая достает данные по ссылке
-const getPopularHotels = () =>
-  fetch('https://if-student-api.onrender.com/api/hotels/popular')
-    .then((response) => {
-      return response.json();
-    })
-    .catch((e) => {
-      console.error('Error!!!', e.message);
-    });
 
 //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
 const createHotelCard = ({ imageUrl, name, city, country }) => {
@@ -71,13 +65,14 @@ const addClassNone = (cards) => {
 };
 
 // функция которая вызывает функции выше
-async function createdAndAddedCard() {
+export const createdAndAddedCard = async () => {
   const dataStorage = sessionStorage.getItem('hotels');
 
   if (dataStorage === null) {
-    const data = await getPopularHotels();
-    await addedCard(data);
-    sessionStorage.setItem('hotels', JSON.stringify(data));
+    const data = await getPopularHotels(urlPopularHotel);
+    const sortHotels = await bubbleSort(data);
+    await addedCard(sortHotels);
+    sessionStorage.setItem('hotels', JSON.stringify(sortHotels));
   } else {
     const dataInSessionStorage = JSON.parse(dataStorage);
     await addedCard(dataInSessionStorage);
@@ -98,7 +93,4 @@ async function createdAndAddedCard() {
 
   addClassNone(apartmentsCardsEl);
   button.addEventListener('click', nextApartments);
-}
-
-createdAndAddedCard();
-createSectionApartments();
+};
