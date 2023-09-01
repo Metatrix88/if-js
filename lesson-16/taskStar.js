@@ -7,7 +7,7 @@ function checkBracketsSyntax(inputString) {
     if (openingBrackets.includes(value)) {
       stack.push(value);
     } else if (closingBrackets.includes(value)) {
-      if (stack.length === 0 || stack[stack.length-1] !== '{') {
+      if (stack.length === 0 || stack[stack.length - 1] !== '{') {
         return false;
       } else {
         stack.pop();
