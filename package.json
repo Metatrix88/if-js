@@ -23,6 +23,7 @@
     "prettier": "2.8.8"
   },
   "dependencies": {
-    "save-dev": "^0.0.1-security"
+    "save-dev": "^0.0.1-security",
+    "swiper": "^10.2.0"
   }
 }
