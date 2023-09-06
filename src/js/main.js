@@ -34,5 +34,3 @@ createdAndAddedCard();
 createSectionApartments();
 
 desktopForm.addEventListener('submit', searchHotels);
-
-
