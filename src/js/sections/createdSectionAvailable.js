@@ -2,10 +2,14 @@ import { desktopForm, mainEl, offerEl } from '../constants-utils/constants.js';
 
 const sectionElAvailableHotels = document.createElement('section'); // создал section
 const ulElAvailableHotel = document.createElement('ul'); // создал tag ul
+const divElSwiperWrapper = document.createElement('div'); // создал tag div
+const divElPagination = document.createElement('div'); // создал tag div
+const divElSwiperButPrev = document.createElement('div'); // создал tag div
+const divElSwiperButNext = document.createElement('div'); // создал tag div
 
 //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
 const createHotelCardAvailable = ({ imageUrl, name, city, country }) => {
-  return `<li class="col-lg-3 col-md-6 col-sm-3 available__card">
+  return `<li class="col-lg-3 col-md-6 col-sm-3 available__card swiper-slide">
       <a class="link available__link" href="#" target="_blank">
         <img class="images available__img"
          src=${imageUrl}
@@ -68,9 +72,17 @@ export const createSectionAvailable = () => {
   titleElAvailable.textContent = 'Available hotels'; // добавил контент в tag h2
 
   sectionElAvailableHotels.appendChild(titleElAvailable); // добавил в tag section tag h2 с контентом
-  sectionElAvailableHotels.appendChild(ulElAvailableHotel); // добавил tag ul в tag section за tag h2
+  sectionElAvailableHotels.appendChild(divElSwiperWrapper); // добавил swiper обертку в tag section за tag h2
+  divElSwiperWrapper.appendChild(ulElAvailableHotel); // добавил tag ul в swiper обертку за tag h2
+  divElSwiperWrapper.appendChild(divElSwiperButPrev); // добавил div кнопку "назад" в swiper обертку за Pagination
+  divElSwiperWrapper.appendChild(divElSwiperButNext); // добавил div кнопку "вперед" в swiper обертку за кнопкой назад
+  divElSwiperWrapper.appendChild(divElPagination); // добавил Pagination в swiper обертку за tag ul
 
   sectionElAvailableHotels.classList.add('container', 'available'); // добавил классы к tag section
   titleElAvailable.classList.add('available__title'); // добавил классы к tag h2
-  ulElAvailableHotel.classList.add('row'); // добавил классы к tag ul
+  divElSwiperWrapper.classList.add('swiper'); // добавил классы к обертке swiper
+  ulElAvailableHotel.classList.add('swiper-wrapper'); // добавил классы к tag ul
+  divElPagination.classList.add('swiper-pagination'); // добавил классы к Pagination
+  divElSwiperButPrev.classList.add('swiper-button-prev'); // добавил классы к кнопке назад
+  divElSwiperButNext.classList.add('swiper-button-next'); // добавил классы к кнопке вперед
 };
