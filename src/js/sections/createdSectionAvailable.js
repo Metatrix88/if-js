@@ -80,7 +80,7 @@ export const createSectionAvailable = () => {
 
   sectionElAvailableHotels.classList.add('container', 'available'); // добавил классы к tag section
   titleElAvailable.classList.add('available__title'); // добавил классы к tag h2
-  divElSwiperWrapper.classList.add('swiper'); // добавил классы к обертке swiper
+  divElSwiperWrapper.classList.add('swiper', 'swiper__coverflow'); // добавил классы к обертке swiper
   ulElAvailableHotel.classList.add('swiper-wrapper'); // добавил классы к tag ul
   divElPagination.classList.add('swiper-pagination'); // добавил классы к Pagination
   divElSwiperButPrev.classList.add('swiper-button-prev'); // добавил классы к кнопке назад
