@@ -2,35 +2,40 @@ import { g as getDocument } from '../shared/ssr-window.esm.mjs';
 import { j as isObject, e as elementChildren } from '../shared/utils.mjs';
 
 function Thumb(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     thumbs: {
       swiper: null,
       multipleActiveThumbs: true,
       autoScrollOffset: 0,
       slideThumbActiveClass: 'swiper-slide-thumb-active',
-      thumbsContainerClass: 'swiper-thumbs'
-    }
+      thumbsContainerClass: 'swiper-thumbs',
+    },
   });
   let initialized = false;
   let swiperCreated = false;
   swiper.thumbs = {
-    swiper: null
+    swiper: null,
   };
   function onThumbClick() {
     const thumbsSwiper = swiper.thumbs.swiper;
     if (!thumbsSwiper || thumbsSwiper.destroyed) return;
     const clickedIndex = thumbsSwiper.clickedIndex;
     const clickedSlide = thumbsSwiper.clickedSlide;
-    if (clickedSlide && clickedSlide.classList.contains(swiper.params.thumbs.slideThumbActiveClass)) return;
+    if (
+      clickedSlide &&
+      clickedSlide.classList.contains(
+        swiper.params.thumbs.slideThumbActiveClass,
+      )
+    )
+      return;
     if (typeof clickedIndex === 'undefined' || clickedIndex === null) return;
     let slideToIndex;
     if (thumbsSwiper.params.loop) {
-      slideToIndex = parseInt(thumbsSwiper.clickedSlide.getAttribute('data-swiper-slide-index'), 10);
+      slideToIndex = parseInt(
+        thumbsSwiper.clickedSlide.getAttribute('data-swiper-slide-index'),
+        10,
+      );
     } else {
       slideToIndex = clickedIndex;
     }
@@ -41,9 +46,7 @@ function Thumb(_ref) {
     }
   }
   function init() {
-    const {
-      thumbs: thumbsParams
-    } = swiper.params;
+    const { thumbs: thumbsParams } = swiper.params;
     if (initialized) return false;
     initialized = true;
     const SwiperClass = swiper.constructor;
@@ -51,30 +54,35 @@ function Thumb(_ref) {
       swiper.thumbs.swiper = thumbsParams.swiper;
       Object.assign(swiper.thumbs.swiper.originalParams, {
         watchSlidesProgress: true,
-        slideToClickedSlide: false
+        slideToClickedSlide: false,
       });
       Object.assign(swiper.thumbs.swiper.params, {
         watchSlidesProgress: true,
-        slideToClickedSlide: false
+        slideToClickedSlide: false,
       });
       swiper.thumbs.swiper.update();
     } else if (isObject(thumbsParams.swiper)) {
       const thumbsSwiperParams = Object.assign({}, thumbsParams.swiper);
       Object.assign(thumbsSwiperParams, {
         watchSlidesProgress: true,
-        slideToClickedSlide: false
+        slideToClickedSlide: false,
       });
       swiper.thumbs.swiper = new SwiperClass(thumbsSwiperParams);
       swiperCreated = true;
     }
-    swiper.thumbs.swiper.el.classList.add(swiper.params.thumbs.thumbsContainerClass);
+    swiper.thumbs.swiper.el.classList.add(
+      swiper.params.thumbs.thumbsContainerClass,
+    );
     swiper.thumbs.swiper.on('tap', onThumbClick);
     return true;
   }
   function update(initial) {
     const thumbsSwiper = swiper.thumbs.swiper;
     if (!thumbsSwiper || thumbsSwiper.destroyed) return;
-    const slidesPerView = thumbsSwiper.params.slidesPerView === 'auto' ? thumbsSwiper.slidesPerViewDynamic() : thumbsSwiper.params.slidesPerView;
+    const slidesPerView =
+      thumbsSwiper.params.slidesPerView === 'auto'
+        ? thumbsSwiper.slidesPerViewDynamic()
+        : thumbsSwiper.params.slidesPerView;
 
     // Activate thumbs
     let thumbsToActivate = 1;
@@ -86,17 +94,27 @@ function Thumb(_ref) {
       thumbsToActivate = 1;
     }
     thumbsToActivate = Math.floor(thumbsToActivate);
-    thumbsSwiper.slides.forEach(slideEl => slideEl.classList.remove(thumbActiveClass));
-    if (thumbsSwiper.params.loop || thumbsSwiper.params.virtual && thumbsSwiper.params.virtual.enabled) {
+    thumbsSwiper.slides.forEach((slideEl) =>
+      slideEl.classList.remove(thumbActiveClass),
+    );
+    if (
+      thumbsSwiper.params.loop ||
+      (thumbsSwiper.params.virtual && thumbsSwiper.params.virtual.enabled)
+    ) {
       for (let i = 0; i < thumbsToActivate; i += 1) {
-        elementChildren(thumbsSwiper.slidesEl, `[data-swiper-slide-index="${swiper.realIndex + i}"]`).forEach(slideEl => {
+        elementChildren(
+          thumbsSwiper.slidesEl,
+          `[data-swiper-slide-index="${swiper.realIndex + i}"]`,
+        ).forEach((slideEl) => {
           slideEl.classList.add(thumbActiveClass);
         });
       }
     } else {
       for (let i = 0; i < thumbsToActivate; i += 1) {
         if (thumbsSwiper.slides[swiper.realIndex + i]) {
-          thumbsSwiper.slides[swiper.realIndex + i].classList.add(thumbActiveClass);
+          thumbsSwiper.slides[swiper.realIndex + i].classList.add(
+            thumbActiveClass,
+          );
         }
       }
     }
@@ -107,7 +125,11 @@ function Thumb(_ref) {
       let newThumbsIndex;
       let direction;
       if (thumbsSwiper.params.loop) {
-        const newThumbsSlide = thumbsSwiper.slides.filter(slideEl => slideEl.getAttribute('data-swiper-slide-index') === `${swiper.realIndex}`)[0];
+        const newThumbsSlide = thumbsSwiper.slides.filter(
+          (slideEl) =>
+            slideEl.getAttribute('data-swiper-slide-index') ===
+            `${swiper.realIndex}`,
+        )[0];
         newThumbsIndex = thumbsSwiper.slides.indexOf(newThumbsSlide);
         direction = swiper.activeIndex > swiper.previousIndex ? 'next' : 'prev';
       } else {
@@ -115,35 +137,46 @@ function Thumb(_ref) {
         direction = newThumbsIndex > swiper.previousIndex ? 'next' : 'prev';
       }
       if (useOffset) {
-        newThumbsIndex += direction === 'next' ? autoScrollOffset : -1 * autoScrollOffset;
+        newThumbsIndex +=
+          direction === 'next' ? autoScrollOffset : -1 * autoScrollOffset;
       }
-      if (thumbsSwiper.visibleSlidesIndexes && thumbsSwiper.visibleSlidesIndexes.indexOf(newThumbsIndex) < 0) {
+      if (
+        thumbsSwiper.visibleSlidesIndexes &&
+        thumbsSwiper.visibleSlidesIndexes.indexOf(newThumbsIndex) < 0
+      ) {
         if (thumbsSwiper.params.centeredSlides) {
           if (newThumbsIndex > currentThumbsIndex) {
             newThumbsIndex = newThumbsIndex - Math.floor(slidesPerView / 2) + 1;
           } else {
             newThumbsIndex = newThumbsIndex + Math.floor(slidesPerView / 2) - 1;
           }
-        } else if (newThumbsIndex > currentThumbsIndex && thumbsSwiper.params.slidesPerGroup === 1) ;
+        } else if (
+          newThumbsIndex > currentThumbsIndex &&
+          thumbsSwiper.params.slidesPerGroup === 1
+        );
         thumbsSwiper.slideTo(newThumbsIndex, initial ? 0 : undefined);
       }
     }
   }
   on('beforeInit', () => {
-    const {
-      thumbs
-    } = swiper.params;
+    const { thumbs } = swiper.params;
     if (!thumbs || !thumbs.swiper) return;
-    if (typeof thumbs.swiper === 'string' || thumbs.swiper instanceof HTMLElement) {
+    if (
+      typeof thumbs.swiper === 'string' ||
+      thumbs.swiper instanceof HTMLElement
+    ) {
       const document = getDocument();
       const getThumbsElementAndInit = () => {
-        const thumbsElement = typeof thumbs.swiper === 'string' ? document.querySelector(thumbs.swiper) : thumbs.swiper;
+        const thumbsElement =
+          typeof thumbs.swiper === 'string'
+            ? document.querySelector(thumbs.swiper)
+            : thumbs.swiper;
         if (thumbsElement && thumbsElement.swiper) {
           thumbs.swiper = thumbsElement.swiper;
           init();
           update(true);
         } else if (thumbsElement) {
-          const onThumbsSwiper = e => {
+          const onThumbsSwiper = (e) => {
             thumbs.swiper = e.detail[0];
             thumbsElement.removeEventListener('init', onThumbsSwiper);
             init();
@@ -185,7 +218,7 @@ function Thumb(_ref) {
   });
   Object.assign(swiper.thumbs, {
     init,
-    update
+    update,
   });
 }
 

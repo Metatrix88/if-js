@@ -36,7 +36,31 @@ import EffectCreative from './modules/effect-creative.mjs';
 import EffectCards from './modules/effect-cards.mjs';
 
 // Swiper Class
-const modules = [Virtual, Keyboard, Mousewheel, Navigation, Pagination, Scrollbar, Parallax, Zoom, Controller, A11y, History, HashNavigation, Autoplay, Thumb, freeMode, Grid, Manipulation, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCreative, EffectCards];
+const modules = [
+  Virtual,
+  Keyboard,
+  Mousewheel,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Parallax,
+  Zoom,
+  Controller,
+  A11y,
+  History,
+  HashNavigation,
+  Autoplay,
+  Thumb,
+  freeMode,
+  Grid,
+  Manipulation,
+  EffectFade,
+  EffectCube,
+  EffectFlip,
+  EffectCoverflow,
+  EffectCreative,
+  EffectCards,
+];
 Swiper.use(modules);
 
 export { Swiper, Swiper as default };

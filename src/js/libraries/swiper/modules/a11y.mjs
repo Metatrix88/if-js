@@ -2,11 +2,7 @@ import { c as classesToSelector } from '../shared/classes-to-selector.mjs';
 import { c as createElement, g as elementIndex } from '../shared/utils.mjs';
 
 function A11y(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     a11y: {
       enabled: true,
@@ -21,11 +17,11 @@ function A11y(_ref) {
       containerRoleDescriptionMessage: null,
       itemRoleDescriptionMessage: null,
       slideRole: 'group',
-      id: null
-    }
+      id: null,
+    },
   });
   swiper.a11y = {
-    clicked: false
+    clicked: false,
   };
   let liveRegion = null;
   function notify(message) {
@@ -34,7 +30,8 @@ function A11y(_ref) {
     notification.innerHTML = '';
     notification.innerHTML = message;
   }
-  const makeElementsArray = el => (Array.isArray(el) ? el : [el]).filter(e => !!e);
+  const makeElementsArray = (el) =>
+    (Array.isArray(el) ? el : [el]).filter((e) => !!e);
   function getRandomNumber(size) {
     if (size === void 0) {
       size = 16;
@@ -44,61 +41,61 @@ function A11y(_ref) {
   }
   function makeElFocusable(el) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('tabIndex', '0');
     });
   }
   function makeElNotFocusable(el) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('tabIndex', '-1');
     });
   }
   function addElRole(el, role) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('role', role);
     });
   }
   function addElRoleDescription(el, description) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('aria-roledescription', description);
     });
   }
   function addElControls(el, controls) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('aria-controls', controls);
     });
   }
   function addElLabel(el, label) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('aria-label', label);
     });
   }
   function addElId(el, id) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('id', id);
     });
   }
   function addElLive(el, live) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('aria-live', live);
     });
   }
   function disableEl(el) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('aria-disabled', true);
     });
   }
   function enableEl(el) {
     el = makeElementsArray(el);
-    el.forEach(subEl => {
+    el.forEach((subEl) => {
       subEl.setAttribute('aria-disabled', false);
     });
   }
@@ -106,10 +103,24 @@ function A11y(_ref) {
     if (e.keyCode !== 13 && e.keyCode !== 32) return;
     const params = swiper.params.a11y;
     const targetEl = e.target;
-    if (swiper.pagination && swiper.pagination.el && (targetEl === swiper.pagination.el || swiper.pagination.el.contains(e.target))) {
-      if (!e.target.matches(classesToSelector(swiper.params.pagination.bulletClass))) return;
+    if (
+      swiper.pagination &&
+      swiper.pagination.el &&
+      (targetEl === swiper.pagination.el ||
+        swiper.pagination.el.contains(e.target))
+    ) {
+      if (
+        !e.target.matches(
+          classesToSelector(swiper.params.pagination.bulletClass),
+        )
+      )
+        return;
     }
-    if (swiper.navigation && swiper.navigation.nextEl && targetEl === swiper.navigation.nextEl) {
+    if (
+      swiper.navigation &&
+      swiper.navigation.nextEl &&
+      targetEl === swiper.navigation.nextEl
+    ) {
       if (!(swiper.isEnd && !swiper.params.loop)) {
         swiper.slideNext();
       }
@@ -119,7 +130,11 @@ function A11y(_ref) {
         notify(params.nextSlideMessage);
       }
     }
-    if (swiper.navigation && swiper.navigation.prevEl && targetEl === swiper.navigation.prevEl) {
+    if (
+      swiper.navigation &&
+      swiper.navigation.prevEl &&
+      targetEl === swiper.navigation.prevEl
+    ) {
       if (!(swiper.isBeginning && !swiper.params.loop)) {
         swiper.slidePrev();
       }
@@ -129,16 +144,17 @@ function A11y(_ref) {
         notify(params.prevSlideMessage);
       }
     }
-    if (swiper.pagination && targetEl.matches(classesToSelector(swiper.params.pagination.bulletClass))) {
+    if (
+      swiper.pagination &&
+      targetEl.matches(classesToSelector(swiper.params.pagination.bulletClass))
+    ) {
       targetEl.click();
     }
   }
   function updateNavigation() {
-    if (swiper.params.loop || swiper.params.rewind || !swiper.navigation) return;
-    const {
-      nextEl,
-      prevEl
-    } = swiper.navigation;
+    if (swiper.params.loop || swiper.params.rewind || !swiper.navigation)
+      return;
+    const { nextEl, prevEl } = swiper.navigation;
     if (prevEl) {
       if (swiper.isBeginning) {
         disableEl(prevEl);
@@ -159,7 +175,11 @@ function A11y(_ref) {
     }
   }
   function hasPagination() {
-    return swiper.pagination && swiper.pagination.bullets && swiper.pagination.bullets.length;
+    return (
+      swiper.pagination &&
+      swiper.pagination.bullets &&
+      swiper.pagination.bullets.length
+    );
   }
   function hasClickablePagination() {
     return hasPagination() && swiper.params.pagination.clickable;
@@ -167,15 +187,25 @@ function A11y(_ref) {
   function updatePagination() {
     const params = swiper.params.a11y;
     if (!hasPagination()) return;
-    swiper.pagination.bullets.forEach(bulletEl => {
+    swiper.pagination.bullets.forEach((bulletEl) => {
       if (swiper.params.pagination.clickable) {
         makeElFocusable(bulletEl);
         if (!swiper.params.pagination.renderBullet) {
           addElRole(bulletEl, 'button');
-          addElLabel(bulletEl, params.paginationBulletMessage.replace(/\{\{index\}\}/, elementIndex(bulletEl) + 1));
+          addElLabel(
+            bulletEl,
+            params.paginationBulletMessage.replace(
+              /\{\{index\}\}/,
+              elementIndex(bulletEl) + 1,
+            ),
+          );
         }
       }
-      if (bulletEl.matches(classesToSelector(swiper.params.pagination.bulletActiveClass))) {
+      if (
+        bulletEl.matches(
+          classesToSelector(swiper.params.pagination.bulletActiveClass),
+        )
+      ) {
         bulletEl.setAttribute('aria-current', 'true');
       } else {
         bulletEl.removeAttribute('aria-current');
@@ -203,12 +233,17 @@ function A11y(_ref) {
       });
     });
   };
-  const handleFocus = e => {
+  const handleFocus = (e) => {
     if (swiper.a11y.clicked) return;
-    const slideEl = e.target.closest(`.${swiper.params.slideClass}, swiper-slide`);
+    const slideEl = e.target.closest(
+      `.${swiper.params.slideClass}, swiper-slide`,
+    );
     if (!slideEl || !swiper.slides.includes(slideEl)) return;
     const isActive = swiper.slides.indexOf(slideEl) === swiper.activeIndex;
-    const isVisible = swiper.params.watchSlidesProgress && swiper.visibleSlides && swiper.visibleSlides.includes(slideEl);
+    const isVisible =
+      swiper.params.watchSlidesProgress &&
+      swiper.visibleSlides &&
+      swiper.visibleSlides.includes(slideEl);
     if (isActive || isVisible) return;
     if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
     if (swiper.isHorizontal()) {
@@ -229,8 +264,12 @@ function A11y(_ref) {
     const slidesLength = swiper.slides.length;
     if (params.slideLabelMessage) {
       swiper.slides.forEach((slideEl, index) => {
-        const slideIndex = swiper.params.loop ? parseInt(slideEl.getAttribute('data-swiper-slide-index'), 10) : index;
-        const ariaLabelMessage = params.slideLabelMessage.replace(/\{\{index\}\}/, slideIndex + 1).replace(/\{\{slidesLength\}\}/, slidesLength);
+        const slideIndex = swiper.params.loop
+          ? parseInt(slideEl.getAttribute('data-swiper-slide-index'), 10)
+          : index;
+        const ariaLabelMessage = params.slideLabelMessage
+          .replace(/\{\{index\}\}/, slideIndex + 1)
+          .replace(/\{\{slidesLength\}\}/, slidesLength);
         addElLabel(slideEl, ariaLabelMessage);
       });
     }
@@ -250,8 +289,14 @@ function A11y(_ref) {
 
     // Wrapper
     const wrapperEl = swiper.wrapperEl;
-    const wrapperId = params.id || wrapperEl.getAttribute('id') || `swiper-wrapper-${getRandomNumber(16)}`;
-    const live = swiper.params.autoplay && swiper.params.autoplay.enabled ? 'off' : 'polite';
+    const wrapperId =
+      params.id ||
+      wrapperEl.getAttribute('id') ||
+      `swiper-wrapper-${getRandomNumber(16)}`;
+    const live =
+      swiper.params.autoplay && swiper.params.autoplay.enabled
+        ? 'off'
+        : 'polite';
     addElId(wrapperEl, wrapperId);
     addElLive(wrapperEl, live);
 
@@ -259,23 +304,22 @@ function A11y(_ref) {
     initSlides();
 
     // Navigation
-    let {
-      nextEl,
-      prevEl
-    } = swiper.navigation ? swiper.navigation : {};
+    let { nextEl, prevEl } = swiper.navigation ? swiper.navigation : {};
     nextEl = makeElementsArray(nextEl);
     prevEl = makeElementsArray(prevEl);
     if (nextEl) {
-      nextEl.forEach(el => initNavEl(el, wrapperId, params.nextSlideMessage));
+      nextEl.forEach((el) => initNavEl(el, wrapperId, params.nextSlideMessage));
     }
     if (prevEl) {
-      prevEl.forEach(el => initNavEl(el, wrapperId, params.prevSlideMessage));
+      prevEl.forEach((el) => initNavEl(el, wrapperId, params.prevSlideMessage));
     }
 
     // Pagination
     if (hasClickablePagination()) {
-      const paginationEl = Array.isArray(swiper.pagination.el) ? swiper.pagination.el : [swiper.pagination.el];
-      paginationEl.forEach(el => {
+      const paginationEl = Array.isArray(swiper.pagination.el)
+        ? swiper.pagination.el
+        : [swiper.pagination.el];
+      paginationEl.forEach((el) => {
         el.addEventListener('keydown', onEnterOrSpaceKey);
       });
     }
@@ -287,23 +331,26 @@ function A11y(_ref) {
   };
   function destroy() {
     if (liveRegion) liveRegion.remove();
-    let {
-      nextEl,
-      prevEl
-    } = swiper.navigation ? swiper.navigation : {};
+    let { nextEl, prevEl } = swiper.navigation ? swiper.navigation : {};
     nextEl = makeElementsArray(nextEl);
     prevEl = makeElementsArray(prevEl);
     if (nextEl) {
-      nextEl.forEach(el => el.removeEventListener('keydown', onEnterOrSpaceKey));
+      nextEl.forEach((el) =>
+        el.removeEventListener('keydown', onEnterOrSpaceKey),
+      );
     }
     if (prevEl) {
-      prevEl.forEach(el => el.removeEventListener('keydown', onEnterOrSpaceKey));
+      prevEl.forEach((el) =>
+        el.removeEventListener('keydown', onEnterOrSpaceKey),
+      );
     }
 
     // Pagination
     if (hasClickablePagination()) {
-      const paginationEl = Array.isArray(swiper.pagination.el) ? swiper.pagination.el : [swiper.pagination.el];
-      paginationEl.forEach(el => {
+      const paginationEl = Array.isArray(swiper.pagination.el)
+        ? swiper.pagination.el
+        : [swiper.pagination.el];
+      paginationEl.forEach((el) => {
         el.removeEventListener('keydown', onEnterOrSpaceKey);
       });
     }

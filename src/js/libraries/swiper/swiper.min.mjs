@@ -10,5 +10,5 @@
  * Released on: September 21, 2023
  */
 
-export{S as Swiper,S as default}from"./shared/swiper-core.min.mjs";
+export { S as Swiper, S as default } from './shared/swiper-core.min.mjs';
 //# sourceMappingURL=swiper.min.mjs.map

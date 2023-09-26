@@ -3,12 +3,7 @@ import { n as nextTick, d as now } from '../shared/utils.mjs';
 
 /* eslint-disable consistent-return */
 function Mousewheel(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on,
-    emit
-  } = _ref;
+  let { swiper, extendParams, on, emit } = _ref;
   const window = getWindow();
   extendParams({
     mousewheel: {
@@ -20,11 +15,11 @@ function Mousewheel(_ref) {
       eventsTarget: 'container',
       thresholdDelta: null,
       thresholdTime: null,
-      noMousewheelClass: 'swiper-no-mousewheel'
-    }
+      noMousewheelClass: 'swiper-no-mousewheel',
+    },
   });
   swiper.mousewheel = {
-    enabled: false
+    enabled: false,
   };
   let timeout;
   let lastScrollTime = now();
@@ -95,7 +90,7 @@ function Mousewheel(_ref) {
       spinX: sX,
       spinY: sY,
       pixelX: pX,
-      pixelY: pY
+      pixelY: pY,
     };
   }
   function handleMouseEnter() {
@@ -107,11 +102,17 @@ function Mousewheel(_ref) {
     swiper.mouseEntered = false;
   }
   function animateSlider(newEvent) {
-    if (swiper.params.mousewheel.thresholdDelta && newEvent.delta < swiper.params.mousewheel.thresholdDelta) {
+    if (
+      swiper.params.mousewheel.thresholdDelta &&
+      newEvent.delta < swiper.params.mousewheel.thresholdDelta
+    ) {
       // Prevent if delta of wheel scroll delta is below configured threshold
       return false;
     }
-    if (swiper.params.mousewheel.thresholdTime && now() - lastScrollTime < swiper.params.mousewheel.thresholdTime) {
+    if (
+      swiper.params.mousewheel.thresholdTime &&
+      now() - lastScrollTime < swiper.params.mousewheel.thresholdTime
+    ) {
       // Prevent if time between scrolls is below configured threshold
       return false;
     }
@@ -140,7 +141,10 @@ function Mousewheel(_ref) {
         swiper.slideNext();
         emit('scroll', newEvent.raw);
       }
-    } else if ((!swiper.isBeginning || swiper.params.loop) && !swiper.animating) {
+    } else if (
+      (!swiper.isBeginning || swiper.params.loop) &&
+      !swiper.animating
+    ) {
       swiper.slidePrev();
       emit('scroll', newEvent.raw);
     }
@@ -156,7 +160,11 @@ function Mousewheel(_ref) {
         // Return true to animate scroll on edges
         return true;
       }
-    } else if (swiper.isBeginning && !swiper.params.loop && params.releaseOnEdges) {
+    } else if (
+      swiper.isBeginning &&
+      !swiper.params.loop &&
+      params.releaseOnEdges
+    ) {
       // Return true to animate scroll on edges
       return true;
     }
@@ -168,7 +176,8 @@ function Mousewheel(_ref) {
     if (!swiper.enabled) return;
 
     // Ignore event if the target or its parents have the swiper-no-mousewheel class
-    if (event.target.closest(`.${swiper.params.mousewheel.noMousewheelClass}`)) return;
+    if (event.target.closest(`.${swiper.params.mousewheel.noMousewheelClass}`))
+      return;
     const params = swiper.params.mousewheel;
     if (swiper.params.cssMode) {
       e.preventDefault();
@@ -178,17 +187,29 @@ function Mousewheel(_ref) {
       targetEl = document.querySelector(swiper.params.mousewheel.eventsTarget);
     }
     const targetElContainsTarget = targetEl && targetEl.contains(e.target);
-    if (!swiper.mouseEntered && !targetElContainsTarget && !params.releaseOnEdges) return true;
+    if (
+      !swiper.mouseEntered &&
+      !targetElContainsTarget &&
+      !params.releaseOnEdges
+    )
+      return true;
     if (e.originalEvent) e = e.originalEvent; // jquery fix
     let delta = 0;
     const rtlFactor = swiper.rtlTranslate ? -1 : 1;
     const data = normalize(e);
     if (params.forceToAxis) {
       if (swiper.isHorizontal()) {
-        if (Math.abs(data.pixelX) > Math.abs(data.pixelY)) delta = -data.pixelX * rtlFactor;else return true;
-      } else if (Math.abs(data.pixelY) > Math.abs(data.pixelX)) delta = -data.pixelY;else return true;
+        if (Math.abs(data.pixelX) > Math.abs(data.pixelY))
+          delta = -data.pixelX * rtlFactor;
+        else return true;
+      } else if (Math.abs(data.pixelY) > Math.abs(data.pixelX))
+        delta = -data.pixelY;
+      else return true;
     } else {
-      delta = Math.abs(data.pixelX) > Math.abs(data.pixelY) ? -data.pixelX * rtlFactor : -data.pixelY;
+      delta =
+        Math.abs(data.pixelX) > Math.abs(data.pixelY)
+          ? -data.pixelX * rtlFactor
+          : -data.pixelY;
     }
     if (delta === 0) return true;
     if (params.invert) delta = -delta;
@@ -205,7 +226,12 @@ function Mousewheel(_ref) {
     //     then the disableParentSwiper will be true.
     //     if the scroll on edge positions,
     //     then the disableParentSwiper will be false.
-    disableParentSwiper = swiper.params.loop ? true : !(positions === swiper.minTranslate() || positions === swiper.maxTranslate());
+    disableParentSwiper = swiper.params.loop
+      ? true
+      : !(
+          positions === swiper.minTranslate() ||
+          positions === swiper.maxTranslate()
+        );
     if (disableParentSwiper && swiper.params.nested) e.stopPropagation();
     if (!swiper.params.freeMode || !swiper.params.freeMode.enabled) {
       // Register the new event in a variable which stores the relevant data
@@ -213,7 +239,7 @@ function Mousewheel(_ref) {
         time: now(),
         delta: Math.abs(delta),
         direction: Math.sign(delta),
-        raw: event
+        raw: event,
       };
 
       // Keep the most recent events
@@ -221,7 +247,9 @@ function Mousewheel(_ref) {
         recentWheelEvents.shift(); // only store the last N events
       }
 
-      const prevEvent = recentWheelEvents.length ? recentWheelEvents[recentWheelEvents.length - 1] : undefined;
+      const prevEvent = recentWheelEvents.length
+        ? recentWheelEvents[recentWheelEvents.length - 1]
+        : undefined;
       recentWheelEvents.push(newEvent);
 
       // If there is at least one previous recorded event:
@@ -231,7 +259,11 @@ function Mousewheel(_ref) {
       // Else (this is the first time the wheel is moved):
       //     Animate the slider.
       if (prevEvent) {
-        if (newEvent.direction !== prevEvent.direction || newEvent.delta > prevEvent.delta || newEvent.time > prevEvent.time + 150) {
+        if (
+          newEvent.direction !== prevEvent.direction ||
+          newEvent.delta > prevEvent.delta ||
+          newEvent.time > prevEvent.time + 150
+        ) {
           animateSlider(newEvent);
         }
       } else {
@@ -253,9 +285,13 @@ function Mousewheel(_ref) {
       const newEvent = {
         time: now(),
         delta: Math.abs(delta),
-        direction: Math.sign(delta)
+        direction: Math.sign(delta),
       };
-      const ignoreWheelEvents = lastEventBeforeSnap && newEvent.time < lastEventBeforeSnap.time + 500 && newEvent.delta <= lastEventBeforeSnap.delta && newEvent.direction === lastEventBeforeSnap.direction;
+      const ignoreWheelEvents =
+        lastEventBeforeSnap &&
+        newEvent.time < lastEventBeforeSnap.time + 500 &&
+        newEvent.delta <= lastEventBeforeSnap.delta &&
+        newEvent.direction === lastEventBeforeSnap.direction;
       if (!ignoreWheelEvents) {
         lastEventBeforeSnap = undefined;
         let position = swiper.getTranslate() + delta * params.sensitivity;
@@ -268,13 +304,16 @@ function Mousewheel(_ref) {
         swiper.updateProgress();
         swiper.updateActiveIndex();
         swiper.updateSlidesClasses();
-        if (!wasBeginning && swiper.isBeginning || !wasEnd && swiper.isEnd) {
+        if (
+          (!wasBeginning && swiper.isBeginning) ||
+          (!wasEnd && swiper.isEnd)
+        ) {
           swiper.updateSlidesClasses();
         }
         if (swiper.params.loop) {
           swiper.loopFix({
             direction: newEvent.direction < 0 ? 'next' : 'prev',
-            byMousewheel: true
+            byMousewheel: true,
           });
         }
         if (swiper.params.freeMode.sticky) {
@@ -295,13 +334,24 @@ function Mousewheel(_ref) {
             recentWheelEvents.shift(); // only store the last N events
           }
 
-          const prevEvent = recentWheelEvents.length ? recentWheelEvents[recentWheelEvents.length - 1] : undefined;
+          const prevEvent = recentWheelEvents.length
+            ? recentWheelEvents[recentWheelEvents.length - 1]
+            : undefined;
           const firstEvent = recentWheelEvents[0];
           recentWheelEvents.push(newEvent);
-          if (prevEvent && (newEvent.delta > prevEvent.delta || newEvent.direction !== prevEvent.direction)) {
+          if (
+            prevEvent &&
+            (newEvent.delta > prevEvent.delta ||
+              newEvent.direction !== prevEvent.direction)
+          ) {
             // Increasing or reverse-sign delta means the user started scrolling again. Clear the wheel event log.
             recentWheelEvents.splice(0);
-          } else if (recentWheelEvents.length >= 15 && newEvent.time - firstEvent.time < 500 && firstEvent.delta - newEvent.delta >= 1 && newEvent.delta <= 6) {
+          } else if (
+            recentWheelEvents.length >= 15 &&
+            newEvent.time - firstEvent.time < 500 &&
+            firstEvent.delta - newEvent.delta >= 1 &&
+            newEvent.delta <= 6
+          ) {
             // We're at the end of the deceleration of a momentum scroll, so there's no need
             // to wait for more events. Snap ASAP on the next tick.
             // Also, because there's some remaining momentum we'll bias the snap in the
@@ -312,7 +362,12 @@ function Mousewheel(_ref) {
             lastEventBeforeSnap = newEvent;
             recentWheelEvents.splice(0);
             timeout = nextTick(() => {
-              swiper.slideToClosest(swiper.params.speed, true, undefined, snapToThreshold);
+              swiper.slideToClosest(
+                swiper.params.speed,
+                true,
+                undefined,
+                snapToThreshold,
+              );
             }, 0); // no delay; move on next tick
           }
 
@@ -324,7 +379,12 @@ function Mousewheel(_ref) {
               const snapToThreshold = 0.5;
               lastEventBeforeSnap = newEvent;
               recentWheelEvents.splice(0);
-              swiper.slideToClosest(swiper.params.speed, true, undefined, snapToThreshold);
+              swiper.slideToClosest(
+                swiper.params.speed,
+                true,
+                undefined,
+                snapToThreshold,
+              );
             }, 500);
           }
         }
@@ -333,14 +393,23 @@ function Mousewheel(_ref) {
         if (!ignoreWheelEvents) emit('scroll', e);
 
         // Stop autoplay
-        if (swiper.params.autoplay && swiper.params.autoplayDisableOnInteraction) swiper.autoplay.stop();
+        if (
+          swiper.params.autoplay &&
+          swiper.params.autoplayDisableOnInteraction
+        )
+          swiper.autoplay.stop();
         // Return page scroll on edge positions
-        if (params.releaseOnEdges && (position === swiper.minTranslate() || position === swiper.maxTranslate())) {
+        if (
+          params.releaseOnEdges &&
+          (position === swiper.minTranslate() ||
+            position === swiper.maxTranslate())
+        ) {
           return true;
         }
       }
     }
-    if (e.preventDefault) e.preventDefault();else e.returnValue = false;
+    if (e.preventDefault) e.preventDefault();
+    else e.returnValue = false;
     return false;
   }
   function events(method) {
@@ -386,7 +455,7 @@ function Mousewheel(_ref) {
   });
   Object.assign(swiper.mousewheel, {
     enable,
-    disable
+    disable,
   });
 }
 

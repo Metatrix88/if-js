@@ -1,13 +1,10 @@
 function appendSlide(slides) {
   const swiper = this;
-  const {
-    params,
-    slidesEl
-  } = swiper;
+  const { params, slidesEl } = swiper;
   if (params.loop) {
     swiper.loopDestroy();
   }
-  const appendElement = slideEl => {
+  const appendElement = (slideEl) => {
     if (typeof slideEl === 'string') {
       const tempDOM = document.createElement('div');
       tempDOM.innerHTML = slideEl;
@@ -35,16 +32,12 @@ function appendSlide(slides) {
 
 function prependSlide(slides) {
   const swiper = this;
-  const {
-    params,
-    activeIndex,
-    slidesEl
-  } = swiper;
+  const { params, activeIndex, slidesEl } = swiper;
   if (params.loop) {
     swiper.loopDestroy();
   }
   let newActiveIndex = activeIndex + 1;
-  const prependElement = slideEl => {
+  const prependElement = (slideEl) => {
     if (typeof slideEl === 'string') {
       const tempDOM = document.createElement('div');
       tempDOM.innerHTML = slideEl;
@@ -74,11 +67,7 @@ function prependSlide(slides) {
 
 function addSlide(index, slides) {
   const swiper = this;
-  const {
-    params,
-    activeIndex,
-    slidesEl
-  } = swiper;
+  const { params, activeIndex, slidesEl } = swiper;
   let activeIndexBuffer = activeIndex;
   if (params.loop) {
     activeIndexBuffer -= swiper.loopedSlides;
@@ -94,7 +83,8 @@ function addSlide(index, slides) {
     swiper.appendSlide(slides);
     return;
   }
-  let newActiveIndex = activeIndexBuffer > index ? activeIndexBuffer + 1 : activeIndexBuffer;
+  let newActiveIndex =
+    activeIndexBuffer > index ? activeIndexBuffer + 1 : activeIndexBuffer;
   const slidesBuffer = [];
   for (let i = baseLength - 1; i >= index; i -= 1) {
     const currentSlide = swiper.slides[i];
@@ -105,7 +95,10 @@ function addSlide(index, slides) {
     for (let i = 0; i < slides.length; i += 1) {
       if (slides[i]) slidesEl.append(slides[i]);
     }
-    newActiveIndex = activeIndexBuffer > index ? activeIndexBuffer + slides.length : activeIndexBuffer;
+    newActiveIndex =
+      activeIndexBuffer > index
+        ? activeIndexBuffer + slides.length
+        : activeIndexBuffer;
   } else {
     slidesEl.append(slides);
   }
@@ -128,10 +121,7 @@ function addSlide(index, slides) {
 
 function removeSlide(slidesIndexes) {
   const swiper = this;
-  const {
-    params,
-    activeIndex
-  } = swiper;
+  const { params, activeIndex } = swiper;
   let activeIndexBuffer = activeIndex;
   if (params.loop) {
     activeIndexBuffer -= swiper.loopedSlides;
@@ -176,15 +166,13 @@ function removeAllSlides() {
 }
 
 function Manipulation(_ref) {
-  let {
-    swiper
-  } = _ref;
+  let { swiper } = _ref;
   Object.assign(swiper, {
     appendSlide: appendSlide.bind(swiper),
     prependSlide: prependSlide.bind(swiper),
     addSlide: addSlide.bind(swiper),
     removeSlide: removeSlide.bind(swiper),
-    removeAllSlides: removeAllSlides.bind(swiper)
+    removeAllSlides: removeAllSlides.bind(swiper),
   });
 }
 

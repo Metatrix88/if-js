@@ -111,32 +111,50 @@ export interface SwiperEvents {
   /**
    * Event will be fired when user touch Swiper. Receives `pointerdown` event as an arguments.
    */
-  touchStart: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  touchStart: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when user touch and move finger over Swiper. Receives `pointermove` event as an arguments.
    */
-  touchMove: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  touchMove: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when user touch and move finger over Swiper in direction opposite to direction parameter. Receives `pointermove` event as an arguments.
    */
-  touchMoveOpposite: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  touchMoveOpposite: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when user touch and move finger over Swiper and move it. Receives `pointermove` event as an arguments.
    */
-  sliderMove: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  sliderMove: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when user release Swiper. Receives `pointerup` event as an arguments.
    */
-  touchEnd: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  touchEnd: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when user click/tap on Swiper. Receives `pointerup` event as an arguments.
    */
-  click: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  click: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when user click/tap on Swiper. Receives `pointerup` event as an arguments.
@@ -146,7 +164,10 @@ export interface SwiperEvents {
   /**
    * Event will be fired when user double tap on Swiper's container. Receives `pointerup` event as an arguments
    */
-  doubleTap: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  doubleTap: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
 
   /**
    * Event will be fired when Swiper progress is changed, as an arguments it receives progress that is always from 0 to 1
@@ -221,7 +242,11 @@ export interface SwiperEvents {
   /**
    * !INTERNAL: Event will fired after setting CSS classes on swiper slide element
    */
-  _slideClass?: (swiper: Swiper, slideEl: HTMLElement, classNames: string) => void;
+  _slideClass?: (
+    swiper: Swiper,
+    slideEl: HTMLElement,
+    classNames: string,
+  ) => void;
 
   /**
    * !INTERNAL: Event will fired after setting CSS classes on all swiper slides
@@ -280,7 +305,10 @@ export interface SwiperEvents {
   /**
    * Event will be fired when user double click/tap on Swiper
    */
-  doubleClick: (swiper: Swiper, event: MouseEvent | TouchEvent | PointerEvent) => void;
+  doubleClick: (
+    swiper: Swiper,
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => void;
   /**
    * Event will be fired on swiper destroy
    */

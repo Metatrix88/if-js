@@ -1,26 +1,28 @@
 import { a as getWindow } from '../shared/ssr-window.esm.mjs';
 
 function History(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     history: {
       enabled: false,
       root: '',
       replaceState: false,
       key: 'slides',
-      keepQuery: false
-    }
+      keepQuery: false,
+    },
   });
   let initialized = false;
   let paths = {};
-  const slugify = text => {
-    return text.toString().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+  const slugify = (text) => {
+    return text
+      .toString()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
   };
-  const getPathValues = urlOverride => {
+  const getPathValues = (urlOverride) => {
     const window = getWindow();
     let location;
     if (urlOverride) {
@@ -28,13 +30,16 @@ function History(_ref) {
     } else {
       location = window.location;
     }
-    const pathArray = location.pathname.slice(1).split('/').filter(part => part !== '');
+    const pathArray = location.pathname
+      .slice(1)
+      .split('/')
+      .filter((part) => part !== '');
     const total = pathArray.length;
     const key = pathArray[total - 2];
     const value = pathArray[total - 1];
     return {
       key,
-      value
+      value,
     };
   };
   const setHistory = (key, index) => {
@@ -63,13 +68,21 @@ function History(_ref) {
       return;
     }
     if (swiper.params.history.replaceState) {
-      window.history.replaceState({
-        value
-      }, null, value);
+      window.history.replaceState(
+        {
+          value,
+        },
+        null,
+        value,
+      );
     } else {
-      window.history.pushState({
-        value
-      }, null, value);
+      window.history.pushState(
+        {
+          value,
+        },
+        null,
+        value,
+      );
     }
   };
   const scrollToSlide = (speed, value, runCallbacks) => {

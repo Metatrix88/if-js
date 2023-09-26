@@ -1,4 +1,11 @@
-import { e as extend, p as paramsList, i as isObject, n as needsNavigation, a as needsPagination, b as needsScrollbar } from './update-swiper.mjs';
+import {
+  e as extend,
+  p as paramsList,
+  i as isObject,
+  n as needsNavigation,
+  a as needsPagination,
+  b as needsScrollbar,
+} from './update-swiper.mjs';
 import { d as defaults } from './swiper-core.mjs';
 
 function getParams(obj, splitEvents) {
@@ -9,7 +16,7 @@ function getParams(obj, splitEvents) {
     splitEvents = true;
   }
   const params = {
-    on: {}
+    on: {},
   };
   const events = {};
   const passedParams = {};
@@ -17,9 +24,9 @@ function getParams(obj, splitEvents) {
   params._emitClasses = true;
   params.init = false;
   const rest = {};
-  const allowedParams = paramsList.map(key => key.replace(/_/, ''));
+  const allowedParams = paramsList.map((key) => key.replace(/_/, ''));
   const plainObj = Object.assign({}, obj);
-  Object.keys(plainObj).forEach(key => {
+  Object.keys(plainObj).forEach((key) => {
     if (typeof obj[key] === 'undefined') return;
     if (allowedParams.indexOf(key) >= 0) {
       if (isObject(obj[key])) {
@@ -41,7 +48,7 @@ function getParams(obj, splitEvents) {
       rest[key] = obj[key];
     }
   });
-  ['navigation', 'pagination', 'scrollbar'].forEach(key => {
+  ['navigation', 'pagination', 'scrollbar'].forEach((key) => {
     if (params[key] === true) params[key] = {};
     if (params[key] === false) delete params[key];
   });
@@ -49,19 +56,12 @@ function getParams(obj, splitEvents) {
     params,
     passedParams,
     rest,
-    events
+    events,
   };
 }
 
 function mountSwiper(_ref, swiperParams) {
-  let {
-    el,
-    nextEl,
-    prevEl,
-    paginationEl,
-    scrollbarEl,
-    swiper
-  } = _ref;
+  let { el, nextEl, prevEl, paginationEl, scrollbarEl, swiper } = _ref;
   if (needsNavigation(swiperParams) && nextEl && prevEl) {
     swiper.params.navigation.nextEl = nextEl;
     swiper.originalParams.navigation.nextEl = nextEl;
@@ -79,10 +79,16 @@ function mountSwiper(_ref, swiperParams) {
   swiper.init(el);
 }
 
-function getChangedParams(swiperParams, oldParams, children, oldChildren, getKey) {
+function getChangedParams(
+  swiperParams,
+  oldParams,
+  children,
+  oldChildren,
+  getKey,
+) {
   const keys = [];
   if (!oldParams) return keys;
-  const addKey = key => {
+  const addKey = (key) => {
     if (keys.indexOf(key) < 0) keys.push(key);
   };
   if (children && oldChildren) {
@@ -91,8 +97,10 @@ function getChangedParams(swiperParams, oldParams, children, oldChildren, getKey
     if (oldChildrenKeys.join('') !== childrenKeys.join('')) addKey('children');
     if (oldChildren.length !== children.length) addKey('children');
   }
-  const watchParams = paramsList.filter(key => key[0] === '_').map(key => key.replace(/_/, ''));
-  watchParams.forEach(key => {
+  const watchParams = paramsList
+    .filter((key) => key[0] === '_')
+    .map((key) => key.replace(/_/, ''));
+  watchParams.forEach((key) => {
     if (key in swiperParams && key in oldParams) {
       if (isObject(swiperParams[key]) && isObject(oldParams[key])) {
         const newKeys = Object.keys(swiperParams[key]);
@@ -100,13 +108,14 @@ function getChangedParams(swiperParams, oldParams, children, oldChildren, getKey
         if (newKeys.length !== oldKeys.length) {
           addKey(key);
         } else {
-          newKeys.forEach(newKey => {
+          newKeys.forEach((newKey) => {
             if (swiperParams[key][newKey] !== oldParams[key][newKey]) {
               addKey(key);
             }
           });
-          oldKeys.forEach(oldKey => {
-            if (swiperParams[key][oldKey] !== oldParams[key][oldKey]) addKey(key);
+          oldKeys.forEach((oldKey) => {
+            if (swiperParams[key][oldKey] !== oldParams[key][oldKey])
+              addKey(key);
           });
         }
       } else if (swiperParams[key] !== oldParams[key]) {
@@ -117,14 +126,29 @@ function getChangedParams(swiperParams, oldParams, children, oldChildren, getKey
   return keys;
 }
 
-const updateOnVirtualData = swiper => {
-  if (!swiper || swiper.destroyed || !swiper.params.virtual || swiper.params.virtual && !swiper.params.virtual.enabled) return;
+const updateOnVirtualData = (swiper) => {
+  if (
+    !swiper ||
+    swiper.destroyed ||
+    !swiper.params.virtual ||
+    (swiper.params.virtual && !swiper.params.virtual.enabled)
+  )
+    return;
   swiper.updateSlides();
   swiper.updateProgress();
   swiper.updateSlidesClasses();
-  if (swiper.parallax && swiper.params.parallax && swiper.params.parallax.enabled) {
+  if (
+    swiper.parallax &&
+    swiper.params.parallax &&
+    swiper.params.parallax.enabled
+  ) {
     swiper.parallax.setTranslate();
   }
 };
 
-export { getChangedParams as a, getParams as g, mountSwiper as m, updateOnVirtualData as u };
+export {
+  getChangedParams as a,
+  getParams as g,
+  mountSwiper as m,
+  updateOnVirtualData as u,
+};

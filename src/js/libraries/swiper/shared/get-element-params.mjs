@@ -1,14 +1,24 @@
-import { e as extend, i as isObject, c as attrToProp, p as paramsList } from './update-swiper.mjs';
+import {
+  e as extend,
+  i as isObject,
+  c as attrToProp,
+  p as paramsList,
+} from './update-swiper.mjs';
 import { d as defaults } from './swiper-core.mjs';
 
-const formatValue = val => {
+const formatValue = (val) => {
   if (parseFloat(val) === Number(val)) return Number(val);
   if (val === 'true') return true;
   if (val === '') return true;
   if (val === 'false') return false;
   if (val === 'null') return null;
   if (val === 'undefined') return undefined;
-  if (typeof val === 'string' && val.includes('{') && val.includes('}') && val.includes('"')) {
+  if (
+    typeof val === 'string' &&
+    val.includes('{') &&
+    val.includes('}') &&
+    val.includes('"')
+  ) {
     let v;
     try {
       v = JSON.parse(val);
@@ -19,16 +29,39 @@ const formatValue = val => {
   }
   return val;
 };
-const modulesParamsList = ['a11y', 'autoplay', 'controller', 'cards-effect', 'coverflow-effect', 'creative-effect', 'cube-effect', 'fade-effect', 'flip-effect', 'free-mode', 'grid', 'hash-navigation', 'history', 'keyboard', 'mousewheel', 'navigation', 'pagination', 'parallax', 'scrollbar', 'thumbs', 'virtual', 'zoom'];
+const modulesParamsList = [
+  'a11y',
+  'autoplay',
+  'controller',
+  'cards-effect',
+  'coverflow-effect',
+  'creative-effect',
+  'cube-effect',
+  'fade-effect',
+  'flip-effect',
+  'free-mode',
+  'grid',
+  'hash-navigation',
+  'history',
+  'keyboard',
+  'mousewheel',
+  'navigation',
+  'pagination',
+  'parallax',
+  'scrollbar',
+  'thumbs',
+  'virtual',
+  'zoom',
+];
 function getParams(element, propName, propValue) {
   const params = {};
   const passedParams = {};
   extend(params, defaults);
   const localParamsList = [...paramsList, 'on'];
-  const allowedParams = localParamsList.map(key => key.replace(/_/, ''));
+  const allowedParams = localParamsList.map((key) => key.replace(/_/, ''));
 
   // First check props
-  localParamsList.forEach(paramName => {
+  localParamsList.forEach((paramName) => {
     paramName = paramName.replace('_', '');
     if (typeof element[paramName] !== 'undefined') {
       passedParams[paramName] = element[paramName];
@@ -40,20 +73,25 @@ function getParams(element, propName, propValue) {
   if (typeof propName === 'string' && typeof propValue !== 'undefined') {
     attrsList.push({
       name: propName,
-      value: isObject(propValue) ? {
-        ...propValue
-      } : propValue
+      value: isObject(propValue)
+        ? {
+            ...propValue,
+          }
+        : propValue,
     });
   }
-  attrsList.forEach(attr => {
-    const moduleParam = modulesParamsList.filter(mParam => attr.name.indexOf(`${mParam}-`) === 0)[0];
+  attrsList.forEach((attr) => {
+    const moduleParam = modulesParamsList.filter(
+      (mParam) => attr.name.indexOf(`${mParam}-`) === 0,
+    )[0];
     if (moduleParam) {
       const parentObjName = attrToProp(moduleParam);
       const subObjName = attrToProp(attr.name.split(`${moduleParam}-`)[1]);
-      if (typeof passedParams[parentObjName] === 'undefined') passedParams[parentObjName] = {};
+      if (typeof passedParams[parentObjName] === 'undefined')
+        passedParams[parentObjName] = {};
       if (passedParams[parentObjName] === true) {
         passedParams[parentObjName] = {
-          enabled: true
+          enabled: true,
         };
       }
       passedParams[parentObjName][subObjName] = formatValue(attr.value);
@@ -61,7 +99,11 @@ function getParams(element, propName, propValue) {
       const name = attrToProp(attr.name);
       if (!allowedParams.includes(name)) return;
       const value = formatValue(attr.value);
-      if (passedParams[name] && modulesParamsList.includes(attr.name) && !isObject(value)) {
+      if (
+        passedParams[name] &&
+        modulesParamsList.includes(attr.name) &&
+        !isObject(value)
+      ) {
         if (passedParams[name].constructor !== Object) {
           passedParams[name] = {};
         }
@@ -76,7 +118,7 @@ function getParams(element, propName, propValue) {
     params.navigation = {
       prevEl: '.swiper-button-prev',
       nextEl: '.swiper-button-next',
-      ...(params.navigation !== true ? params.navigation : {})
+      ...(params.navigation !== true ? params.navigation : {}),
     };
   } else if (params.navigation === false) {
     delete params.navigation;
@@ -84,7 +126,7 @@ function getParams(element, propName, propValue) {
   if (params.scrollbar) {
     params.scrollbar = {
       el: '.swiper-scrollbar',
-      ...(params.scrollbar !== true ? params.scrollbar : {})
+      ...(params.scrollbar !== true ? params.scrollbar : {}),
     };
   } else if (params.scrollbar === false) {
     delete params.scrollbar;
@@ -92,14 +134,14 @@ function getParams(element, propName, propValue) {
   if (params.pagination) {
     params.pagination = {
       el: '.swiper-pagination',
-      ...(params.pagination !== true ? params.pagination : {})
+      ...(params.pagination !== true ? params.pagination : {}),
     };
   } else if (params.pagination === false) {
     delete params.pagination;
   }
   return {
     params,
-    passedParams
+    passedParams,
   };
 }
 

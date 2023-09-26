@@ -1,19 +1,14 @@
 import { i as elementTransitionEnd } from './utils.mjs';
 
 function effectVirtualTransitionEnd(_ref) {
-  let {
-    swiper,
-    duration,
-    transformElements,
-    allSlides
-  } = _ref;
-  const {
-    activeIndex
-  } = swiper;
-  const getSlide = el => {
+  let { swiper, duration, transformElements, allSlides } = _ref;
+  const { activeIndex } = swiper;
+  const getSlide = (el) => {
     if (!el.parentElement) {
       // assume shadow root
-      const slide = swiper.slides.filter(slideEl => slideEl.shadowRoot && slideEl.shadowRoot === el.parentNode)[0];
+      const slide = swiper.slides.filter(
+        (slideEl) => slideEl.shadowRoot && slideEl.shadowRoot === el.parentNode,
+      )[0];
       return slide;
     }
     return el.parentElement;
@@ -24,12 +19,14 @@ function effectVirtualTransitionEnd(_ref) {
     if (allSlides) {
       transitionEndTarget = transformElements;
     } else {
-      transitionEndTarget = transformElements.filter(transformEl => {
-        const el = transformEl.classList.contains('swiper-slide-transform') ? getSlide(transformEl) : transformEl;
+      transitionEndTarget = transformElements.filter((transformEl) => {
+        const el = transformEl.classList.contains('swiper-slide-transform')
+          ? getSlide(transformEl)
+          : transformEl;
         return swiper.getSlideIndex(el) === activeIndex;
       });
     }
-    transitionEndTarget.forEach(el => {
+    transitionEndTarget.forEach((el) => {
       elementTransitionEnd(el, () => {
         if (eventTriggered) return;
         if (!swiper || swiper.destroyed) return;
@@ -37,7 +34,7 @@ function effectVirtualTransitionEnd(_ref) {
         swiper.animating = false;
         const evt = new window.CustomEvent('transitionend', {
           bubbles: true,
-          cancelable: true
+          cancelable: true,
         });
         swiper.wrapperEl.dispatchEvent(evt);
       });

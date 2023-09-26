@@ -4,20 +4,14 @@ import { e as effectVirtualTransitionEnd } from '../shared/effect-virtual-transi
 import { k as getSlideTransformEl } from '../shared/utils.mjs';
 
 function EffectFade(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     fadeEffect: {
-      crossFade: false
-    }
+      crossFade: false,
+    },
   });
   const setTranslate = () => {
-    const {
-      slides
-    } = swiper;
+    const { slides } = swiper;
     const params = swiper.params.fadeEffect;
     for (let i = 0; i < slides.length; i += 1) {
       const slideEl = swiper.slides[i];
@@ -29,22 +23,26 @@ function EffectFade(_ref) {
         ty = tx;
         tx = 0;
       }
-      const slideOpacity = swiper.params.fadeEffect.crossFade ? Math.max(1 - Math.abs(slideEl.progress), 0) : 1 + Math.min(Math.max(slideEl.progress, -1), 0);
+      const slideOpacity = swiper.params.fadeEffect.crossFade
+        ? Math.max(1 - Math.abs(slideEl.progress), 0)
+        : 1 + Math.min(Math.max(slideEl.progress, -1), 0);
       const targetEl = effectTarget(params, slideEl);
       targetEl.style.opacity = slideOpacity;
       targetEl.style.transform = `translate3d(${tx}px, ${ty}px, 0px)`;
     }
   };
-  const setTransition = duration => {
-    const transformElements = swiper.slides.map(slideEl => getSlideTransformEl(slideEl));
-    transformElements.forEach(el => {
+  const setTransition = (duration) => {
+    const transformElements = swiper.slides.map((slideEl) =>
+      getSlideTransformEl(slideEl),
+    );
+    transformElements.forEach((el) => {
       el.style.transitionDuration = `${duration}ms`;
     });
     effectVirtualTransitionEnd({
       swiper,
       duration,
       transformElements,
-      allSlides: true
+      allSlides: true,
     });
   };
   effectInit({
@@ -58,8 +56,8 @@ function EffectFade(_ref) {
       slidesPerGroup: 1,
       watchSlidesProgress: true,
       spaceBetween: 0,
-      virtualTranslate: !swiper.params.cssMode
-    })
+      virtualTranslate: !swiper.params.cssMode,
+    }),
   });
 }
 

@@ -11,7 +11,12 @@
  */
 /* eslint-disable no-param-reassign */
 function isObject(obj) {
-  return obj !== null && typeof obj === 'object' && 'constructor' in obj && obj.constructor === Object;
+  return (
+    obj !== null &&
+    typeof obj === 'object' &&
+    'constructor' in obj &&
+    obj.constructor === Object
+  );
 }
 function extend(target, src) {
   if (target === void 0) {
@@ -20,8 +25,13 @@ function extend(target, src) {
   if (src === void 0) {
     src = {};
   }
-  Object.keys(src).forEach(key => {
-    if (typeof target[key] === 'undefined') target[key] = src[key];else if (isObject(src[key]) && isObject(target[key]) && Object.keys(src[key]).length > 0) {
+  Object.keys(src).forEach((key) => {
+    if (typeof target[key] === 'undefined') target[key] = src[key];
+    else if (
+      isObject(src[key]) &&
+      isObject(target[key]) &&
+      Object.keys(src[key]).length > 0
+    ) {
       extend(target[key], src[key]);
     }
   });
@@ -32,7 +42,7 @@ const ssrDocument = {
   removeEventListener() {},
   activeElement: {
     blur() {},
-    nodeName: ''
+    nodeName: '',
   },
   querySelector() {
     return null;
@@ -45,7 +55,7 @@ const ssrDocument = {
   },
   createEvent() {
     return {
-      initEvent() {}
+      initEvent() {},
     };
   },
   createElement() {
@@ -56,7 +66,7 @@ const ssrDocument = {
       setAttribute() {},
       getElementsByTagName() {
         return [];
-      }
+      },
     };
   },
   createElementNS() {
@@ -73,8 +83,8 @@ const ssrDocument = {
     origin: '',
     pathname: '',
     protocol: '',
-    search: ''
-  }
+    search: '',
+  },
 };
 function getDocument() {
   const doc = typeof document !== 'undefined' ? document : {};
@@ -84,7 +94,7 @@ function getDocument() {
 const ssrWindow = {
   document: ssrDocument,
   navigator: {
-    userAgent: ''
+    userAgent: '',
   },
   location: {
     hash: '',
@@ -94,13 +104,13 @@ const ssrWindow = {
     origin: '',
     pathname: '',
     protocol: '',
-    search: ''
+    search: '',
   },
   history: {
     replaceState() {},
     pushState() {},
     go() {},
-    back() {}
+    back() {},
   },
   CustomEvent: function CustomEvent() {
     return this;
@@ -111,7 +121,7 @@ const ssrWindow = {
     return {
       getPropertyValue() {
         return '';
-      }
+      },
     };
   },
   Image() {},
@@ -134,7 +144,7 @@ const ssrWindow = {
       return;
     }
     clearTimeout(id);
-  }
+  },
 };
 function getWindow() {
   const win = typeof window !== 'undefined' ? window : {};

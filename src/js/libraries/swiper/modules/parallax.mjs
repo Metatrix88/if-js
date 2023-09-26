@@ -1,21 +1,16 @@
 import { e as elementChildren } from '../shared/utils.mjs';
 
 function Parallax(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     parallax: {
-      enabled: false
-    }
+      enabled: false,
+    },
   });
-  const elementsSelector = '[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]';
+  const elementsSelector =
+    '[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]';
   const setTransform = (el, progress) => {
-    const {
-      rtl
-    } = swiper;
+    const { rtl } = swiper;
     const rtlFactor = rtl ? -1 : 1;
     const p = el.getAttribute('data-swiper-parallax') || '0';
     let x = el.getAttribute('data-swiper-parallax-x');
@@ -59,45 +54,46 @@ function Parallax(_ref) {
     el.style.transform = transform;
   };
   const setTranslate = () => {
-    const {
-      el,
-      slides,
-      progress,
-      snapGrid,
-      isElement
-    } = swiper;
+    const { el, slides, progress, snapGrid, isElement } = swiper;
     const elements = elementChildren(el, elementsSelector);
     if (swiper.isElement) {
       elements.push(...elementChildren(swiper.hostEl, elementsSelector));
     }
-    elements.forEach(subEl => {
+    elements.forEach((subEl) => {
       setTransform(subEl, progress);
     });
     slides.forEach((slideEl, slideIndex) => {
       let slideProgress = slideEl.progress;
-      if (swiper.params.slidesPerGroup > 1 && swiper.params.slidesPerView !== 'auto') {
-        slideProgress += Math.ceil(slideIndex / 2) - progress * (snapGrid.length - 1);
+      if (
+        swiper.params.slidesPerGroup > 1 &&
+        swiper.params.slidesPerView !== 'auto'
+      ) {
+        slideProgress +=
+          Math.ceil(slideIndex / 2) - progress * (snapGrid.length - 1);
       }
       slideProgress = Math.min(Math.max(slideProgress, -1), 1);
-      slideEl.querySelectorAll(`${elementsSelector}, [data-swiper-parallax-rotate]`).forEach(subEl => {
-        setTransform(subEl, slideProgress);
-      });
+      slideEl
+        .querySelectorAll(`${elementsSelector}, [data-swiper-parallax-rotate]`)
+        .forEach((subEl) => {
+          setTransform(subEl, slideProgress);
+        });
     });
   };
   const setTransition = function (duration) {
     if (duration === void 0) {
       duration = swiper.params.speed;
     }
-    const {
-      el,
-      hostEl
-    } = swiper;
+    const { el, hostEl } = swiper;
     const elements = [...el.querySelectorAll(elementsSelector)];
     if (swiper.isElement) {
       elements.push(...hostEl.querySelectorAll(elementsSelector));
     }
-    elements.forEach(parallaxEl => {
-      let parallaxDuration = parseInt(parallaxEl.getAttribute('data-swiper-parallax-duration'), 10) || duration;
+    elements.forEach((parallaxEl) => {
+      let parallaxDuration =
+        parseInt(
+          parallaxEl.getAttribute('data-swiper-parallax-duration'),
+          10,
+        ) || duration;
       if (duration === 0) parallaxDuration = 0;
       parallaxEl.style.transitionDuration = `${parallaxDuration}ms`;
     });

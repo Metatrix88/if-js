@@ -2,24 +2,20 @@ import { n as nextTick, i as elementTransitionEnd } from '../shared/utils.mjs';
 
 /* eslint no-bitwise: ["error", { "allow": [">>"] }] */
 function Controller(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     controller: {
       control: undefined,
       inverse: false,
-      by: 'slide' // or 'container'
-    }
+      by: 'slide', // or 'container'
+    },
   });
 
   swiper.controller = {
-    control: undefined
+    control: undefined,
   };
   function LinearSpline(x, y) {
-    const binarySearch = function search() {
+    const binarySearch = (function search() {
       let maxIndex;
       let minIndex;
       let guess;
@@ -27,7 +23,7 @@ function Controller(_ref) {
         minIndex = -1;
         maxIndex = array.length;
         while (maxIndex - minIndex > 1) {
-          guess = maxIndex + minIndex >> 1;
+          guess = (maxIndex + minIndex) >> 1;
           if (array[guess] <= val) {
             minIndex = guess;
           } else {
@@ -36,7 +32,7 @@ function Controller(_ref) {
         }
         return maxIndex;
       };
-    }();
+    })();
     this.x = x;
     this.y = y;
     this.lastIndex = x.length - 1;
@@ -54,12 +50,18 @@ function Controller(_ref) {
 
       // We have our indexes i1 & i3, so we can calculate already:
       // y2 := ((x2−x1) × (y3−y1)) ÷ (x3−x1) + y1
-      return (x2 - this.x[i1]) * (this.y[i3] - this.y[i1]) / (this.x[i3] - this.x[i1]) + this.y[i1];
+      return (
+        ((x2 - this.x[i1]) * (this.y[i3] - this.y[i1])) /
+          (this.x[i3] - this.x[i1]) +
+        this.y[i1]
+      );
     };
     return this;
   }
   function getInterpolateFunction(c) {
-    swiper.controller.spline = swiper.params.loop ? new LinearSpline(swiper.slidesGrid, c.slidesGrid) : new LinearSpline(swiper.snapGrid, c.snapGrid);
+    swiper.controller.spline = swiper.params.loop
+      ? new LinearSpline(swiper.slidesGrid, c.slidesGrid)
+      : new LinearSpline(swiper.snapGrid, c.snapGrid);
   }
   function setTranslate(_t, byController) {
     const controlled = swiper.controller.control;
@@ -73,7 +75,9 @@ function Controller(_ref) {
       // x is the Grid of the scrolled scroller and y will be the controlled scroller
       // it makes sense to create this only once and recall it for the interpolation
       // the function does a lot of value caching for performance
-      const translate = swiper.rtlTranslate ? -swiper.translate : swiper.translate;
+      const translate = swiper.rtlTranslate
+        ? -swiper.translate
+        : swiper.translate;
       if (swiper.params.controller.by === 'slide') {
         getInterpolateFunction(c);
         // i am not sure why the values have to be multiplicated this way, tried to invert the snapGrid
@@ -81,11 +85,14 @@ function Controller(_ref) {
         controlledTranslate = -swiper.controller.spline.interpolate(-translate);
       }
       if (!controlledTranslate || swiper.params.controller.by === 'container') {
-        multiplier = (c.maxTranslate() - c.minTranslate()) / (swiper.maxTranslate() - swiper.minTranslate());
+        multiplier =
+          (c.maxTranslate() - c.minTranslate()) /
+          (swiper.maxTranslate() - swiper.minTranslate());
         if (Number.isNaN(multiplier) || !Number.isFinite(multiplier)) {
           multiplier = 1;
         }
-        controlledTranslate = (translate - swiper.minTranslate()) * multiplier + c.minTranslate();
+        controlledTranslate =
+          (translate - swiper.minTranslate()) * multiplier + c.minTranslate();
       }
       if (swiper.params.controller.inverse) {
         controlledTranslate = c.maxTranslate() - controlledTranslate;
@@ -143,14 +150,19 @@ function Controller(_ref) {
     }
   }
   on('beforeInit', () => {
-    if (typeof window !== 'undefined' && (
-    // eslint-disable-line
-    typeof swiper.params.controller.control === 'string' || swiper.params.controller.control instanceof HTMLElement)) {
-      const controlElement = document.querySelector(swiper.params.controller.control);
+    if (
+      typeof window !== 'undefined' &&
+      // eslint-disable-line
+      (typeof swiper.params.controller.control === 'string' ||
+        swiper.params.controller.control instanceof HTMLElement)
+    ) {
+      const controlElement = document.querySelector(
+        swiper.params.controller.control,
+      );
       if (controlElement && controlElement.swiper) {
         swiper.controller.control = controlElement.swiper;
       } else if (controlElement) {
-        const onControllerSwiper = e => {
+        const onControllerSwiper = (e) => {
           swiper.controller.control = e.detail[0];
           swiper.update();
           controlElement.removeEventListener('init', onControllerSwiper);
@@ -171,16 +183,18 @@ function Controller(_ref) {
     removeSpline();
   });
   on('setTranslate', (_s, translate, byController) => {
-    if (!swiper.controller.control || swiper.controller.control.destroyed) return;
+    if (!swiper.controller.control || swiper.controller.control.destroyed)
+      return;
     swiper.controller.setTranslate(translate, byController);
   });
   on('setTransition', (_s, duration, byController) => {
-    if (!swiper.controller.control || swiper.controller.control.destroyed) return;
+    if (!swiper.controller.control || swiper.controller.control.destroyed)
+      return;
     swiper.controller.setTransition(duration, byController);
   });
   Object.assign(swiper.controller, {
     setTranslate,
-    setTransition
+    setTransition,
   });
 }
 

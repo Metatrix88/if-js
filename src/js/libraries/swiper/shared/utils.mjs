@@ -2,7 +2,7 @@ import { a as getWindow, g as getDocument } from './ssr-window.esm.mjs';
 
 function deleteProps(obj) {
   const object = obj;
-  Object.keys(object).forEach(key => {
+  Object.keys(object).forEach((key) => {
     try {
       object[key] = null;
     } catch (e) {
@@ -50,13 +50,26 @@ function getTranslate(el, axis) {
   if (window.WebKitCSSMatrix) {
     curTransform = curStyle.transform || curStyle.webkitTransform;
     if (curTransform.split(',').length > 6) {
-      curTransform = curTransform.split(', ').map(a => a.replace(',', '.')).join(', ');
+      curTransform = curTransform
+        .split(', ')
+        .map((a) => a.replace(',', '.'))
+        .join(', ');
     }
     // Some old versions of Webkit choke when 'none' is passed; pass
     // empty string instead in this case
-    transformMatrix = new window.WebKitCSSMatrix(curTransform === 'none' ? '' : curTransform);
+    transformMatrix = new window.WebKitCSSMatrix(
+      curTransform === 'none' ? '' : curTransform,
+    );
   } else {
-    transformMatrix = curStyle.MozTransform || curStyle.OTransform || curStyle.MsTransform || curStyle.msTransform || curStyle.transform || curStyle.getPropertyValue('transform').replace('translate(', 'matrix(1, 0, 0, 1,');
+    transformMatrix =
+      curStyle.MozTransform ||
+      curStyle.OTransform ||
+      curStyle.MsTransform ||
+      curStyle.msTransform ||
+      curStyle.transform ||
+      curStyle
+        .getPropertyValue('transform')
+        .replace('translate(', 'matrix(1, 0, 0, 1,');
     matrix = transformMatrix.toString().split(',');
   }
   if (axis === 'x') {
@@ -78,11 +91,19 @@ function getTranslate(el, axis) {
   return curTransform || 0;
 }
 function isObject(o) {
-  return typeof o === 'object' && o !== null && o.constructor && Object.prototype.toString.call(o).slice(8, -1) === 'Object';
+  return (
+    typeof o === 'object' &&
+    o !== null &&
+    o.constructor &&
+    Object.prototype.toString.call(o).slice(8, -1) === 'Object'
+  );
 }
 function isNode(node) {
   // eslint-disable-next-line
-  if (typeof window !== 'undefined' && typeof window.HTMLElement !== 'undefined') {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.HTMLElement !== 'undefined'
+  ) {
     return node instanceof HTMLElement;
   }
   return node && (node.nodeType === 1 || node.nodeType === 11);
@@ -91,10 +112,21 @@ function extend() {
   const to = Object(arguments.length <= 0 ? undefined : arguments[0]);
   const noExtend = ['__proto__', 'constructor', 'prototype'];
   for (let i = 1; i < arguments.length; i += 1) {
-    const nextSource = i < 0 || arguments.length <= i ? undefined : arguments[i];
-    if (nextSource !== undefined && nextSource !== null && !isNode(nextSource)) {
-      const keysArray = Object.keys(Object(nextSource)).filter(key => noExtend.indexOf(key) < 0);
-      for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex += 1) {
+    const nextSource =
+      i < 0 || arguments.length <= i ? undefined : arguments[i];
+    if (
+      nextSource !== undefined &&
+      nextSource !== null &&
+      !isNode(nextSource)
+    ) {
+      const keysArray = Object.keys(Object(nextSource)).filter(
+        (key) => noExtend.indexOf(key) < 0,
+      );
+      for (
+        let nextIndex = 0, len = keysArray.length;
+        nextIndex < len;
+        nextIndex += 1
+      ) {
         const nextKey = keysArray[nextIndex];
         const desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
         if (desc !== undefined && desc.enumerable) {
@@ -124,11 +156,7 @@ function setCSSProperty(el, varName, varValue) {
   el.style.setProperty(varName, varValue);
 }
 function animateCSSModeScroll(_ref) {
-  let {
-    swiper,
-    targetPosition,
-    side
-  } = _ref;
+  let { swiper, targetPosition, side } = _ref;
   const window = getWindow();
   const startPosition = -swiper.translate;
   let startTime = null;
@@ -138,7 +166,10 @@ function animateCSSModeScroll(_ref) {
   window.cancelAnimationFrame(swiper.cssModeFrameID);
   const dir = targetPosition > startPosition ? 'next' : 'prev';
   const isOutOfBound = (current, target) => {
-    return dir === 'next' && current >= target || dir === 'prev' && current <= target;
+    return (
+      (dir === 'next' && current >= target) ||
+      (dir === 'prev' && current <= target)
+    );
   };
   const animate = () => {
     time = new Date().getTime();
@@ -147,12 +178,13 @@ function animateCSSModeScroll(_ref) {
     }
     const progress = Math.max(Math.min((time - startTime) / duration, 1), 0);
     const easeProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
-    let currentPosition = startPosition + easeProgress * (targetPosition - startPosition);
+    let currentPosition =
+      startPosition + easeProgress * (targetPosition - startPosition);
     if (isOutOfBound(currentPosition, targetPosition)) {
       currentPosition = targetPosition;
     }
     swiper.wrapperEl.scrollTo({
-      [side]: currentPosition
+      [side]: currentPosition,
     });
     if (isOutOfBound(currentPosition, targetPosition)) {
       swiper.wrapperEl.style.overflow = 'hidden';
@@ -160,7 +192,7 @@ function animateCSSModeScroll(_ref) {
       setTimeout(() => {
         swiper.wrapperEl.style.overflow = '';
         swiper.wrapperEl.scrollTo({
-          [side]: currentPosition
+          [side]: currentPosition,
         });
       });
       window.cancelAnimationFrame(swiper.cssModeFrameID);
@@ -171,13 +203,18 @@ function animateCSSModeScroll(_ref) {
   animate();
 }
 function getSlideTransformEl(slideEl) {
-  return slideEl.querySelector('.swiper-slide-transform') || slideEl.shadowRoot && slideEl.shadowRoot.querySelector('.swiper-slide-transform') || slideEl;
+  return (
+    slideEl.querySelector('.swiper-slide-transform') ||
+    (slideEl.shadowRoot &&
+      slideEl.shadowRoot.querySelector('.swiper-slide-transform')) ||
+    slideEl
+  );
 }
 function elementChildren(element, selector) {
   if (selector === void 0) {
     selector = '';
   }
-  return [...element.children].filter(el => el.matches(selector));
+  return [...element.children].filter((el) => el.matches(selector));
 }
 function createElement(tag, classes) {
   if (classes === void 0) {
@@ -198,7 +235,7 @@ function elementOffset(el) {
   const scrollLeft = el === window ? window.scrollX : el.scrollLeft;
   return {
     top: box.top + scrollTop - clientTop,
-    left: box.left + scrollLeft - clientLeft
+    left: box.left + scrollLeft - clientLeft,
   };
 }
 function elementPrevAll(el, selector) {
@@ -266,9 +303,41 @@ function elementTransitionEnd(el, callback) {
 function elementOuterSize(el, size, includeMargins) {
   const window = getWindow();
   if (includeMargins) {
-    return el[size === 'width' ? 'offsetWidth' : 'offsetHeight'] + parseFloat(window.getComputedStyle(el, null).getPropertyValue(size === 'width' ? 'margin-right' : 'margin-top')) + parseFloat(window.getComputedStyle(el, null).getPropertyValue(size === 'width' ? 'margin-left' : 'margin-bottom'));
+    return (
+      el[size === 'width' ? 'offsetWidth' : 'offsetHeight'] +
+      parseFloat(
+        window
+          .getComputedStyle(el, null)
+          .getPropertyValue(size === 'width' ? 'margin-right' : 'margin-top'),
+      ) +
+      parseFloat(
+        window
+          .getComputedStyle(el, null)
+          .getPropertyValue(size === 'width' ? 'margin-left' : 'margin-bottom'),
+      )
+    );
   }
   return el.offsetWidth;
 }
 
-export { elementParents as a, elementOffset as b, createElement as c, now as d, elementChildren as e, elementOuterSize as f, elementIndex as g, getTranslate as h, elementTransitionEnd as i, isObject as j, getSlideTransformEl as k, elementStyle as l, elementNextAll as m, nextTick as n, elementPrevAll as o, animateCSSModeScroll as p, extend as q, deleteProps as r, setCSSProperty as s };
+export {
+  elementParents as a,
+  elementOffset as b,
+  createElement as c,
+  now as d,
+  elementChildren as e,
+  elementOuterSize as f,
+  elementIndex as g,
+  getTranslate as h,
+  elementTransitionEnd as i,
+  isObject as j,
+  getSlideTransformEl as k,
+  elementStyle as l,
+  elementNextAll as m,
+  nextTick as n,
+  elementPrevAll as o,
+  animateCSSModeScroll as p,
+  extend as q,
+  deleteProps as r,
+  setCSSProperty as s,
+};

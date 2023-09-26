@@ -10,10 +10,35 @@
  * Released on: September 21, 2023
  */
 
-import { h, ref, onUpdated, provide, watch, nextTick, onMounted, onBeforeUnmount, onBeforeUpdate, computed, inject } from 'vue';
+import {
+  h,
+  ref,
+  onUpdated,
+  provide,
+  watch,
+  nextTick,
+  onMounted,
+  onBeforeUnmount,
+  onBeforeUpdate,
+  computed,
+  inject,
+} from 'vue';
 import { S as Swiper$1 } from './shared/swiper-core.mjs';
-import { g as getParams, a as getChangedParams, u as updateOnVirtualData, m as mountSwiper } from './shared/update-on-virtual-data.mjs';
-import { e as extend, u as updateSwiper, d as uniqueClasses, w as wrapperClass, n as needsNavigation, b as needsScrollbar, a as needsPagination } from './shared/update-swiper.mjs';
+import {
+  g as getParams,
+  a as getChangedParams,
+  u as updateOnVirtualData,
+  m as mountSwiper,
+} from './shared/update-on-virtual-data.mjs';
+import {
+  e as extend,
+  u as updateSwiper,
+  d as uniqueClasses,
+  w as wrapperClass,
+  n as needsNavigation,
+  b as needsScrollbar,
+  a as needsPagination,
+} from './shared/update-swiper.mjs';
 
 function getChildren(originalSlots, slidesRef, oldSlidesRef) {
   if (originalSlots === void 0) {
@@ -24,25 +49,29 @@ function getChildren(originalSlots, slidesRef, oldSlidesRef) {
     'container-start': [],
     'container-end': [],
     'wrapper-start': [],
-    'wrapper-end': []
+    'wrapper-end': [],
   };
   const getSlidesFromElements = (els, slotName) => {
     if (!Array.isArray(els)) {
       return;
     }
-    els.forEach(vnode => {
+    els.forEach((vnode) => {
       const isFragment = typeof vnode.type === 'symbol';
       if (slotName === 'default') slotName = 'container-end';
       if (isFragment && vnode.children) {
         getSlidesFromElements(vnode.children, slotName);
-      } else if (vnode.type && (vnode.type.name === 'SwiperSlide' || vnode.type.name === 'AsyncComponentWrapper')) {
+      } else if (
+        vnode.type &&
+        (vnode.type.name === 'SwiperSlide' ||
+          vnode.type.name === 'AsyncComponentWrapper')
+      ) {
         slides.push(vnode);
       } else if (slots[slotName]) {
         slots[slotName].push(vnode);
       }
     });
   };
-  Object.keys(originalSlots).forEach(slotName => {
+  Object.keys(originalSlots).forEach((slotName) => {
     if (typeof originalSlots[slotName] !== 'function') return;
     const els = originalSlots[slotName]();
     getSlidesFromElements(els, slotName);
@@ -51,13 +80,13 @@ function getChildren(originalSlots, slidesRef, oldSlidesRef) {
   slidesRef.value = slides;
   return {
     slides,
-    slots
+    slots,
   };
 }
 
 function renderVirtual(swiperRef, slides, virtualData) {
   if (!virtualData) return null;
-  const getSlideIndex = index => {
+  const getSlideIndex = (index) => {
     let slideIndex = index;
     if (index < 0) {
       slideIndex = slides.length + index;
@@ -67,31 +96,38 @@ function renderVirtual(swiperRef, slides, virtualData) {
     }
     return slideIndex;
   };
-  const style = swiperRef.value.isHorizontal() ? {
-    [swiperRef.value.rtlTranslate ? 'right' : 'left']: `${virtualData.offset}px`
-  } : {
-    top: `${virtualData.offset}px`
-  };
-  const {
-    from,
-    to
-  } = virtualData;
+  const style = swiperRef.value.isHorizontal()
+    ? {
+        [swiperRef.value.rtlTranslate
+          ? 'right'
+          : 'left']: `${virtualData.offset}px`,
+      }
+    : {
+        top: `${virtualData.offset}px`,
+      };
+  const { from, to } = virtualData;
   const loopFrom = swiperRef.value.params.loop ? -slides.length : 0;
-  const loopTo = swiperRef.value.params.loop ? slides.length * 2 : slides.length;
+  const loopTo = swiperRef.value.params.loop
+    ? slides.length * 2
+    : slides.length;
   const slidesToRender = [];
   for (let i = loopFrom; i < loopTo; i += 1) {
     if (i >= from && i <= to) {
       slidesToRender.push(slides[getSlideIndex(i)]);
     }
   }
-  return slidesToRender.map(slide => {
+  return slidesToRender.map((slide) => {
     if (!slide.props) slide.props = {};
     if (!slide.props.style) slide.props.style = {};
     slide.props.swiperRef = swiperRef;
     slide.props.style = style;
-    return h(slide.type, {
-      ...slide.props
-    }, slide.children);
+    return h(
+      slide.type,
+      {
+        ...slide.props,
+      },
+      slide.children,
+    );
   });
 }
 
@@ -100,451 +136,532 @@ const Swiper = {
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     wrapperTag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     modules: {
       type: Array,
-      default: undefined
+      default: undefined,
     },
     init: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     direction: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     oneWayMovement: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     touchEventsTarget: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     initialSlide: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     speed: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     cssMode: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     updateOnWindowResize: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     resizeObserver: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     nested: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     focusableElements: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     width: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     height: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     preventInteractionOnTransition: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     userAgent: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     url: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     edgeSwipeDetection: {
       type: [Boolean, String],
-      default: undefined
+      default: undefined,
     },
     edgeSwipeThreshold: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     autoHeight: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     setWrapperSize: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     virtualTranslate: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     effect: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     breakpoints: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     spaceBetween: {
       type: [Number, String],
-      default: undefined
+      default: undefined,
     },
     slidesPerView: {
       type: [Number, String],
-      default: undefined
+      default: undefined,
     },
     maxBackfaceHiddenSlides: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     slidesPerGroup: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     slidesPerGroupSkip: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     slidesPerGroupAuto: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     centeredSlides: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     centeredSlidesBounds: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     slidesOffsetBefore: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     slidesOffsetAfter: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     normalizeSlideIndex: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     centerInsufficientSlides: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     watchOverflow: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     roundLengths: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     touchRatio: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     touchAngle: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     simulateTouch: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     shortSwipes: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     longSwipes: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     longSwipesRatio: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     longSwipesMs: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     followFinger: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     allowTouchMove: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     threshold: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     touchMoveStopPropagation: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     touchStartPreventDefault: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     touchStartForcePreventDefault: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     touchReleaseOnEdges: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     uniqueNavElements: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     resistance: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     resistanceRatio: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     watchSlidesProgress: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     grabCursor: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     preventClicks: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     preventClicksPropagation: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     slideToClickedSlide: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     loop: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     loopedSlides: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     loopPreventsSliding: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     rewind: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     allowSlidePrev: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     allowSlideNext: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     swipeHandler: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     noSwiping: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     noSwipingClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     noSwipingSelector: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     passiveListeners: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     containerModifierClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     slideClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     slideActiveClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     slideVisibleClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     slideNextClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     slidePrevClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     wrapperClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     lazyPreloaderClass: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     lazyPreloadPrevNext: {
       type: Number,
-      default: undefined
+      default: undefined,
     },
     runCallbacksOnInit: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     observer: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     observeParents: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     observeSlideChildren: {
       type: Boolean,
-      default: undefined
+      default: undefined,
     },
     a11y: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     autoplay: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     controller: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     coverflowEffect: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     cubeEffect: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     fadeEffect: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     flipEffect: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     creativeEffect: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     cardsEffect: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     hashNavigation: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     history: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     keyboard: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     mousewheel: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     navigation: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     pagination: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     parallax: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     scrollbar: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     thumbs: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     virtual: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     zoom: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     grid: {
       type: [Object],
-      default: undefined
+      default: undefined,
     },
     freeMode: {
       type: [Boolean, Object],
-      default: undefined
+      default: undefined,
     },
     enabled: {
       type: Boolean,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
-  emits: ['_beforeBreakpoint', '_containerClasses', '_slideClass', '_slideClasses', '_swiper', '_freeModeNoMomentumRelease', 'activeIndexChange', 'afterInit', 'autoplay', 'autoplayStart', 'autoplayStop', 'autoplayPause', 'autoplayResume', 'autoplayTimeLeft', 'beforeDestroy', 'beforeInit', 'beforeLoopFix', 'beforeResize', 'beforeSlideChangeStart', 'beforeTransitionStart', 'breakpoint', 'breakpointsBase', 'changeDirection', 'click', 'disable', 'doubleTap', 'doubleClick', 'destroy', 'enable', 'fromEdge', 'hashChange', 'hashSet', 'init', 'keyPress', 'lock', 'loopFix', 'momentumBounce', 'navigationHide', 'navigationShow', 'navigationPrev', 'navigationNext', 'observerUpdate', 'orientationchange', 'paginationHide', 'paginationRender', 'paginationShow', 'paginationUpdate', 'progress', 'reachBeginning', 'reachEnd', 'realIndexChange', 'resize', 'scroll', 'scrollbarDragEnd', 'scrollbarDragMove', 'scrollbarDragStart', 'setTransition', 'setTranslate', 'slideChange', 'slideChangeTransitionEnd', 'slideChangeTransitionStart', 'slideNextTransitionEnd', 'slideNextTransitionStart', 'slidePrevTransitionEnd', 'slidePrevTransitionStart', 'slideResetTransitionStart', 'slideResetTransitionEnd', 'sliderMove', 'sliderFirstMove', 'slidesLengthChange', 'slidesGridLengthChange', 'snapGridLengthChange', 'snapIndexChange', 'swiper', 'tap', 'toEdge', 'touchEnd', 'touchMove', 'touchMoveOpposite', 'touchStart', 'transitionEnd', 'transitionStart', 'unlock', 'update', 'virtualUpdate', 'zoomChange'],
+  emits: [
+    '_beforeBreakpoint',
+    '_containerClasses',
+    '_slideClass',
+    '_slideClasses',
+    '_swiper',
+    '_freeModeNoMomentumRelease',
+    'activeIndexChange',
+    'afterInit',
+    'autoplay',
+    'autoplayStart',
+    'autoplayStop',
+    'autoplayPause',
+    'autoplayResume',
+    'autoplayTimeLeft',
+    'beforeDestroy',
+    'beforeInit',
+    'beforeLoopFix',
+    'beforeResize',
+    'beforeSlideChangeStart',
+    'beforeTransitionStart',
+    'breakpoint',
+    'breakpointsBase',
+    'changeDirection',
+    'click',
+    'disable',
+    'doubleTap',
+    'doubleClick',
+    'destroy',
+    'enable',
+    'fromEdge',
+    'hashChange',
+    'hashSet',
+    'init',
+    'keyPress',
+    'lock',
+    'loopFix',
+    'momentumBounce',
+    'navigationHide',
+    'navigationShow',
+    'navigationPrev',
+    'navigationNext',
+    'observerUpdate',
+    'orientationchange',
+    'paginationHide',
+    'paginationRender',
+    'paginationShow',
+    'paginationUpdate',
+    'progress',
+    'reachBeginning',
+    'reachEnd',
+    'realIndexChange',
+    'resize',
+    'scroll',
+    'scrollbarDragEnd',
+    'scrollbarDragMove',
+    'scrollbarDragStart',
+    'setTransition',
+    'setTranslate',
+    'slideChange',
+    'slideChangeTransitionEnd',
+    'slideChangeTransitionStart',
+    'slideNextTransitionEnd',
+    'slideNextTransitionStart',
+    'slidePrevTransitionEnd',
+    'slidePrevTransitionStart',
+    'slideResetTransitionStart',
+    'slideResetTransitionEnd',
+    'sliderMove',
+    'sliderFirstMove',
+    'slidesLengthChange',
+    'slidesGridLengthChange',
+    'snapGridLengthChange',
+    'snapIndexChange',
+    'swiper',
+    'tap',
+    'toEdge',
+    'touchEnd',
+    'touchMove',
+    'touchMoveOpposite',
+    'touchStart',
+    'transitionEnd',
+    'transitionStart',
+    'unlock',
+    'update',
+    'virtualUpdate',
+    'zoomChange',
+  ],
   setup(props, _ref) {
-    let {
-      slots: originalSlots,
-      emit
-    } = _ref;
-    const {
-      tag: Tag,
-      wrapperTag: WrapperTag
-    } = props;
+    let { slots: originalSlots, emit } = _ref;
+    const { tag: Tag, wrapperTag: WrapperTag } = props;
     const containerClasses = ref('swiper');
     const virtualData = ref(null);
     const breakpointChanged = ref(false);
@@ -553,19 +670,16 @@ const Swiper = {
     const swiperRef = ref(null);
     const oldPassedParamsRef = ref(null);
     const slidesRef = {
-      value: []
+      value: [],
     };
     const oldSlidesRef = {
-      value: []
+      value: [],
     };
     const nextElRef = ref(null);
     const prevElRef = ref(null);
     const paginationElRef = ref(null);
     const scrollbarElRef = ref(null);
-    const {
-      params: swiperParams,
-      passedParams
-    } = getParams(props, false);
+    const { params: swiperParams, passedParams } = getParams(props, false);
     getChildren(originalSlots, slidesRef, oldSlidesRef);
     oldPassedParamsRef.value = passedParams;
     oldSlidesRef.value = slidesRef.value;
@@ -574,7 +688,13 @@ const Swiper = {
       breakpointChanged.value = true;
     };
     swiperParams.onAny = function (event) {
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      for (
+        var _len = arguments.length,
+          args = new Array(_len > 1 ? _len - 1 : 0),
+          _key = 1;
+        _key < _len;
+        _key++
+      ) {
         args[_key - 1] = arguments[_key];
       }
       emit(event, ...args);
@@ -583,12 +703,12 @@ const Swiper = {
       _beforeBreakpoint: onBeforeBreakpoint,
       _containerClasses(swiper, classes) {
         containerClasses.value = classes;
-      }
+      },
     });
 
     // init Swiper
     const passParams = {
-      ...swiperParams
+      ...swiperParams,
     };
     delete passParams.wrapperClass;
     swiperRef.value = new Swiper$1(passParams);
@@ -597,10 +717,10 @@ const Swiper = {
       const extendWith = {
         cache: false,
         slides: slidesRef.value,
-        renderExternal: data => {
+        renderExternal: (data) => {
           virtualData.value = data;
         },
-        renderExternalUpdate: false
+        renderExternalUpdate: false,
       };
       extend(swiperRef.value.params.virtual, extendWith);
       extend(swiperRef.value.originalParams.virtual, extendWith);
@@ -612,12 +732,20 @@ const Swiper = {
         initializedRef.value = true;
       }
       // watch for params change
-      const {
-        passedParams: newPassedParams
-      } = getParams(props, false);
-      const changedParams = getChangedParams(newPassedParams, oldPassedParamsRef.value, slidesRef.value, oldSlidesRef.value, c => c.props && c.props.key);
+      const { passedParams: newPassedParams } = getParams(props, false);
+      const changedParams = getChangedParams(
+        newPassedParams,
+        oldPassedParamsRef.value,
+        slidesRef.value,
+        oldSlidesRef.value,
+        (c) => c.props && c.props.key,
+      );
       oldPassedParamsRef.value = newPassedParams;
-      if ((changedParams.length || breakpointChanged.value) && swiperRef.value && !swiperRef.value.destroyed) {
+      if (
+        (changedParams.length || breakpointChanged.value) &&
+        swiperRef.value &&
+        !swiperRef.value.destroyed
+      ) {
         updateSwiper({
           swiper: swiperRef.value,
           slides: slidesRef.value,
@@ -626,7 +754,7 @@ const Swiper = {
           nextEl: nextElRef.value,
           prevEl: prevElRef.value,
           scrollbarEl: scrollbarElRef.value,
-          paginationEl: paginationElRef.value
+          paginationEl: paginationElRef.value,
         });
       }
       breakpointChanged.value = false;
@@ -643,14 +771,17 @@ const Swiper = {
     // mount swiper
     onMounted(() => {
       if (!swiperElRef.value) return;
-      mountSwiper({
-        el: swiperElRef.value,
-        nextEl: nextElRef.value,
-        prevEl: prevElRef.value,
-        paginationEl: paginationElRef.value,
-        scrollbarEl: scrollbarElRef.value,
-        swiper: swiperRef.value
-      }, swiperParams);
+      mountSwiper(
+        {
+          el: swiperElRef.value,
+          nextEl: nextElRef.value,
+          prevEl: prevElRef.value,
+          paginationEl: paginationElRef.value,
+          scrollbarEl: scrollbarElRef.value,
+          swiper: swiperRef.value,
+        },
+        swiperParams,
+      );
       emit('swiper', swiperRef.value);
     });
     onBeforeUnmount(() => {
@@ -672,30 +803,55 @@ const Swiper = {
       return slides;
     }
     return () => {
-      const {
-        slides,
-        slots
-      } = getChildren(originalSlots, slidesRef, oldSlidesRef);
-      return h(Tag, {
-        ref: swiperElRef,
-        class: uniqueClasses(containerClasses.value)
-      }, [slots['container-start'], h(WrapperTag, {
-        class: wrapperClass(swiperParams.wrapperClass)
-      }, [slots['wrapper-start'], renderSlides(slides), slots['wrapper-end']]), needsNavigation(props) && [h('div', {
-        ref: prevElRef,
-        class: 'swiper-button-prev'
-      }), h('div', {
-        ref: nextElRef,
-        class: 'swiper-button-next'
-      })], needsScrollbar(props) && h('div', {
-        ref: scrollbarElRef,
-        class: 'swiper-scrollbar'
-      }), needsPagination(props) && h('div', {
-        ref: paginationElRef,
-        class: 'swiper-pagination'
-      }), slots['container-end']]);
+      const { slides, slots } = getChildren(
+        originalSlots,
+        slidesRef,
+        oldSlidesRef,
+      );
+      return h(
+        Tag,
+        {
+          ref: swiperElRef,
+          class: uniqueClasses(containerClasses.value),
+        },
+        [
+          slots['container-start'],
+          h(
+            WrapperTag,
+            {
+              class: wrapperClass(swiperParams.wrapperClass),
+            },
+            [
+              slots['wrapper-start'],
+              renderSlides(slides),
+              slots['wrapper-end'],
+            ],
+          ),
+          needsNavigation(props) && [
+            h('div', {
+              ref: prevElRef,
+              class: 'swiper-button-prev',
+            }),
+            h('div', {
+              ref: nextElRef,
+              class: 'swiper-button-next',
+            }),
+          ],
+          needsScrollbar(props) &&
+            h('div', {
+              ref: scrollbarElRef,
+              class: 'swiper-scrollbar',
+            }),
+          needsPagination(props) &&
+            h('div', {
+              ref: paginationElRef,
+              class: 'swiper-pagination',
+            }),
+          slots['container-end'],
+        ],
+      );
     };
-  }
+  },
 };
 
 const SwiperSlide = {
@@ -703,40 +859,36 @@ const SwiperSlide = {
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     swiperRef: {
       type: Object,
-      required: false
+      required: false,
     },
     swiperSlideIndex: {
       type: Number,
       default: undefined,
-      required: false
+      required: false,
     },
     zoom: {
       type: Boolean,
       default: undefined,
-      required: false
+      required: false,
     },
     lazy: {
       type: Boolean,
       default: false,
-      required: false
+      required: false,
     },
     virtualIndex: {
       type: [String, Number],
-      default: undefined
-    }
+      default: undefined,
+    },
   },
   setup(props, _ref) {
-    let {
-      slots
-    } = _ref;
+    let { slots } = _ref;
     let eventAttached = false;
-    const {
-      swiperRef
-    } = props;
+    const { swiperRef } = props;
     const slideElRef = ref(null);
     const slideClasses = ref('swiper-slide');
     const lazyLoaded = ref(false);
@@ -774,28 +926,55 @@ const SwiperSlide = {
       isActive: slideClasses.value.indexOf('swiper-slide-active') >= 0,
       isVisible: slideClasses.value.indexOf('swiper-slide-visible') >= 0,
       isPrev: slideClasses.value.indexOf('swiper-slide-prev') >= 0,
-      isNext: slideClasses.value.indexOf('swiper-slide-next') >= 0
+      isNext: slideClasses.value.indexOf('swiper-slide-next') >= 0,
     }));
     provide('swiperSlide', slideData);
     const onLoad = () => {
       lazyLoaded.value = true;
     };
     return () => {
-      return h(props.tag, {
-        class: uniqueClasses(`${slideClasses.value}`),
-        ref: slideElRef,
-        'data-swiper-slide-index': typeof props.virtualIndex === 'undefined' && swiperRef && swiperRef.value && swiperRef.value.params.loop ? props.swiperSlideIndex : props.virtualIndex,
-        onLoadCapture: onLoad
-      }, props.zoom ? h('div', {
-        class: 'swiper-zoom-container',
-        'data-swiper-zoom': typeof props.zoom === 'number' ? props.zoom : undefined
-      }, [slots.default && slots.default(slideData.value), props.lazy && !lazyLoaded.value && h('div', {
-        class: 'swiper-lazy-preloader'
-      })]) : [slots.default && slots.default(slideData.value), props.lazy && !lazyLoaded.value && h('div', {
-        class: 'swiper-lazy-preloader'
-      })]);
+      return h(
+        props.tag,
+        {
+          class: uniqueClasses(`${slideClasses.value}`),
+          ref: slideElRef,
+          'data-swiper-slide-index':
+            typeof props.virtualIndex === 'undefined' &&
+            swiperRef &&
+            swiperRef.value &&
+            swiperRef.value.params.loop
+              ? props.swiperSlideIndex
+              : props.virtualIndex,
+          onLoadCapture: onLoad,
+        },
+        props.zoom
+          ? h(
+              'div',
+              {
+                class: 'swiper-zoom-container',
+                'data-swiper-zoom':
+                  typeof props.zoom === 'number' ? props.zoom : undefined,
+              },
+              [
+                slots.default && slots.default(slideData.value),
+                props.lazy &&
+                  !lazyLoaded.value &&
+                  h('div', {
+                    class: 'swiper-lazy-preloader',
+                  }),
+              ],
+            )
+          : [
+              slots.default && slots.default(slideData.value),
+              props.lazy &&
+                !lazyLoaded.value &&
+                h('div', {
+                  class: 'swiper-lazy-preloader',
+                }),
+            ],
+      );
     };
-  }
+  },
 };
 
 const useSwiperSlide = () => {

@@ -3,17 +3,11 @@ import { g as getDocument } from '../shared/ssr-window.esm.mjs';
 /* eslint no-underscore-dangle: "off" */
 /* eslint no-use-before-define: "off" */
 function Autoplay(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on,
-    emit,
-    params
-  } = _ref;
+  let { swiper, extendParams, on, emit, params } = _ref;
   swiper.autoplay = {
     running: false,
     paused: false,
-    timeLeft: 0
+    timeLeft: 0,
   };
   extendParams({
     autoplay: {
@@ -23,13 +17,15 @@ function Autoplay(_ref) {
       disableOnInteraction: true,
       stopOnLastSlide: false,
       reverseDirection: false,
-      pauseOnMouseEnter: false
-    }
+      pauseOnMouseEnter: false,
+    },
   });
   let timeout;
   let raf;
-  let autoplayDelayTotal = params && params.autoplay ? params.autoplay.delay : 3000;
-  let autoplayDelayCurrent = params && params.autoplay ? params.autoplay.delay : 3000;
+  let autoplayDelayTotal =
+    params && params.autoplay ? params.autoplay.delay : 3000;
+  let autoplayDelayCurrent =
+    params && params.autoplay ? params.autoplay.delay : 3000;
   let autoplayTimeLeft;
   let autoplayStartTime = new Date().getTime;
   let wasPaused;
@@ -52,7 +48,9 @@ function Autoplay(_ref) {
       autoplayDelayCurrent = autoplayTimeLeft;
       wasPaused = false;
     }
-    const timeLeft = swiper.autoplay.paused ? autoplayTimeLeft : autoplayStartTime + autoplayDelayCurrent - new Date().getTime();
+    const timeLeft = swiper.autoplay.paused
+      ? autoplayTimeLeft
+      : autoplayStartTime + autoplayDelayCurrent - new Date().getTime();
     swiper.autoplay.timeLeft = timeLeft;
     emit('autoplayTimeLeft', timeLeft, timeLeft / autoplayDelayTotal);
     raf = requestAnimationFrame(() => {
@@ -62,23 +60,35 @@ function Autoplay(_ref) {
   const getSlideDelay = () => {
     let activeSlideEl;
     if (swiper.virtual && swiper.params.virtual.enabled) {
-      activeSlideEl = swiper.slides.filter(slideEl => slideEl.classList.contains('swiper-slide-active'))[0];
+      activeSlideEl = swiper.slides.filter((slideEl) =>
+        slideEl.classList.contains('swiper-slide-active'),
+      )[0];
     } else {
       activeSlideEl = swiper.slides[swiper.activeIndex];
     }
     if (!activeSlideEl) return undefined;
-    const currentSlideDelay = parseInt(activeSlideEl.getAttribute('data-swiper-autoplay'), 10);
+    const currentSlideDelay = parseInt(
+      activeSlideEl.getAttribute('data-swiper-autoplay'),
+      10,
+    );
     return currentSlideDelay;
   };
-  const run = delayForce => {
+  const run = (delayForce) => {
     if (swiper.destroyed || !swiper.autoplay.running) return;
     cancelAnimationFrame(raf);
     calcTimeLeft();
-    let delay = typeof delayForce === 'undefined' ? swiper.params.autoplay.delay : delayForce;
+    let delay =
+      typeof delayForce === 'undefined'
+        ? swiper.params.autoplay.delay
+        : delayForce;
     autoplayDelayTotal = swiper.params.autoplay.delay;
     autoplayDelayCurrent = swiper.params.autoplay.delay;
     const currentSlideDelay = getSlideDelay();
-    if (!Number.isNaN(currentSlideDelay) && currentSlideDelay > 0 && typeof delayForce === 'undefined') {
+    if (
+      !Number.isNaN(currentSlideDelay) &&
+      currentSlideDelay > 0 &&
+      typeof delayForce === 'undefined'
+    ) {
       delay = currentSlideDelay;
       autoplayDelayTotal = currentSlideDelay;
       autoplayDelayCurrent = currentSlideDelay;
@@ -166,7 +176,12 @@ function Autoplay(_ref) {
     proceed();
   };
   const resume = () => {
-    if (swiper.isEnd && autoplayTimeLeft < 0 && !swiper.params.loop || swiper.destroyed || !swiper.autoplay.running) return;
+    if (
+      (swiper.isEnd && autoplayTimeLeft < 0 && !swiper.params.loop) ||
+      swiper.destroyed ||
+      !swiper.autoplay.running
+    )
+      return;
     autoplayStartTime = new Date().getTime();
     if (pausedByInteraction) {
       pausedByInteraction = false;
@@ -188,13 +203,13 @@ function Autoplay(_ref) {
       resume();
     }
   };
-  const onPointerEnter = e => {
+  const onPointerEnter = (e) => {
     if (e.pointerType !== 'mouse') return;
     pausedByInteraction = true;
     if (swiper.animating || swiper.autoplay.paused) return;
     pause(true);
   };
-  const onPointerLeave = e => {
+  const onPointerLeave = (e) => {
     if (e.pointerType !== 'mouse') return;
     if (swiper.autoplay.paused) {
       resume();
@@ -277,7 +292,7 @@ function Autoplay(_ref) {
     start,
     stop,
     pause,
-    resume
+    resume,
   });
 }
 

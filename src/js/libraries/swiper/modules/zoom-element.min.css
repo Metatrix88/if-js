@@ -1,1 +1,4 @@
-::slotted(.swiper-slide-zoomed){cursor:move;touch-action:none}
+::slotted(.swiper-slide-zoomed) {
+  cursor: move;
+  touch-action: none;
+}

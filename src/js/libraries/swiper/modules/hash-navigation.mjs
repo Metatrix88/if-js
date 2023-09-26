@@ -2,12 +2,7 @@ import { g as getDocument, a as getWindow } from '../shared/ssr-window.esm.mjs';
 import { e as elementChildren } from '../shared/utils.mjs';
 
 function HashNavigation(_ref) {
-  let {
-    swiper,
-    extendParams,
-    emit,
-    on
-  } = _ref;
+  let { swiper, extendParams, emit, on } = _ref;
   let initialized = false;
   const document = getDocument();
   const window = getWindow();
@@ -18,31 +13,63 @@ function HashNavigation(_ref) {
       watchState: false,
       getSlideIndex(_s, hash) {
         if (swiper.virtual && swiper.params.virtual.enabled) {
-          const slideWithHash = swiper.slides.filter(slideEl => slideEl.getAttribute('data-hash') === hash)[0];
+          const slideWithHash = swiper.slides.filter(
+            (slideEl) => slideEl.getAttribute('data-hash') === hash,
+          )[0];
           if (!slideWithHash) return 0;
-          const index = parseInt(slideWithHash.getAttribute('data-swiper-slide-index'), 10);
+          const index = parseInt(
+            slideWithHash.getAttribute('data-swiper-slide-index'),
+            10,
+          );
           return index;
         }
-        return swiper.getSlideIndex(elementChildren(swiper.slidesEl, `.${swiper.params.slideClass}[data-hash="${hash}"], swiper-slide[data-hash="${hash}"]`)[0]);
-      }
-    }
+        return swiper.getSlideIndex(
+          elementChildren(
+            swiper.slidesEl,
+            `.${swiper.params.slideClass}[data-hash="${hash}"], swiper-slide[data-hash="${hash}"]`,
+          )[0],
+        );
+      },
+    },
   });
   const onHashChange = () => {
     emit('hashChange');
     const newHash = document.location.hash.replace('#', '');
-    const activeSlideEl = swiper.virtual && swiper.params.virtual.enabled ? swiper.slidesEl.querySelector(`[data-swiper-slide-index="${swiper.activeIndex}"]`) : swiper.slides[swiper.activeIndex];
-    const activeSlideHash = activeSlideEl ? activeSlideEl.getAttribute('data-hash') : '';
+    const activeSlideEl =
+      swiper.virtual && swiper.params.virtual.enabled
+        ? swiper.slidesEl.querySelector(
+            `[data-swiper-slide-index="${swiper.activeIndex}"]`,
+          )
+        : swiper.slides[swiper.activeIndex];
+    const activeSlideHash = activeSlideEl
+      ? activeSlideEl.getAttribute('data-hash')
+      : '';
     if (newHash !== activeSlideHash) {
-      const newIndex = swiper.params.hashNavigation.getSlideIndex(swiper, newHash);
+      const newIndex = swiper.params.hashNavigation.getSlideIndex(
+        swiper,
+        newHash,
+      );
       if (typeof newIndex === 'undefined' || Number.isNaN(newIndex)) return;
       swiper.slideTo(newIndex);
     }
   };
   const setHash = () => {
     if (!initialized || !swiper.params.hashNavigation.enabled) return;
-    const activeSlideEl = swiper.virtual && swiper.params.virtual.enabled ? swiper.slidesEl.querySelector(`[data-swiper-slide-index="${swiper.activeIndex}"]`) : swiper.slides[swiper.activeIndex];
-    const activeSlideHash = activeSlideEl ? activeSlideEl.getAttribute('data-hash') || activeSlideEl.getAttribute('data-history') : '';
-    if (swiper.params.hashNavigation.replaceState && window.history && window.history.replaceState) {
+    const activeSlideEl =
+      swiper.virtual && swiper.params.virtual.enabled
+        ? swiper.slidesEl.querySelector(
+            `[data-swiper-slide-index="${swiper.activeIndex}"]`,
+          )
+        : swiper.slides[swiper.activeIndex];
+    const activeSlideHash = activeSlideEl
+      ? activeSlideEl.getAttribute('data-hash') ||
+        activeSlideEl.getAttribute('data-history')
+      : '';
+    if (
+      swiper.params.hashNavigation.replaceState &&
+      window.history &&
+      window.history.replaceState
+    ) {
       window.history.replaceState(null, null, `#${activeSlideHash}` || '');
       emit('hashSet');
     } else {
@@ -51,7 +78,11 @@ function HashNavigation(_ref) {
     }
   };
   const init = () => {
-    if (!swiper.params.hashNavigation.enabled || swiper.params.history && swiper.params.history.enabled) return;
+    if (
+      !swiper.params.hashNavigation.enabled ||
+      (swiper.params.history && swiper.params.history.enabled)
+    )
+      return;
     initialized = true;
     const hash = document.location.hash.replace('#', '');
     if (hash) {

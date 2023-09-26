@@ -1,26 +1,156 @@
 /* underscore in name -> watch for changes */
-const paramsList = ['eventsPrefix', 'injectStyles', 'injectStylesUrls', 'modules', 'init', '_direction', 'oneWayMovement', 'touchEventsTarget', 'initialSlide', '_speed', 'cssMode', 'updateOnWindowResize', 'resizeObserver', 'nested', 'focusableElements', '_enabled', '_width', '_height', 'preventInteractionOnTransition', 'userAgent', 'url', '_edgeSwipeDetection', '_edgeSwipeThreshold', '_freeMode', '_autoHeight', 'setWrapperSize', 'virtualTranslate', '_effect', 'breakpoints', 'breakpointsBase', '_spaceBetween', '_slidesPerView', 'maxBackfaceHiddenSlides', '_grid', '_slidesPerGroup', '_slidesPerGroupSkip', '_slidesPerGroupAuto', '_centeredSlides', '_centeredSlidesBounds', '_slidesOffsetBefore', '_slidesOffsetAfter', 'normalizeSlideIndex', '_centerInsufficientSlides', '_watchOverflow', 'roundLengths', 'touchRatio', 'touchAngle', 'simulateTouch', '_shortSwipes', '_longSwipes', 'longSwipesRatio', 'longSwipesMs', '_followFinger', 'allowTouchMove', '_threshold', 'touchMoveStopPropagation', 'touchStartPreventDefault', 'touchStartForcePreventDefault', 'touchReleaseOnEdges', 'uniqueNavElements', '_resistance', '_resistanceRatio', '_watchSlidesProgress', '_grabCursor', 'preventClicks', 'preventClicksPropagation', '_slideToClickedSlide', '_loop', 'loopedSlides', 'loopPreventsSliding', '_rewind', '_allowSlidePrev', '_allowSlideNext', '_swipeHandler', '_noSwiping', 'noSwipingClass', 'noSwipingSelector', 'passiveListeners', 'containerModifierClass', 'slideClass', 'slideActiveClass', 'slideVisibleClass', 'slideNextClass', 'slidePrevClass', 'wrapperClass', 'lazyPreloaderClass', 'lazyPreloadPrevNext', 'runCallbacksOnInit', 'observer', 'observeParents', 'observeSlideChildren',
-// modules
-'a11y', '_autoplay', '_controller', 'coverflowEffect', 'cubeEffect', 'fadeEffect', 'flipEffect', 'creativeEffect', 'cardsEffect', 'hashNavigation', 'history', 'keyboard', 'mousewheel', '_navigation', '_pagination', 'parallax', '_scrollbar', '_thumbs', 'virtual', 'zoom', 'control'];
+const paramsList = [
+  'eventsPrefix',
+  'injectStyles',
+  'injectStylesUrls',
+  'modules',
+  'init',
+  '_direction',
+  'oneWayMovement',
+  'touchEventsTarget',
+  'initialSlide',
+  '_speed',
+  'cssMode',
+  'updateOnWindowResize',
+  'resizeObserver',
+  'nested',
+  'focusableElements',
+  '_enabled',
+  '_width',
+  '_height',
+  'preventInteractionOnTransition',
+  'userAgent',
+  'url',
+  '_edgeSwipeDetection',
+  '_edgeSwipeThreshold',
+  '_freeMode',
+  '_autoHeight',
+  'setWrapperSize',
+  'virtualTranslate',
+  '_effect',
+  'breakpoints',
+  'breakpointsBase',
+  '_spaceBetween',
+  '_slidesPerView',
+  'maxBackfaceHiddenSlides',
+  '_grid',
+  '_slidesPerGroup',
+  '_slidesPerGroupSkip',
+  '_slidesPerGroupAuto',
+  '_centeredSlides',
+  '_centeredSlidesBounds',
+  '_slidesOffsetBefore',
+  '_slidesOffsetAfter',
+  'normalizeSlideIndex',
+  '_centerInsufficientSlides',
+  '_watchOverflow',
+  'roundLengths',
+  'touchRatio',
+  'touchAngle',
+  'simulateTouch',
+  '_shortSwipes',
+  '_longSwipes',
+  'longSwipesRatio',
+  'longSwipesMs',
+  '_followFinger',
+  'allowTouchMove',
+  '_threshold',
+  'touchMoveStopPropagation',
+  'touchStartPreventDefault',
+  'touchStartForcePreventDefault',
+  'touchReleaseOnEdges',
+  'uniqueNavElements',
+  '_resistance',
+  '_resistanceRatio',
+  '_watchSlidesProgress',
+  '_grabCursor',
+  'preventClicks',
+  'preventClicksPropagation',
+  '_slideToClickedSlide',
+  '_loop',
+  'loopedSlides',
+  'loopPreventsSliding',
+  '_rewind',
+  '_allowSlidePrev',
+  '_allowSlideNext',
+  '_swipeHandler',
+  '_noSwiping',
+  'noSwipingClass',
+  'noSwipingSelector',
+  'passiveListeners',
+  'containerModifierClass',
+  'slideClass',
+  'slideActiveClass',
+  'slideVisibleClass',
+  'slideNextClass',
+  'slidePrevClass',
+  'wrapperClass',
+  'lazyPreloaderClass',
+  'lazyPreloadPrevNext',
+  'runCallbacksOnInit',
+  'observer',
+  'observeParents',
+  'observeSlideChildren',
+  // modules
+  'a11y',
+  '_autoplay',
+  '_controller',
+  'coverflowEffect',
+  'cubeEffect',
+  'fadeEffect',
+  'flipEffect',
+  'creativeEffect',
+  'cardsEffect',
+  'hashNavigation',
+  'history',
+  'keyboard',
+  'mousewheel',
+  '_navigation',
+  '_pagination',
+  'parallax',
+  '_scrollbar',
+  '_thumbs',
+  'virtual',
+  'zoom',
+  'control',
+];
 
 function isObject(o) {
-  return typeof o === 'object' && o !== null && o.constructor && Object.prototype.toString.call(o).slice(8, -1) === 'Object' && !o.__swiper__;
+  return (
+    typeof o === 'object' &&
+    o !== null &&
+    o.constructor &&
+    Object.prototype.toString.call(o).slice(8, -1) === 'Object' &&
+    !o.__swiper__
+  );
 }
 function extend(target, src) {
   const noExtend = ['__proto__', 'constructor', 'prototype'];
-  Object.keys(src).filter(key => noExtend.indexOf(key) < 0).forEach(key => {
-    if (typeof target[key] === 'undefined') target[key] = src[key];else if (isObject(src[key]) && isObject(target[key]) && Object.keys(src[key]).length > 0) {
-      if (src[key].__swiper__) target[key] = src[key];else extend(target[key], src[key]);
-    } else {
-      target[key] = src[key];
-    }
-  });
+  Object.keys(src)
+    .filter((key) => noExtend.indexOf(key) < 0)
+    .forEach((key) => {
+      if (typeof target[key] === 'undefined') target[key] = src[key];
+      else if (
+        isObject(src[key]) &&
+        isObject(target[key]) &&
+        Object.keys(src[key]).length > 0
+      ) {
+        if (src[key].__swiper__) target[key] = src[key];
+        else extend(target[key], src[key]);
+      } else {
+        target[key] = src[key];
+      }
+    });
 }
 function needsNavigation(params) {
   if (params === void 0) {
     params = {};
   }
-  return params.navigation && typeof params.navigation.nextEl === 'undefined' && typeof params.navigation.prevEl === 'undefined';
+  return (
+    params.navigation &&
+    typeof params.navigation.nextEl === 'undefined' &&
+    typeof params.navigation.prevEl === 'undefined'
+  );
 }
 function needsPagination(params) {
   if (params === void 0) {
@@ -38,9 +168,12 @@ function uniqueClasses(classNames) {
   if (classNames === void 0) {
     classNames = '';
   }
-  const classes = classNames.split(' ').map(c => c.trim()).filter(c => !!c);
+  const classes = classNames
+    .split(' ')
+    .map((c) => c.trim())
+    .filter((c) => !!c);
   const unique = [];
-  classes.forEach(c => {
+  classes.forEach((c) => {
     if (unique.indexOf(c) < 0) unique.push(c);
   });
   return unique.join(' ');
@@ -49,14 +182,15 @@ function attrToProp(attrName) {
   if (attrName === void 0) {
     attrName = '';
   }
-  return attrName.replace(/-[a-z]/g, l => l.toUpperCase().replace('-', ''));
+  return attrName.replace(/-[a-z]/g, (l) => l.toUpperCase().replace('-', ''));
 }
 function wrapperClass(className) {
   if (className === void 0) {
     className = '';
   }
   if (!className) return 'swiper-wrapper';
-  if (!className.includes('swiper-wrapper')) return `swiper-wrapper ${className}`;
+  if (!className.includes('swiper-wrapper'))
+    return `swiper-wrapper ${className}`;
   return className;
 }
 
@@ -69,16 +203,19 @@ function updateSwiper(_ref) {
     nextEl,
     prevEl,
     scrollbarEl,
-    paginationEl
+    paginationEl,
   } = _ref;
-  const updateParams = changedParams.filter(key => key !== 'children' && key !== 'direction' && key !== 'wrapperClass');
+  const updateParams = changedParams.filter(
+    (key) =>
+      key !== 'children' && key !== 'direction' && key !== 'wrapperClass',
+  );
   const {
     params: currentParams,
     pagination,
     navigation,
     scrollbar,
     virtual,
-    thumbs
+    thumbs,
   } = swiper;
   let needThumbsInit;
   let needControllerInit;
@@ -88,22 +225,57 @@ function updateSwiper(_ref) {
   let loopNeedDestroy;
   let loopNeedEnable;
   let loopNeedReloop;
-  if (changedParams.includes('thumbs') && passedParams.thumbs && passedParams.thumbs.swiper && currentParams.thumbs && !currentParams.thumbs.swiper) {
+  if (
+    changedParams.includes('thumbs') &&
+    passedParams.thumbs &&
+    passedParams.thumbs.swiper &&
+    currentParams.thumbs &&
+    !currentParams.thumbs.swiper
+  ) {
     needThumbsInit = true;
   }
-  if (changedParams.includes('controller') && passedParams.controller && passedParams.controller.control && currentParams.controller && !currentParams.controller.control) {
+  if (
+    changedParams.includes('controller') &&
+    passedParams.controller &&
+    passedParams.controller.control &&
+    currentParams.controller &&
+    !currentParams.controller.control
+  ) {
     needControllerInit = true;
   }
-  if (changedParams.includes('pagination') && passedParams.pagination && (passedParams.pagination.el || paginationEl) && (currentParams.pagination || currentParams.pagination === false) && pagination && !pagination.el) {
+  if (
+    changedParams.includes('pagination') &&
+    passedParams.pagination &&
+    (passedParams.pagination.el || paginationEl) &&
+    (currentParams.pagination || currentParams.pagination === false) &&
+    pagination &&
+    !pagination.el
+  ) {
     needPaginationInit = true;
   }
-  if (changedParams.includes('scrollbar') && passedParams.scrollbar && (passedParams.scrollbar.el || scrollbarEl) && (currentParams.scrollbar || currentParams.scrollbar === false) && scrollbar && !scrollbar.el) {
+  if (
+    changedParams.includes('scrollbar') &&
+    passedParams.scrollbar &&
+    (passedParams.scrollbar.el || scrollbarEl) &&
+    (currentParams.scrollbar || currentParams.scrollbar === false) &&
+    scrollbar &&
+    !scrollbar.el
+  ) {
     needScrollbarInit = true;
   }
-  if (changedParams.includes('navigation') && passedParams.navigation && (passedParams.navigation.prevEl || prevEl) && (passedParams.navigation.nextEl || nextEl) && (currentParams.navigation || currentParams.navigation === false) && navigation && !navigation.prevEl && !navigation.nextEl) {
+  if (
+    changedParams.includes('navigation') &&
+    passedParams.navigation &&
+    (passedParams.navigation.prevEl || prevEl) &&
+    (passedParams.navigation.nextEl || nextEl) &&
+    (currentParams.navigation || currentParams.navigation === false) &&
+    navigation &&
+    !navigation.prevEl &&
+    !navigation.nextEl
+  ) {
     needNavigationInit = true;
   }
-  const destroyModule = mod => {
+  const destroyModule = (mod) => {
     if (!swiper[mod]) return;
     swiper[mod].destroy();
     if (mod === 'navigation') {
@@ -132,15 +304,22 @@ function updateSwiper(_ref) {
       loopNeedReloop = true;
     }
   }
-  updateParams.forEach(key => {
+  updateParams.forEach((key) => {
     if (isObject(currentParams[key]) && isObject(passedParams[key])) {
       extend(currentParams[key], passedParams[key]);
-      if ((key === 'navigation' || key === 'pagination' || key === 'scrollbar') && 'enabled' in passedParams[key] && !passedParams[key].enabled) {
+      if (
+        (key === 'navigation' || key === 'pagination' || key === 'scrollbar') &&
+        'enabled' in passedParams[key] &&
+        !passedParams[key].enabled
+      ) {
         destroyModule(key);
       }
     } else {
       const newValue = passedParams[key];
-      if ((newValue === true || newValue === false) && (key === 'navigation' || key === 'pagination' || key === 'scrollbar')) {
+      if (
+        (newValue === true || newValue === false) &&
+        (key === 'navigation' || key === 'pagination' || key === 'scrollbar')
+      ) {
         if (newValue === false) {
           destroyModule(key);
         }
@@ -149,10 +328,22 @@ function updateSwiper(_ref) {
       }
     }
   });
-  if (updateParams.includes('controller') && !needControllerInit && swiper.controller && swiper.controller.control && currentParams.controller && currentParams.controller.control) {
+  if (
+    updateParams.includes('controller') &&
+    !needControllerInit &&
+    swiper.controller &&
+    swiper.controller.control &&
+    currentParams.controller &&
+    currentParams.controller.control
+  ) {
     swiper.controller.control = currentParams.controller.control;
   }
-  if (changedParams.includes('children') && slides && virtual && currentParams.virtual.enabled) {
+  if (
+    changedParams.includes('children') &&
+    slides &&
+    virtual &&
+    currentParams.virtual.enabled
+  ) {
     virtual.slides = slides;
     virtual.update(true);
   }
@@ -167,7 +358,10 @@ function updateSwiper(_ref) {
     swiper.controller.control = currentParams.controller.control;
   }
   if (needPaginationInit) {
-    if (swiper.isElement && (!paginationEl || typeof paginationEl === 'string')) {
+    if (
+      swiper.isElement &&
+      (!paginationEl || typeof paginationEl === 'string')
+    ) {
       paginationEl = document.createElement('div');
       paginationEl.classList.add('swiper-pagination');
       paginationEl.part.add('pagination');
@@ -230,4 +424,15 @@ function updateSwiper(_ref) {
   swiper.update();
 }
 
-export { needsPagination as a, needsScrollbar as b, attrToProp as c, uniqueClasses as d, extend as e, isObject as i, needsNavigation as n, paramsList as p, updateSwiper as u, wrapperClass as w };
+export {
+  needsPagination as a,
+  needsScrollbar as b,
+  attrToProp as c,
+  uniqueClasses as d,
+  extend as e,
+  isObject as i,
+  needsNavigation as n,
+  paramsList as p,
+  updateSwiper as u,
+  wrapperClass as w,
+};

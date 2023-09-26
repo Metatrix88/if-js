@@ -1,14 +1,10 @@
 function Grid(_ref) {
-  let {
-    swiper,
-    extendParams,
-    on
-  } = _ref;
+  let { swiper, extendParams, on } = _ref;
   extendParams({
     grid: {
       rows: 1,
-      fill: 'column'
-    }
+      fill: 'column',
+    },
   });
   let slidesNumberEvenToRows;
   let slidesPerRow;
@@ -17,20 +13,16 @@ function Grid(_ref) {
   const getSpaceBetween = () => {
     let spaceBetween = swiper.params.spaceBetween;
     if (typeof spaceBetween === 'string' && spaceBetween.indexOf('%') >= 0) {
-      spaceBetween = parseFloat(spaceBetween.replace('%', '')) / 100 * swiper.size;
+      spaceBetween =
+        (parseFloat(spaceBetween.replace('%', '')) / 100) * swiper.size;
     } else if (typeof spaceBetween === 'string') {
       spaceBetween = parseFloat(spaceBetween);
     }
     return spaceBetween;
   };
-  const initSlides = slidesLength => {
-    const {
-      slidesPerView
-    } = swiper.params;
-    const {
-      rows,
-      fill
-    } = swiper.params.grid;
+  const initSlides = (slidesLength) => {
+    const { slidesPerView } = swiper.params;
+    const { rows, fill } = swiper.params.grid;
     numFullColumns = Math.floor(slidesLength / rows);
     if (Math.floor(slidesLength / rows) === slidesLength / rows) {
       slidesNumberEvenToRows = slidesLength;
@@ -38,19 +30,17 @@ function Grid(_ref) {
       slidesNumberEvenToRows = Math.ceil(slidesLength / rows) * rows;
     }
     if (slidesPerView !== 'auto' && fill === 'row') {
-      slidesNumberEvenToRows = Math.max(slidesNumberEvenToRows, slidesPerView * rows);
+      slidesNumberEvenToRows = Math.max(
+        slidesNumberEvenToRows,
+        slidesPerView * rows,
+      );
     }
     slidesPerRow = slidesNumberEvenToRows / rows;
   };
   const updateSlide = (i, slide, slidesLength, getDirectionLabel) => {
-    const {
-      slidesPerGroup
-    } = swiper.params;
+    const { slidesPerGroup } = swiper.params;
     const spaceBetween = getSpaceBetween();
-    const {
-      rows,
-      fill
-    } = swiper.params.grid;
+    const { rows, fill } = swiper.params.grid;
     // Set slides order
     let newSlideOrderIndex;
     let column;
@@ -58,15 +48,27 @@ function Grid(_ref) {
     if (fill === 'row' && slidesPerGroup > 1) {
       const groupIndex = Math.floor(i / (slidesPerGroup * rows));
       const slideIndexInGroup = i - rows * slidesPerGroup * groupIndex;
-      const columnsInGroup = groupIndex === 0 ? slidesPerGroup : Math.min(Math.ceil((slidesLength - groupIndex * rows * slidesPerGroup) / rows), slidesPerGroup);
+      const columnsInGroup =
+        groupIndex === 0
+          ? slidesPerGroup
+          : Math.min(
+              Math.ceil(
+                (slidesLength - groupIndex * rows * slidesPerGroup) / rows,
+              ),
+              slidesPerGroup,
+            );
       row = Math.floor(slideIndexInGroup / columnsInGroup);
-      column = slideIndexInGroup - row * columnsInGroup + groupIndex * slidesPerGroup;
-      newSlideOrderIndex = column + row * slidesNumberEvenToRows / rows;
+      column =
+        slideIndexInGroup - row * columnsInGroup + groupIndex * slidesPerGroup;
+      newSlideOrderIndex = column + (row * slidesNumberEvenToRows) / rows;
       slide.style.order = newSlideOrderIndex;
     } else if (fill === 'column') {
       column = Math.floor(i / rows);
       row = i - column * rows;
-      if (column > numFullColumns || column === numFullColumns && row === rows - 1) {
+      if (
+        column > numFullColumns ||
+        (column === numFullColumns && row === rows - 1)
+      ) {
         row += 1;
         if (row >= rows) {
           row = 0;
@@ -79,26 +81,25 @@ function Grid(_ref) {
     }
     slide.row = row;
     slide.column = column;
-    slide.style[getDirectionLabel('margin-top')] = row !== 0 ? spaceBetween && `${spaceBetween}px` : '';
+    slide.style[getDirectionLabel('margin-top')] =
+      row !== 0 ? spaceBetween && `${spaceBetween}px` : '';
   };
   const updateWrapperSize = (slideSize, snapGrid, getDirectionLabel) => {
-    const {
-      centeredSlides,
-      roundLengths
-    } = swiper.params;
+    const { centeredSlides, roundLengths } = swiper.params;
     const spaceBetween = getSpaceBetween();
-    const {
-      rows
-    } = swiper.params.grid;
+    const { rows } = swiper.params.grid;
     swiper.virtualSize = (slideSize + spaceBetween) * slidesNumberEvenToRows;
     swiper.virtualSize = Math.ceil(swiper.virtualSize / rows) - spaceBetween;
-    swiper.wrapperEl.style[getDirectionLabel('width')] = `${swiper.virtualSize + spaceBetween}px`;
+    swiper.wrapperEl.style[getDirectionLabel('width')] = `${
+      swiper.virtualSize + spaceBetween
+    }px`;
     if (centeredSlides) {
       const newSlidesGrid = [];
       for (let i = 0; i < snapGrid.length; i += 1) {
         let slidesGridItem = snapGrid[i];
         if (roundLengths) slidesGridItem = Math.floor(slidesGridItem);
-        if (snapGrid[i] < swiper.virtualSize + snapGrid[0]) newSlidesGrid.push(slidesGridItem);
+        if (snapGrid[i] < swiper.virtualSize + snapGrid[0])
+          newSlidesGrid.push(slidesGridItem);
       }
       snapGrid.splice(0, snapGrid.length);
       snapGrid.push(...newSlidesGrid);
@@ -108,13 +109,13 @@ function Grid(_ref) {
     wasMultiRow = swiper.params.grid && swiper.params.grid.rows > 1;
   };
   const onUpdate = () => {
-    const {
-      params,
-      el
-    } = swiper;
+    const { params, el } = swiper;
     const isMultiRow = params.grid && params.grid.rows > 1;
     if (wasMultiRow && !isMultiRow) {
-      el.classList.remove(`${params.containerModifierClass}grid`, `${params.containerModifierClass}grid-column`);
+      el.classList.remove(
+        `${params.containerModifierClass}grid`,
+        `${params.containerModifierClass}grid-column`,
+      );
       numFullColumns = 1;
       swiper.emitContainerClasses();
     } else if (!wasMultiRow && isMultiRow) {
@@ -131,7 +132,7 @@ function Grid(_ref) {
   swiper.grid = {
     initSlides,
     updateSlide,
-    updateWrapperSize
+    updateWrapperSize,
   };
 }
 

@@ -27,12 +27,12 @@ export const getSwiperCoverflow = () => {
 };
 
 export const getSwiperSlides = () => {
-  return new Swiper(".swiper", {
+  return new Swiper('.swiper', {
     modules: [Navigation, Pagination],
     slidesPerView: 4,
     spaceBetween: 1,
     pagination: {
-      el: ".swiper-pagination",
+      el: '.swiper-pagination',
       clickable: true,
     },
     navigation: {
