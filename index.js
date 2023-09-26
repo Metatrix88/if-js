@@ -13,13 +13,13 @@ import {
   buttonMinusChildrenEl,
   buttonPlusRoomsEl,
   buttonMinusRoomsEl,
-} from './desktopFormFilter/createdFilterInputFilter.js';
+} from './src/js/desktopFormFilter/createdFilterInputFilter.js';
 import {
   createdAndAddedCard,
   createSectionApartments,
-} from './sections/createdSectionApartments.js';
-import { desktopForm } from './constants-utils/constants.js';
-import { searchHotels } from './desktopFormFilter/searchHotels.js';
+} from './src/js/sections/createdSectionApartments.js';
+import { desktopForm } from './src/js/constants-utils/constants.js';
+import { searchHotels } from './src/js/desktopFormFilter/searchHotels.js';
 
 //Фильтр и счетчики
 inputFilterEl.addEventListener('click', countersFilter);
