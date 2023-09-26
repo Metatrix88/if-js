@@ -4,10 +4,15 @@ import {
   urlPopularHotel,
 } from '../constants-utils/constants.js';
 import { getPopularHotels, bubbleSort } from '../constants-utils/helpers.js';
+import { getSwiperSlides } from '../constants-utils/swiper.js';
 
 const sectionElApartments = document.createElement('section'); // создал section
 const ulElApartments = document.createElement('ul'); // создал tag ul
-const button = document.createElement('button'); // создал кнопку
+const divElSwiperWrapper = document.createElement('div'); // создал tag div
+const divElPagination = document.createElement('div'); // создал tag div
+const divElSwiperButPrev = document.createElement('div'); // создал tag div
+const divElSwiperButNext = document.createElement('div'); // создал tag div
+// const button = document.createElement('button'); // создал кнопку
 
 // Создаю секцию Apartments
 export const createSectionApartments = () => {
@@ -17,26 +22,34 @@ export const createSectionApartments = () => {
   titleElApartments.textContent = 'Homes guests loves'; // добавил контент в tag h2
 
   sectionElApartments.appendChild(titleElApartments); // добавил в tag section tag h2 с контентом
-  sectionElApartments.appendChild(ulElApartments); // добавил tag ul в tag section за tag h2
+  sectionElApartments.appendChild(divElSwiperWrapper); // добавил swiper обертку в tag section за tag h2
+  divElSwiperWrapper.appendChild(ulElApartments); // добавил tag ul в swiper обертку за tag h2
+  divElSwiperWrapper.appendChild(divElSwiperButPrev); // добавил div кнопку "назад" в swiper обертку за Pagination
+  divElSwiperWrapper.appendChild(divElSwiperButNext); // добавил div кнопку "вперед" в swiper обертку за кнопкой назад
+  divElSwiperWrapper.appendChild(divElPagination); // добавил Pagination в swiper обертку за tag ul
 
   sectionElApartments.classList.add('container', 'apartments'); // добавил классы к tag section
   titleElApartments.classList.add('apartments__title'); // добавил классы к tag h2
-  ulElApartments.classList.add('row'); // добавил классы к tag ul
+  divElSwiperWrapper.classList.add('swiper'); // добавил классы к обертке swiper
+  ulElApartments.classList.add('swiper-wrapper'); // добавил классы к tag ul
+  divElPagination.classList.add('swiper-pagination'); // добавил классы к Pagination
+  divElSwiperButPrev.classList.add('swiper-button-prev'); // добавил классы к кнопке назад
+  divElSwiperButNext.classList.add('swiper-button-next'); // добавил классы к кнопке вперед
 
-  button.classList.add('button-next', 'apartments__button-next'); // Добавил классы к кнопке
-  button.setAttribute('type', 'button'); // добавил атрибуты к кнопке
-  button.setAttribute('aria-label', 'Next apartments'); // добавил атрибуты к кнопке
-  //добавил svg в кнопку
-  button.innerHTML = `<svg class="button-next__icon">
-            <use href="./src/images/svg/sprite.svg#arrow" />
-          </svg>`;
-
-  sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
+  // button.classList.add('button-next', 'apartments__button-next'); // Добавил классы к кнопке
+  // button.setAttribute('type', 'button'); // добавил атрибуты к кнопке
+  // button.setAttribute('aria-label', 'Next apartments'); // добавил атрибуты к кнопке
+  // //добавил svg в кнопку
+  // button.innerHTML = `<svg class="button-next__icon">
+  //           <use href="./src/images/svg/sprite.svg#arrow" />
+  //         </svg>`;
+  //
+  // sectionElApartments.appendChild(button); // Добавил кнопку в секцию в конец
 };
 
 //создал функцию которая принимает объект с атрибутами отеля и создает карточку одного отеля)
 const createHotelCard = ({ imageUrl, name, city, country }) => {
-  return `<li class="col-lg-3 col-md-6 col-sm-3 apartments__card">
+  return `<li class="col-lg-3 col-md-6 col-sm-3 apartments__card swiper-slide">
       <a class="link apartments__link" href="#" target="_blank">
         <img class="images apartments__img"
          src=${imageUrl}
@@ -56,13 +69,13 @@ const addedCard = (apartments) => {
 };
 
 //Создал функцию которая добавляет класс к последним картинкам, чтобы они скрывались изначально
-const addClassNone = (cards) => {
-  cards.forEach((card, index) => {
-    if (index >= 4) {
-      card.classList.toggle('apartments__card--none');
-    }
-  });
-};
+// const addClassNone = (cards) => {
+//   cards.forEach((card, index) => {
+//     if (index >= 4) {
+//       card.classList.toggle('apartments__card--none');
+//     }
+//   });
+// };
 
 // функция которая вызывает функции выше
 export const createdAndAddedCard = async () => {
@@ -78,19 +91,21 @@ export const createdAndAddedCard = async () => {
     await addedCard(dataInSessionStorage);
   }
 
-  const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
+  getSwiperSlides();
+
+  // const apartmentsCardsEl = document.querySelectorAll('.apartments__card'); // получил все карточки по классу
 
   // Функция которая по клику меняет картинки, добавляет класс и убирает его
-  const nextApartments = () => {
-    apartmentsCardsEl.forEach((card, index) => {
-      if (index <= 3) {
-        card.classList.toggle('apartments__card--none');
-      } else if (index >= 4) {
-        card.classList.toggle('apartments__card--none');
-      }
-    });
-  };
+  // const nextApartments = () => {
+  //   apartmentsCardsEl.forEach((card, index) => {
+  //     if (index <= 3) {
+  //       card.classList.toggle('apartments__card--none');
+  //     } else if (index >= 4) {
+  //       card.classList.toggle('apartments__card--none');
+  //     }
+  //   });
+  // };
 
-  addClassNone(apartmentsCardsEl);
-  button.addEventListener('click', nextApartments);
+  // addClassNone(apartmentsCardsEl);
+  // button.addEventListener('click', nextApartments);
 };

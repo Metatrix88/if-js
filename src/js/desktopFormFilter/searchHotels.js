@@ -7,7 +7,7 @@ import {
 import { getPopularHotels } from '../constants-utils/helpers.js';
 import { urlAllHotels } from '../constants-utils/constants.js';
 
-import { getSwiper } from '../constants-utils/swiper.js';
+import { getSwiperCoverflow } from '../constants-utils/swiper.js';
 
 export const searchHotels = async (e) => {
   e.preventDefault();
@@ -19,5 +19,5 @@ export const searchHotels = async (e) => {
   await createSectionAvailable();
   await addHotelsAvailable(hotels);
 
-  getSwiper();
+  getSwiperCoverflow();
 };
