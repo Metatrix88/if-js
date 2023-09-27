@@ -17,25 +17,45 @@ export const getSwiperCoverflow = () => {
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
+      dynamicBullets: true,
     },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+    keyboard: {
+      enable:true,
+      onlyInViewport: true,
+      pageUpDown: true,
+    },
+    mousewheel: {
+      sensitivity: 1,
+    },
+    watchOverflow: true,
   });
 };
 
 export const getSwiperSlides = () => {
   return new Swiper('.swiper', {
     slidesPerView: 4,
-    spaceBetween: 1,
+    slidesPerGroup: 4,
+    grabCursor: true,
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
+      dynamicBullets: true,
     },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
+    },
+    keyboard: {
+      enable:true,
+      onlyInViewport: true,
+      pageUpDown: true,
+    },
+    mousewheel: {
+      sensitivity: 1,
     },
   });
 };
