@@ -4,6 +4,10 @@
   padding-bottom: 16px;
 }
 
+.swiper-slide {
+  width: auto;
+}
+
 .swiper-horizontal > .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal,
 .swiper-pagination-custom,
